@@ -1,22 +1,30 @@
+<!-- subject_page.html -->
 {% extends 'base.html' %}
 
-{% block title %}Subject: {{ subject_id }}{% endblock %}
+{% block title %}Subject Page{% endblock %}
 
 {% block content %}
-<h1>Subject: {{ subject_id }}</h1>
-<div id="topics">
-    {% for topic in topics %}
-        <div class="topic">
-            <h2>{{ topic.topic_name }}</h2>
-            {% for subtopic in topic.subtopics %}
-                <div class="subtopic">
-                    <h3>{{ subtopic.name }}</h3>
-                    <p>{{ subtopic.details.text }}</p>
-                    <pre>{{ subtopic.details.code }}</pre>
-                    <img src="{{ url_for('static', filename='images/' + subtopic.details.images[0]) }}" alt="Image">
-                </div>
-            {% endfor %}
+<h1 class="mb-4">{{ subject.subject }}</h1>
+<div class="accordion" id="topicsAccordion">
+    {% for topic in subject.topics %}
+    <div class="accordion-item">
+        <!-- Accordion for each topic -->
+        <h2 class="accordion-header" id="heading{{ loop.index }}">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="true" aria-controls="collapse{{ loop.index }}">
+                {{ topic.topic }}
+            </button>
+        </h2>
+        <div id="collapse{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ loop.index }}" data-bs-parent="#topicsAccordion">
+            <div class="accordion-body">
+                <ul>
+                    {% for subtopic in topic.subtopics %}
+                    <!-- Subtopics under each topic -->
+                    <li>{{ subtopic.name }}: {{ subtopic.details }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
+    </div>
     {% endfor %}
 </div>
 {% endblock %}

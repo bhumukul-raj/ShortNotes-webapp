@@ -1,33 +1,34 @@
+<!-- admin.html -->
 {% extends 'base.html' %}
 
 {% block title %}Admin Panel{% endblock %}
 
 {% block content %}
-<h1>Admin Panel</h1>
-
-<!-- Add Subject Form -->
-<form method="POST" action="{{ url_for('add_subject_route') }}">
-    <label for="name">Subject Name:</label>
-    <input type="text" name="name" id="name" required>
-    <button type="submit">Add Subject</button>
-</form>
-
-<!-- Add Topic Form -->
-<form method="POST" action="{{ url_for('add_topic_route') }}">
-    <label for="subject_id">Subject:</label>
-    <select name="subject_id" id="subject_id" required>
+<h1 class="mb-4">Admin Panel</h1> <a href="{{ url_for('logout') }}" class="btn text-white btn-warning">Logout</a>
+<div class="text-end mb-3">
+    <!-- Add New Subject Button -->
+    <a href="/admin/add" class="btn btn-success">Add New Subject</a>
+</div>
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>#</th>
+            <th>Subject</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
         {% for subject in subjects %}
-            <option value="{{ subject.id }}">{{ subject.name }}</option>
+        <tr>
+            <!-- Admin Table displaying all subjects with edit and delete actions -->
+            <td>{{ loop.index }}</td>
+            <td>{{ subject.subject }}</td>
+            <td>
+                <a href="/admin/edit/{{ subject.subject }}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="/admin/delete/{{ subject.subject }}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
         {% endfor %}
-    </select>
-
-    <label for="topic_name">Topic Name:</label>
-    <input type="text" name="topic_name" required>
-
-    <label for="subtopics">Subtopics (JSON format):</label>
-    <textarea name="subtopics" required></textarea>
-
-    <button type="submit">Add Topic</button>
-</form>
-
+    </tbody>
+</table>
 {% endblock %}

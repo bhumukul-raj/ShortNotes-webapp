@@ -1,10 +1,14 @@
-import json
+import json , logging
 from os.path import join, exists
 
-def load_json(file_name):
+logging.basicConfig(level=logging.DEBUG)
+
+
+def load_json(file_name):       # cheaked working
     """Helper function to load data from a JSON file."""
     try:
         with open(file_name, 'r') as f:
+            logging.info("JSON File is Loaded.") # log
             return json.load(f)
     except FileNotFoundError:
         print(f"Error: {file_name} not found.")
@@ -13,14 +17,17 @@ def load_json(file_name):
         print(f"Error: Could not decode JSON from {file_name}.")
         return []  # Return an empty list if JSON is invalid
 
+def get_subjects():
+    """Get all subjects from the subjects.json file."""
+    return load_json('data/subjects.json')
+
+
 def save_json(file_name, data):
     """Helper function to save data to a JSON file."""
     with open(join('data', file_name), 'w') as f:
         json.dump(data, f, indent=4)
 
-def get_subjects():
-    """Get all subjects from the subjects.json file."""
-    return load_json('subjects.json')
+
 
 def get_topics(subject_id):
     """Get topics related to a specific subject from topics.json."""
