@@ -1,0 +1,40 @@
+# Python bytecode files
+*.pyc
+*.pyo
+__pycache__/
+
+# Virtual environment
+venv/
+env-webapp/
+
+# Flask instance folder
+instance/
+
+# Flask migrations
+
+# migrations/
+
+# Database files
+*.sqlite3
+
+# IDE and editor files (e.g., VSCode, PyCharm)
+.vscode/
+.idea/
+
+# macOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment variable files
+.env
+
+# Python packages
+*.egg
+*.egg-info
+dist/
+build/
