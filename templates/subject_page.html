@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Subject: {{ subject_id }}{% endblock %}
+
+{% block content %}
+<h1>Subject: {{ subject_id }}</h1>
+<div id="topics">
+    {% for topic in topics %}
+        <div class="topic">
+            <h2>{{ topic.topic_name }}</h2>
+            {% for subtopic in topic.subtopics %}
+                <div class="subtopic">
+                    <h3>{{ subtopic.name }}</h3>
+                    <p>{{ subtopic.details.text }}</p>
+                    <pre>{{ subtopic.details.code }}</pre>
+                    <img src="{{ url_for('static', filename='images/' + subtopic.details.images[0]) }}" alt="Image">
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

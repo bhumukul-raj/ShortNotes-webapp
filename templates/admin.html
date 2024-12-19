@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+<h1>Admin Panel</h1>
+
+<!-- Add Subject Form -->
+<form method="POST" action="{{ url_for('add_subject_route') }}">
+    <label for="name">Subject Name:</label>
+    <input type="text" name="name" id="name" required>
+    <button type="submit">Add Subject</button>
+</form>
+
+<!-- Add Topic Form -->
+<form method="POST" action="{{ url_for('add_topic_route') }}">
+    <label for="subject_id">Subject:</label>
+    <select name="subject_id" id="subject_id" required>
+        {% for subject in subjects %}
+            <option value="{{ subject.id }}">{{ subject.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="topic_name">Topic Name:</label>
+    <input type="text" name="topic_name" required>
+
+    <label for="subtopics">Subtopics (JSON format):</label>
+    <textarea name="subtopics" required></textarea>
+
+    <button type="submit">Add Topic</button>
+</form>
+
+{% endblock %}

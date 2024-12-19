@@ -1,0 +1,34 @@
+[
+    {
+      "subject": "Mathematics",
+      "topics": [
+        {
+          "topic": "Algebra",
+          "subtopics": [
+            {"name": "Linear Equations", "details": "Text and example code"},
+            {"name": "Quadratic Equations", "details": "Explanation with table"}
+          ]
+        },
+        {
+          "topic": "Calculus",
+          "subtopics": [
+            {"name": "Limits", "details": "Detailed text explanation"},
+            {"name": "Differentiation", "details": "Code and tables"}
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "Physics",
+      "topics": [
+        {
+          "topic": "Mechanics",
+          "subtopics": [
+            {"name": "Kinematics", "details": "Text with image example"},
+            {"name": "Forces", "details": "Text and formulas"}
+          ]
+        }
+      ]
+    }
+  ]
+  
