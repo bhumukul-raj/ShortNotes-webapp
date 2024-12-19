@@ -1,0 +1,32 @@
+<!-- templates/admin/topics.html -->
+{% extends 'admin/admin_base.html' %}
+
+{% block title %}Manage Topics{% endblock %}
+
+{% block admin_content %}
+<h1 class="mb-4">Topics</h1>
+<a href="/admin/add_topic" class="btn btn-success mb-3">Add New Topic</a>
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>#</th>
+            <th>Topic</th>
+            <th>Subject</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for topic in topics %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ topic.name }}</td>
+            <td>{{ topic.subject }}</td>
+            <td>
+                <a href="/admin/edit_topic/{{ topic.id }}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="/admin/delete_topic/{{ topic.id }}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

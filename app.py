@@ -3,92 +3,138 @@ import json
 from models import get_subjects, get_topics, add_subject, add_topic, load_json
 from utils import check_login
 import logging
+
 logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Needed for session management
 
-@app.route('/') # cheaked working
+### Public Routes ###
+
+@app.route('/')  # Checked working
 def index():
     """
     Home route that displays the subject cards on the index page.
     If the user is logged in, show the admin options. Otherwise, show the login popup.
     """
     subjects = get_subjects()
-    logging.debug("subjects data is passed to index page")  #log
-    return render_template('index.html', subjects=subjects)
+    logging.debug("Subjects data is passed to index page.")  # Log
+    return render_template('/public/index.html', subjects=subjects)
 
-@app.route('/admin')  #Cheaked Working
-def admin():
-    """
-    Admin panel page for CRUD operations. Only accessible if the admin is logged in.
-    """
-    if 'logged_in' in session and session['logged_in']:
-        return render_template('admin.html')
-        logging.debug("Login Sucessfull!") # log
-    return redirect(url_for('index'))
 
-@app.route('/login', methods=['GET','POST']) # cheaked Working
+@app.route('/subject/<subject_name>')  # Checked working
+def subject_page(subject_name):
+    """
+    Render the page for a specific subject with topics.
+    """
+    subjects = load_json('data/subjects.json')
+    subject = next((s for s in subjects if s['subject'] == subject_name), None)
+    if subject is None:
+        return "Subject not found", 404
+    return render_template('/public/subject_page.html', subject=subject)
+
+
+### Authentication Routes ###
+
+@app.route('/login', methods=['GET', 'POST'])  # Checked working
 def login():
     """
     Handle login request for the admin. Verifies admin credentials.
     """
-    if request.method == 'POST' :
-        logging.debug("Login Endpoint Hit!") # log     
-        
+    if request.method == 'POST':
+        logging.debug("Login endpoint hit.")  # Log
         username = request.form.get('username')
         password = request.form.get('password')
         if check_login(username, password):  # Verifies login credentials
-            logging.info("Login successful!")  # log
+            logging.info("Login successful.")  # Log
             session['logged_in'] = True
-            return redirect(url_for('admin'))
-        
-        logging.warning("Login failed!")  # log
-        return redirect(url_for('index')) # if login is failed
-    # For GET requests (e.g., when the user directly visits /login)
-    return render_template('login.html')
+            return redirect(url_for('dashboard'))
+        logging.warning("Login failed.")  # Log
+        return redirect(url_for('index'))  # If login fails
+    return render_template('/auth/login.html')  # GET request
 
-@app.route('/logout')  # cheaked working
+
+@app.route('/logout')  # Checked working
 def logout():
     """
     Log out the admin and redirect to the homepage.
     """
     session.pop('logged_in', None)
-    logging.info("Logout Sucessfull") # log
+    logging.info("Logout successful.")  # Log
     return redirect(url_for('index'))
 
-@app.route('/subject/<subject_name>')   # cheak working
-def subject_page(subject_name):
-    """Render the page for a specific subject with topics."""
-    subjects = load_json('data/subjects.json')
-    # Find the subject matching the subject_name
-    subject = next((s for s in subjects if s['subject'] == subject_name), None)
-    if subject is None:
-        return "Subject not found", 404
-    return render_template('subject_page.html', subject=subject)
+
+### Admin Routes ###
+
+@app.route('/admin')  # Redirect to dashboard
+def admin():
+    """
+    Redirect to the admin dashboard.
+    """
+    return redirect(url_for('dashboard'))
 
 
+@app.route('/admin/dashboard')  # Dashboard route
+def dashboard():
+    """
+    Admin dashboard for managing subjects and topics.
+    """
+    if 'logged_in' in session and session['logged_in']:
+        logging.debug("Admin dashboard accessed.")  # Log
+        return render_template('/admin/dashboard.html')
+    return redirect(url_for('index'))
 
 
-@app.route('/admin/add_subject', methods=['POST'])
+@app.route('/admin/subjects')  # Subjects management route
+def manage_subjects():
+    """
+    Display and manage all subjects.
+    """
+    if 'logged_in' in session and session['logged_in']:
+        subjects = get_subjects()
+        return render_template('/admin/subjects.html', subjects=subjects)
+    return redirect(url_for('index'))
+
+
+@app.route('/admin/topics')  # Topics management route
+def manage_topics():
+    """
+    Display and manage all topics.
+    """
+    if 'logged_in' in session and session['logged_in']:
+        topics = get_topics()
+        return render_template('/admin/topics.html', topics=topics)
+    return redirect(url_for('index'))
+
+
+@app.route('/admin/add_subject', methods=['POST'])  # Adding a subject
 def add_subject_route():
     """
     Handle the creation of a new subject from the admin panel.
     """
-    name = request.form['name']
-    add_subject(name)
-    return redirect(url_for('admin'))
+    if 'logged_in' in session and session['logged_in']:
+        name = request.form['name']
+        add_subject(name)
+        logging.info(f"New subject '{name}' added.")  # Log
+        return redirect(url_for('manage_subjects'))
+    return redirect(url_for('index'))
 
-@app.route('/admin/add_topic', methods=['POST'])
+
+@app.route('/admin/add_topic', methods=['POST'])  # Adding a topic
 def add_topic_route():
     """
     Handle adding topics and their subtopics under a subject.
     """
-    subject_id = int(request.form['subject_id'])
-    topic_name = request.form['topic_name']
-    subtopics = json.loads(request.form['subtopics'])  # JSON string for subtopics
-    add_topic(subject_id, topic_name, subtopics)
-    return redirect(url_for('admin'))
+    if 'logged_in' in session and session['logged_in']:
+        subject_id = int(request.form['subject_id'])
+        topic_name = request.form['topic_name']
+        subtopics = json.loads(request.form['subtopics'])  # JSON string for subtopics
+        add_topic(subject_id, topic_name, subtopics)
+        logging.info(f"New topic '{topic_name}' added under subject ID {subject_id}.")  # Log
+        return redirect(url_for('manage_topics'))
+    return redirect(url_for('index'))
 
+
+### Run Application ###
 if __name__ == '__main__':
     app.run(debug=True)

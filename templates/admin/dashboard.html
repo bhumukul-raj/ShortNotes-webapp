@@ -1,0 +1,28 @@
+<!-- templates/admin/dashboard.html -->
+{% extends '/admin/admin_base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block admin_content %}
+<h1 class="mb-4">Welcome to the Admin Dashboard</h1>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5 class="card-title">Subjects</h5>
+                <p class="card-text">Manage all subjects here.</p>
+                <a href="/admin/subjects" class="btn btn-light">Go to Subjects</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5 class="card-title">Topics</h5>
+                <p class="card-text">Manage topics for subjects.</p>
+                <a href="/admin/topics" class="btn btn-light">Go to Topics</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

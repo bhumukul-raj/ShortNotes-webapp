@@ -1,0 +1,23 @@
+<!-- templates/admin/admin_base.html -->
+{% extends '/layouts/base.html' %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Admin Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <a class="navbar-brand" href="/admin/admin_base">Admin Panel</a>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a href="{{ url_for('logout') }}" class="btn btn-warning text-white">Logout</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Admin Page Content -->
+    <div class="admin-content">
+        {% block admin_content %}{% endblock %}
+    </div>
+</div>
+{% endblock %}

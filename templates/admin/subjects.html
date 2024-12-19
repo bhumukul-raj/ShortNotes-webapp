@@ -1,14 +1,11 @@
-<!-- admin.html -->
-{% extends 'base.html' %}
+<!-- templates/admin/subjects.html -->
+{% extends 'admin/admin_base.html' %}
 
-{% block title %}Admin Panel{% endblock %}
+{% block title %}Manage Subjects{% endblock %}
 
-{% block content %}
-<h1 class="mb-4">Admin Panel</h1> <a href="{{ url_for('logout') }}" class="btn text-white btn-warning">Logout</a>
-<div class="text-end mb-3">
-    <!-- Add New Subject Button -->
-    <a href="/admin/add" class="btn btn-success">Add New Subject</a>
-</div>
+{% block admin_content %}
+<h1 class="mb-4">Subjects</h1>
+<a href="/admin/add" class="btn btn-success mb-3">Add New Subject</a>
 <table class="table table-bordered">
     <thead class="table-light">
         <tr>
@@ -20,7 +17,6 @@
     <tbody>
         {% for subject in subjects %}
         <tr>
-            <!-- Admin Table displaying all subjects with edit and delete actions -->
             <td>{{ loop.index }}</td>
             <td>{{ subject.subject }}</td>
             <td>

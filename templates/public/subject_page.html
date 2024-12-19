@@ -1,0 +1,67 @@
+{% extends '/layouts/base.html' %}
+
+{% block title %}{{ subject.subject }}{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">{{ subject.subject }}</h1>
+<div class="accordion" id="sectionsAccordion">
+    {% for section in subject.sections %}
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingSection{{ loop.index }}">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSection{{ loop.index }}" aria-expanded="true" aria-controls="collapseSection{{ loop.index }}">
+                {{ section.name }}
+            </button>
+        </h2>
+        <div id="collapseSection{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="headingSection{{ loop.index }}" data-bs-parent="#sectionsAccordion">
+            <div class="accordion-body">
+                {% for topic in section.topics %}
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <strong>{{ topic.name }}</strong>
+                    </div>
+                    <div class="card-body">
+                        <!-- Display text if available -->
+                        {% if topic.details.text %}
+                        <p>{{ topic.details.text }}</p>
+                        {% endif %}
+
+                        <!-- Display code if available -->
+                        {% if topic.details.code %}
+                        <pre><code>{{ topic.details.code }}</code></pre>
+                        {% endif %}
+
+                        <!-- Display table if available -->
+                        {% if topic.details.table %}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    {% for header in topic.details.table.headers %}
+                                    <th>{{ header }}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in topic.details.table.rows %}
+                                <tr>
+                                    {% for cell in row %}
+                                    <td>{{ cell }}</td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endif %}
+
+                        <!-- Display image if available -->
+                        {% if topic.details.image %}
+                        <img src="{{ url_for('static', filename=topic.details.image) }}" alt="{{ topic.name }}" class="img-fluid">
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

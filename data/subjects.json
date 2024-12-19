@@ -1,34 +1,144 @@
 [
-    {
+  {
+      "subject": "Python",
+      "sections": [
+          {
+              "name": "Basics",
+              "topics": [
+                  {
+                      "name": "Basic Syntax",
+                      "details": {
+                          "text": "Python is an easy-to-learn language with a clean syntax.",
+                          "code": "print('Hello, World!')",
+                          "table": null,
+                          "image": null
+                      }
+                  },
+                  {
+                      "name": "Variables",
+                      "details": {
+                          "text": "Variables store data values in Python.",
+                          "code": "x = 5\ny = 'Hello'",
+                          "table": null,
+                          "image": null
+                      }
+                  }
+              ]
+          },
+          {
+              "name": "Control Flow",
+              "topics": [
+                  {
+                      "name": "Loops",
+                      "details": {
+                          "text": "Python supports for and while loops for iteration.",
+                          "code": "for i in range(5):\n    print(i)",
+                          "table": null,
+                          "image": null
+                      }
+                  },
+                  {
+                      "name": "Conditionals",
+                      "details": {
+                          "text": "Use if, elif, and else statements for conditions.",
+                          "code": "if x > 5:\n    print('x is greater than 5')",
+                          "table": null,
+                          "image": null
+                      }
+                  }
+              ]
+          }
+      ]
+  },
+  {
       "subject": "Mathematics",
-      "topics": [
-        {
-          "topic": "Algebra",
-          "subtopics": [
-            {"name": "Linear Equations", "details": "Text and example code"},
-            {"name": "Quadratic Equations", "details": "Explanation with table"}
-          ]
-        },
-        {
-          "topic": "Calculus",
-          "subtopics": [
-            {"name": "Limits", "details": "Detailed text explanation"},
-            {"name": "Differentiation", "details": "Code and tables"}
-          ]
-        }
+      "sections": [
+          {
+              "name": "Algebra",
+              "topics": [
+                  {
+                      "name": "Linear Equations",
+                      "details": {
+                          "text": "Linear equations are equations of the first order.",
+                          "code": null,
+                          "table": {
+                              "headers": ["Equation", "Solution"],
+                              "rows": [
+                                  ["2x + 3 = 7", "x = 2"],
+                                  ["x - 5 = 10", "x = 15"]
+                              ]
+                          },
+                          "image": null
+                      }
+                  },
+                  {
+                      "name": "Quadratic Equations",
+                      "details": {
+                          "text": "Quadratic equations have the form ax^2 + bx + c = 0.",
+                          "code": null,
+                          "table": null,
+                          "image": "images/quadratic_example.png"
+                      }
+                  }
+              ]
+          },
+          {
+              "name": "Calculus",
+              "topics": [
+                  {
+                      "name": "Limits",
+                      "details": {
+                          "text": "Limits describe the value a function approaches.",
+                          "code": null,
+                          "table": null,
+                          "image": null
+                      }
+                  },
+                  {
+                      "name": "Differentiation",
+                      "details": {
+                          "text": "Differentiation calculates the rate of change.",
+                          "code": "f'(x) = d/dx(f(x))",
+                          "table": null,
+                          "image": null
+                      }
+                  }
+              ]
+          }
       ]
-    },
-    {
+  },
+  {
       "subject": "Physics",
-      "topics": [
-        {
-          "topic": "Mechanics",
-          "subtopics": [
-            {"name": "Kinematics", "details": "Text with image example"},
-            {"name": "Forces", "details": "Text and formulas"}
-          ]
-        }
+      "sections": [
+          {
+              "name": "Mechanics",
+              "topics": [
+                  {
+                      "name": "Kinematics",
+                      "details": {
+                          "text": "Kinematics is the study of motion.",
+                          "code": null,
+                          "table": {
+                              "headers": ["Term", "Definition"],
+                              "rows": [
+                                  ["Velocity", "Rate of change of displacement"],
+                                  ["Acceleration", "Rate of change of velocity"]
+                              ]
+                          },
+                          "image": "images/kinematics_diagram.png"
+                      }
+                  },
+                  {
+                      "name": "Forces",
+                      "details": {
+                          "text": "Force equals mass times acceleration.",
+                          "code": "F = m * a",
+                          "table": null,
+                          "image": null
+                      }
+                  }
+              ]
+          }
       ]
-    }
-  ]
-  
+  }
+]
