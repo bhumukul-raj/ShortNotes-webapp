@@ -85,16 +85,6 @@ def manage_subjects():
         return render_template('/admin/subjects.html', subjects=subjects)
     return redirect(url_for('index'))
 
-@app.route('/admin/topics')  # Topics management route
-def manage_topics():
-    """
-    Display and manage all topics.
-    """
-    if 'logged_in' in session and session['logged_in']:
-        topics = get_subjects()
-        return render_template('/admin/topics.html', topics=topics)
-    return redirect(url_for('index'))
-
 @app.route('/api/subjects', methods=['GET'])
 def api_get_subjects():
     """API to fetch all subjects."""

@@ -1,177 +1,122 @@
 // admin_script.js
+import { templates } from './subjectsTemplates.js';
 
-document.addEventListener('DOMContentLoaded', function () {
-    loadSubjects();
-    loadTopics();
-    updateLastUpdated();
-    setInterval(updateLastUpdated, 60000); // Update time every minute
+// Main application logic
+class SubjectViewer {
+    constructor() {
+        this.container = document.getElementById('subjectsContainer');
+        this.searchInput = document.querySelector('.search-box input');
+        this.subjects = [];
+        console.log('SubjectViewer initialized');
+    }
 
-    document.querySelectorAll('.search-input').forEach(input => {
-        input.addEventListener('input', function () {
-            const searchTerm = this.value.toLowerCase();
-            const tableRows = this.closest('.tab-pane').querySelectorAll('tbody tr');
-
-            tableRows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                row.style.display = text.includes(searchTerm) ? '' : 'none';
-            });
-        });
-    });
-
-    document.getElementById('addSubjectForm')?.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const modal = bootstrap.Modal.getInstance(document.getElementById('addSubjectModal'));
-        modal.hide();
-        showToast('Subject added successfully!', 'success');
-    });
-
-    document.getElementById('addTopicForm')?.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const modal = bootstrap.Modal.getInstance(document.getElementById('addTopicModal'));
-        modal.hide();
-        showToast('Topic added successfully!', 'success');
-    });
-
-    document.getElementById('logoutBtn')?.addEventListener('click', function (e) {
-        e.preventDefault();
-        if (confirm('Are you sure you want to logout?')) {
-            window.location.href = '/login';
+    async initialize() {
+        try {
+            console.log('Initializing SubjectViewer...');
+            // Call loadSubjectsData() to fetch data from the API
+            this.subjects = await loadSubjectsData();
+            console.log('Subjects fetched:', this.subjects);
+            this.render();
+            this.setupEventListeners();
+        } catch (error) {
+            console.error('Failed to initialize:', error);
         }
-    });
-});
+    }
 
-// Fetch and load subjects dynamically
-function loadSubjects() {
-    fetch('/api/subjects')
-        .then(response => response.json())
-        .then(subjects => {
-            const tbody = document.getElementById('subjectsTable');
-            if (!tbody) return;
+    render() {
+        console.log('Rendering subjects...');
+        if (!this.container) {
+            console.error('Subjects container not found!');
+            return;
+        }
 
-            tbody.innerHTML = subjects.map(subject => {
-                const sectionsCount = subject.sections.length;
-                const topicsCount = subject.sections.reduce((sum, section) => sum + (section.topics?.length || 0), 0);
+        const html = this.subjects
+            .map(subject => {
+                console.log('Rendering subject:', subject);
+                return templates.subjectCard(subject);  // Generate HTML for each subject
+            })
+            .join('');
 
-                return `
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div class="bg-primary bg-opacity-10 p-2 rounded-circle me-2">
-                                    <i class="fas fa-book text-primary"></i>
-                                </div>
-                                <div>
-                                    <div class="fw-medium">${subject.name}</div>
-                                    <div class="text-muted small">Active</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>${sectionsCount}</td>
-                        <td>${topicsCount}</td>
-                        <td>
-                            <div class="text-muted small">${subject.lastUpdated || 'N/A'}</div>
-                        </td>
-                        <td>
-                            <button class="btn btn-action btn-light me-2" title="Edit">
-                                <i class="fas fa-edit text-primary"></i>
-                            </button>
-                            <button class="btn btn-action btn-light" title="Delete">
-                                <i class="fas fa-trash text-danger"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            }).join('');
-        })
-        .catch(error => console.error('Error fetching subjects:', error));
-}
+        this.container.innerHTML = html;
+        console.log('Subjects rendered into container.');
+    }
 
+    setupEventListeners() {
+        console.log('Setting up event listeners...');
+        if (this.searchInput) {
+            this.searchInput.addEventListener('input', (e) => this.handleSearch(e.target.value));  // Handle search input
+            console.log('Search input event listener attached.');
+        } else {
+            console.warn('Search input element not found!');
+        }
+    }
 
-// Fetch and load topics dynamically, categorized by subject
-function loadTopics() {
-    fetch('/api/subjects')
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);  // Log the data to check the structure
+    handleSearch(searchTerm) {
+        console.log('Handling search for term:', searchTerm);
+        const term = searchTerm.toLowerCase();
+        const cards = document.querySelectorAll('.subject-card');
 
-            // Generate HTML for each subject
-            const subjectsContainer = document.getElementById('subjectsContainer');
-            if (!subjectsContainer) return;
-
-            // Generate dynamic HTML for each subject and its sections
-            subjectsContainer.innerHTML = data.subjects.map(subject => {
-                return `
-                    <div class="subject-category">
-                        <h3 class="subject-name">${subject.name}</h3>
-                        <p class="subject-description">${subject.description}</p>
-                        <div class="sections">
-                            ${subject.sections.map(section => {
-                                return `
-                                    <div class="section-category">
-                                        <h4 class="section-name">${section.name}</h4>
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Topic Name</th>
-                                                    <th>Last Updated</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                ${section.topics.map(topic => {
-                                                    return `
-                                                        <tr>
-                                                            <td>${topic.name}</td>
-                                                            <td>${topic.details.lastUpdated || 'N/A'}</td>
-                                                            <td>
-                                                                <button class="btn btn-action btn-light me-2" title="Edit">
-                                                                    <i class="fas fa-edit text-primary"></i>
-                                                                </button>
-                                                                <button class="btn btn-action btn-light" title="Delete">
-                                                                    <i class="fas fa-trash text-danger"></i>
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                    `;
-                                                }).join('')}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                `;
-                            }).join('')}
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        })
-        .catch(error => console.error('Error fetching subjects:', error));
-}
-
-
-
-
-
-function updateLastUpdated() {
-    const now = new Date();
-    const lastUpdated = document.getElementById('lastUpdated');
-    if (lastUpdated) {
-        lastUpdated.textContent = now.toLocaleString();
+        cards.forEach(card => {
+            const content = card.textContent.toLowerCase();
+            card.style.display = content.includes(term) ? '' : 'none';  // Filter subject cards based on search term
+        });
+        console.log(`Filtered subjects with search term: ${searchTerm}`);
     }
 }
 
-function showToast(message, type = 'success') {
-    const toast = document.createElement('div');
-    toast.className = `toast align-items-center text-white bg-${type} border-0 position-fixed bottom-0 end-0 m-3`;
-    toast.setAttribute('role', 'alert');
-    toast.innerHTML = `
-        <div class="d-flex">
-            <div class="toast-body">
-                ${message}
-            </div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-        </div>
-    `;
-    document.body.appendChild(toast);
-    const bsToast = new bootstrap.Toast(toast);
-    bsToast.show();
-    toast.addEventListener('hidden.bs.toast', () => toast.remove());
+// Initialize the application
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM fully loaded and parsed. Initializing SubjectViewer...');
+    const viewer = new SubjectViewer();
+    viewer.initialize();  // Initialize SubjectViewer
+
+    setupLogoutButton();  // Set up the logout button functionality
+});
+
+// Global handlers for topic actions
+window.editTopic = (topicId) => {
+    console.log('Editing topic:', topicId);
+    // Implement edit logic
+};
+
+window.deleteTopic = (topicId) => {
+    if (confirm('Are you sure you want to delete this topic?')) {
+        console.log('Deleting topic:', topicId);
+        // Implement delete logic
+    }
+};
+
+// Fetch and load subjects dynamically from the API
+async function loadSubjectsData() {
+    console.log('Fetching subjects data from the API...');
+    try {
+        const response = await fetch('/api/subjects');  // Fetch subjects from the API
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();  // Parse the response as JSON
+        console.log('Fetched data:', data);
+        return data;  // Return the parsed subjects data
+    } catch (error) {
+        console.error('Error fetching subjects:', error);
+        throw error;
+    }
+}
+
+// Function to set up the logout button
+function setupLogoutButton() {
+    console.log('Setting up logout button...');
+    const logoutButton = document.getElementById('logoutBtn');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', function (e) {
+            console.log('Logout button clicked');
+            e.preventDefault();
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = '/login';  // Redirect to login page
+            }
+        });
+        console.log('Logout button event listener attached.');
+    } else {
+        console.warn('Logout button not found!');
+    }
 }

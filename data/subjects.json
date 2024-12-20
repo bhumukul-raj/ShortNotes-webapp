@@ -112,7 +112,7 @@
                 "text": "Quadratic equations have the form ax^2 + bx + c = 0.",
                 "code": null,
                 "table": null,
-                "image": "images/quadratic_example.png"
+                "image": null
               }
             }
           ]
@@ -178,7 +178,7 @@
                     ["Acceleration", "Rate of change of velocity"]
                   ]
                 },
-                "image": "images/kinematics_diagram.png"
+                "image": null
               }
             },
             {
