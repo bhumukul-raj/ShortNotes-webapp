@@ -5,6 +5,12 @@ export const templates = {
             <div class="card-header bg-primary bg-opacity-10">
                 <h3 class="card-title mb-0">
                     <i class="fas fa-book me-2"></i>${subject.name}
+                    <button class="btn btn-action btn-light me-2" onclick="editSubject(${subject.id})" title="Edit Subject">
+                    <i class="fas fa-edit text-primary"></i>
+                </button>
+                <button class="btn btn-action btn-light" onclick="deleteSubject(${subject.id})" title="Delete Subject">
+                    <i class="fas fa-trash text-danger"></i>
+                </button>
                 </h3>
             </div>
             <div class="card-body">
@@ -17,21 +23,28 @@ export const templates = {
     `,
 
     sectionContent: (section) => `
-        <div class="section-content mb-4">
-            <h4 class="section-title mb-3">
+        <h4 class="section-title mb-3 d-flex align-items-center justify-content-between">
+            <span>
                 <i class="fas fa-layer-group me-2"></i>${section.name}
-            </h4>
+                <button class="btn btn-action btn-light me-2" onclick="editSection(${section.id})" title="Edit Section">
+                    <i class="fas fa-edit text-primary"></i>
+                </button>
+                <button class="btn btn-action btn-light" onclick="deleteSection(${section.id})" title="Delete Section">
+                    <i class="fas fa-trash text-danger"></i>
+                </button>
+            </span>
+        </h4>
             <div class="table-responsive">
                 ${templates.table({
-                    headers: ['Topic', 'Content', 'Actions'],
-                    columnWidths: ['20%', '60%', '20%'], // Set column widths here
-                    rows: section.topics.map(topic => [
-                        topic.name,
-                        templates.topicContent(topic.details),
-                        `<button class="btn btn-action btn-light me-2" onclick="editTopic(${topic.id})" title="Edit"><i class="fas fa-edit text-primary"></i></button>
+        headers: ['Topic', 'Content', 'Actions'],
+        columnWidths: ['20%', '60%', '20%'], // Set column widths here
+        rows: section.topics.map(topic => [
+            topic.name,
+            templates.topicContent(topic.details),
+            `<button class="btn btn-action btn-light me-2" onclick="editTopic(${topic.id})" title="Edit"><i class="fas fa-edit text-primary"></i></button>
                          <button class="btn btn-action btn-light" onclick="deleteTopic(${topic.id})" title="Delete"><i class="fas fa-trash text-danger"></i></button>`
-                    ])
-                })}
+        ])
+    })}
             </div>
         </div>
     `,
@@ -71,9 +84,9 @@ export const templates = {
             <thead>
                 <tr>
                     ${table.headers.map((header, index) => {
-                        const width = table.columnWidths && table.columnWidths[index] ? table.columnWidths[index] : 'auto';
-                        return `<th style="width: ${width};">${header}</th>`;
-                    }).join('')}
+        const width = table.columnWidths && table.columnWidths[index] ? table.columnWidths[index] : 'auto';
+        return `<th style="width: ${width};">${header}</th>`;
+    }).join('')}
                 </tr>
             </thead>
             <tbody>
