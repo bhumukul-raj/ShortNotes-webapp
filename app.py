@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request, session, jsonify
 import json
-from models import get_subjects, get_topics, add_subject, add_topic, load_json
+from models import get_subjects
 from utils import check_login
 import logging
 
