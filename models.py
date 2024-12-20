@@ -18,8 +18,11 @@ def load_json(file_name):       # cheaked working
         return []  # Return an empty list if JSON is invalid
 
 def get_subjects():
-    """Get all subjects from the subjects.json file."""
-    return load_json('data/subjects.json')
+    """Get all subjects from subjects.json."""
+    data = load_json('data/subjects.json')
+    return data.get('subjects', [])  # Make sure to return the list under 'subjects'
+
+
 
 
 def save_json(file_name, data):
@@ -29,10 +32,30 @@ def save_json(file_name, data):
 
 
 
-def get_topics(subject_id):
-    """Get topics related to a specific subject from topics.json."""
-    topics = load_json('topics.json')
-    return [t for t in topics if t['subject_id'] == subject_id]
+def get_topics(subject_id=None):
+    """Get topics related to a specific subject from subjects.json."""
+    subjects = load_json('data/subjects.json')  # Load subjects from subjects.json
+    if subject_id is None:
+        # If no subject_id is passed, return all topics
+        topics = []
+        for subject in subjects:
+            for section in subject.get('sections', []):
+                topics.extend(section.get('topics', []))
+        return topics
+    else:
+        # Find the subject by ID and return its topics
+        subject = next((s for s in subjects if s['id'] == subject_id), None)
+        if subject is None:
+            return []
+        topics = []
+        for section in subject.get('sections', []):
+            topics.extend(section.get('topics', []))
+        return topics
+
+
+
+
+
 
 def add_subject(name):
     """Add a new subject to subjects.json."""

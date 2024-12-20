@@ -22,13 +22,13 @@ def index():
     return render_template('/public/index.html', subjects=subjects)
 
 
-@app.route('/subject/<subject_name>')  # Checked working
+@app.route('/subject/<subject_name>')
 def subject_page(subject_name):
     """
     Render the page for a specific subject with topics.
     """
-    subjects = load_json('data/subjects.json')
-    subject = next((s for s in subjects if s['subject'] == subject_name), None)
+    subjects = get_subjects()  # Use the function that returns the subjects list
+    subject = next((s for s in subjects if s['name'] == subject_name), None)
     if subject is None:
         return "Subject not found", 404
     return render_template('/public/subject_page.html', subject=subject)
@@ -102,37 +102,17 @@ def manage_topics():
     Display and manage all topics.
     """
     if 'logged_in' in session and session['logged_in']:
-        topics = get_topics()
+        topics = get_subjects()
         return render_template('/admin/topics.html', topics=topics)
     return redirect(url_for('index'))
 
 
-@app.route('/admin/add_subject', methods=['POST'])  # Adding a subject
-def add_subject_route():
-    """
-    Handle the creation of a new subject from the admin panel.
-    """
-    if 'logged_in' in session and session['logged_in']:
-        name = request.form['name']
-        add_subject(name)
-        logging.info(f"New subject '{name}' added.")  # Log
-        return redirect(url_for('manage_subjects'))
-    return redirect(url_for('index'))
 
 
-@app.route('/admin/add_topic', methods=['POST'])  # Adding a topic
-def add_topic_route():
-    """
-    Handle adding topics and their subtopics under a subject.
-    """
-    if 'logged_in' in session and session['logged_in']:
-        subject_id = int(request.form['subject_id'])
-        topic_name = request.form['topic_name']
-        subtopics = json.loads(request.form['subtopics'])  # JSON string for subtopics
-        add_topic(subject_id, topic_name, subtopics)
-        logging.info(f"New topic '{topic_name}' added under subject ID {subject_id}.")  # Log
-        return redirect(url_for('manage_topics'))
-    return redirect(url_for('index'))
+@app.route('/api/subjects', methods=['GET'])
+def api_get_subjects():
+    """API to fetch all subjects."""
+    return jsonify(get_subjects())
 
 
 ### Run Application ###

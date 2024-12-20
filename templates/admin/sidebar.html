@@ -1,0 +1,29 @@
+<!-- sidebar.html -->
+<div class="sidebar">
+    <div class="text-center mb-4">
+        <h3 class="text-white fw-bold">Admin Panel</h3>
+        <p class="text-gray-400 small">Management Dashboard</p>
+    </div>
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link active" href="{{ url_for('dashboard') }}">
+                <i class="fas fa-chart-line"></i> Dashboard
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('manage_subjects') }}">
+                <i class="fas fa-book"></i> Subjects
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('manage_topics') }}">
+                <i class="fas fa-list"></i> Topics
+            </a>
+        </li>
+        <li class="nav-item mt-auto">
+            <a class="nav-link text-danger" href="{{ url_for('logout') }}">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </li>
+    </ul>
+</div>

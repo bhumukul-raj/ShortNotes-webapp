@@ -1,15 +1,15 @@
 {% extends '/layouts/base.html' %}
 
-{% block title %}{{ subject.subject }}{% endblock %}
+{% block title %}{{ subject.name }}{% endblock %} <!-- Changed from subject.subject to subject.name -->
 
 {% block content %}
-<h1 class="mb-4">{{ subject.subject }}</h1>
+<h1 class="mb-4">{{ subject.name }}</h1> <!-- Changed from subject.subject to subject.name -->
 <div class="accordion" id="sectionsAccordion">
     {% for section in subject.sections %}
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingSection{{ loop.index }}">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSection{{ loop.index }}" aria-expanded="true" aria-controls="collapseSection{{ loop.index }}">
-                {{ section.name }}
+                {{ section.name }} <!-- Changed from section.name -->
             </button>
         </h2>
         <div id="collapseSection{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="headingSection{{ loop.index }}" data-bs-parent="#sectionsAccordion">
@@ -17,7 +17,7 @@
                 {% for topic in section.topics %}
                 <div class="card mb-3">
                     <div class="card-header">
-                        <strong>{{ topic.name }}</strong>
+                        <strong>{{ topic.name }} <!-- Changed from topic.name --> </strong>
                     </div>
                     <div class="card-body">
                         <!-- Display text if available -->

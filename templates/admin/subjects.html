@@ -1,30 +1,38 @@
-<!-- templates/admin/subjects.html -->
-{% extends 'admin/admin_base.html' %}
+<!-- subjects.html -->
+{% extends "admin/admin_base.html" %}
 
-{% block title %}Manage Subjects{% endblock %}
+{% block title %}Subjects - Admin Panel{% endblock %}
 
-{% block admin_content %}
-<h1 class="mb-4">Subjects</h1>
-<a href="/admin/add" class="btn btn-success mb-3">Add New Subject</a>
-<table class="table table-bordered">
-    <thead class="table-light">
-        <tr>
-            <th>#</th>
-            <th>Subject</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for subject in subjects %}
-        <tr>
-            <td>{{ loop.index }}</td>
-            <td>{{ subject.subject }}</td>
-            <td>
-                <a href="/admin/edit/{{ subject.subject }}" class="btn btn-warning btn-sm">Edit</a>
-                <a href="/admin/delete/{{ subject.subject }}" class="btn btn-danger btn-sm">Delete</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-1">Subjects</h2>
+        <p class="text-muted">Manage your subjects</p>
+    </div>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSubjectModal">
+        <i class="fas fa-plus me-2"></i>Add Subject
+    </button>
+</div>
+
+<div class="search-box">
+    <i class="fas fa-search"></i>
+    <input type="text" class="form-control" placeholder="Search subjects...">
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Subject Name</th>
+                <th>Sections</th>
+                <th>Topics</th>
+                <th>Last Updated</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="subjectsTable">
+            <!-- Subjects will be dynamically loaded here -->
+        </tbody>
+    </table>
+</div>
 {% endblock %}
