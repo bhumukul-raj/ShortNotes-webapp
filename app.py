@@ -3,14 +3,12 @@ import json
 from models import get_subjects
 from utils import check_login
 import logging
-
 logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Needed for session management
 
 ### Public Routes ###
-
 @app.route('/')  # Checked working
 def index():
     """
@@ -20,7 +18,6 @@ def index():
     subjects = get_subjects()
     logging.debug("Subjects data is passed to index page.")  # Log
     return render_template('/public/index.html', subjects=subjects)
-
 
 @app.route('/subject/<subject_name>')
 def subject_page(subject_name):
@@ -33,9 +30,7 @@ def subject_page(subject_name):
         return "Subject not found", 404
     return render_template('/public/subject_page.html', subject=subject)
 
-
 ### Authentication Routes ###
-
 @app.route('/login', methods=['GET', 'POST'])  # Checked working
 def login():
     """
@@ -53,7 +48,6 @@ def login():
         return redirect(url_for('index'))  # If login fails
     return render_template('/auth/login.html')  # GET request
 
-
 @app.route('/logout')  # Checked working
 def logout():
     """
@@ -63,16 +57,13 @@ def logout():
     logging.info("Logout successful.")  # Log
     return redirect(url_for('index'))
 
-
 ### Admin Routes ###
-
 @app.route('/admin')  # Redirect to dashboard
 def admin():
     """
     Redirect to the admin dashboard.
     """
     return redirect(url_for('dashboard'))
-
 
 @app.route('/admin/dashboard')  # Dashboard route
 def dashboard():
@@ -84,7 +75,6 @@ def dashboard():
         return render_template('/admin/dashboard.html')
     return redirect(url_for('index'))
 
-
 @app.route('/admin/subjects')  # Subjects management route
 def manage_subjects():
     """
@@ -94,7 +84,6 @@ def manage_subjects():
         subjects = get_subjects()
         return render_template('/admin/subjects.html', subjects=subjects)
     return redirect(url_for('index'))
-
 
 @app.route('/admin/topics')  # Topics management route
 def manage_topics():
@@ -106,14 +95,10 @@ def manage_topics():
         return render_template('/admin/topics.html', topics=topics)
     return redirect(url_for('index'))
 
-
-
-
 @app.route('/api/subjects', methods=['GET'])
 def api_get_subjects():
     """API to fetch all subjects."""
     return jsonify(get_subjects())
-
 
 ### Run Application ###
 if __name__ == '__main__':
