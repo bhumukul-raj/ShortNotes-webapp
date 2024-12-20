@@ -22,18 +22,16 @@ export const templates = {
                 <i class="fas fa-layer-group me-2"></i>${section.name}
             </h4>
             <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Topic</th>
-                            <th>Content</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${section.topics.map(topic => templates.topicRow(topic)).join('')}
-                    </tbody>
-                </table>
+                ${templates.table({
+                    headers: ['Topic', 'Content', 'Actions'],
+                    columnWidths: ['20%', '60%', '20%'], // Set column widths here
+                    rows: section.topics.map(topic => [
+                        topic.name,
+                        templates.topicContent(topic.details),
+                        `<button class="btn btn-action btn-light me-2" onclick="editTopic(${topic.id})" title="Edit"><i class="fas fa-edit text-primary"></i></button>
+                         <button class="btn btn-action btn-light" onclick="deleteTopic(${topic.id})" title="Delete"><i class="fas fa-trash text-danger"></i></button>`
+                    ])
+                })}
             </div>
         </div>
     `,
@@ -72,7 +70,10 @@ export const templates = {
         <table class="table table-sm">
             <thead>
                 <tr>
-                    ${table.headers.map(header => `<th>${header}</th>`).join('')}
+                    ${table.headers.map((header, index) => {
+                        const width = table.columnWidths && table.columnWidths[index] ? table.columnWidths[index] : 'auto';
+                        return `<th style="width: ${width};">${header}</th>`;
+                    }).join('')}
                 </tr>
             </thead>
             <tbody>
