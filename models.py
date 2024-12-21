@@ -147,3 +147,21 @@ def delete_topic(subject_id, section_id, topic_id):
     except Exception as e:
         logging.exception("Unexpected error occurred while deleting topic.")
         return {"status": "error", "message": str(e)}
+
+def save_new_subject(name, description):
+    """Save a new subject to the subjects.json file."""
+    try:
+        data = load_json('data/subjects.json')  # Load existing data
+        new_id = max([subject['id'] for subject in data.get('subjects', [])], default=0) + 1  # Generate new ID
+        new_subject = {
+            "id": new_id,
+            "name": name,
+            "description": description,
+            "sections": []
+        }
+        data['subjects'].append(new_subject)
+        save_data('data/subjects.json', data)  # Save the updated data to the file
+        return new_subject  # Return the newly added subject
+    except Exception as e:
+        logging.exception("Error occurred while saving new subject.")
+        return None

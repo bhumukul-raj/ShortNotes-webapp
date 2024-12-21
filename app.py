@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request, session, jsonify
 import json
-from models import get_subjects, delete_section, save_data, delete_subject_from_data, delete_topic
+from models import get_subjects, delete_section, save_data, save_new_subject, delete_subject_from_data, delete_topic
 from utils import check_login
 import logging
 logging.basicConfig(level=logging.DEBUG)
@@ -125,7 +125,25 @@ def delete_topic_route(subject_id, section_id, topic_id):
         return jsonify(result), 200
     else:
         return jsonify(result), 400
+######*********************************************
+@app.route('/api/subjects', methods=['POST'])
+def add_subject():
+    """
+    API to add a new subject.
+    """
+    data = request.get_json()
+    name = data.get('name')
+    description = data.get('description')
 
+    if not name or not description:
+        return jsonify({"status": "error", "message": "Name and description are required"}), 400
+
+    new_subject = save_new_subject(name, description)
+
+    if new_subject:
+        return jsonify(new_subject), 201
+    else:
+        return jsonify({"status": "error", "message": "Failed to add the subject"}), 500
 
 
 

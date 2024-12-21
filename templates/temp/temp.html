@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,16 +14,21 @@
             background-color: #f4f4f4;
             color: #333;
         }
+
         header {
             background: #333;
             color: #fff;
             padding: 1rem 0;
             text-align: center;
         }
+
         .container {
             padding: 2rem;
         }
-        .subject, .section, .topic {
+
+        .subject,
+        .section,
+        .topic {
             margin-bottom: 1rem;
             padding: 1rem;
             background: #fff;
@@ -30,9 +36,11 @@
             border-radius: 5px;
             position: relative;
         }
+
         .actions {
             margin-top: 0.5rem;
         }
+
         button {
             margin: 0 0.5rem;
             padding: 0.5rem 1rem;
@@ -42,145 +50,452 @@
             cursor: pointer;
             border-radius: 3px;
         }
+
         button.delete {
             background-color: #d9534f;
         }
+
+        /* Additional styles for editable placeholders and borders */
+        .editable {
+            border: 1px solid #ccc;
+            padding: 0.5rem;
+            border-radius: 3px;
+            background-color: #f9f9f9;
+            margin: 0.5rem 0;
+        }
+
+        .editable:focus {
+            outline: 2px solid #007BFF;
+            background-color: #fff;
+        }
+
+        .editable[data-placeholder]:empty:before {
+            content: attr(data-placeholder);
+            color: #999;
+            display: block;
+        }
     </style>
 </head>
+
 <body>
 
-<header>
-    <h1>Subjects Overview</h1>
-</header>
+    <header>
+        <h1>Subjects Overview</h1>
+    </header>
 
-<div class="container">
-    <div id="subjects-container">
-        {% for subject in subjects %}
-        <div class="subject" data-id="{{ subject.id }}">
-            <h2 contenteditable="true">{{ subject.name }}</h2>
-            <p contenteditable="true">{{ subject.description }}</p>
-            <div class="actions">
-                <button class="add-section">Add Section</button>
-                <button class="delete delete-subject">Delete Subject</button>
-            </div>
-            <div class="sections">
-                {% for section in subject.sections %}
-                <div class="section" data-id="{{ section.id }}">
-                    <h3 contenteditable="true">{{ section.name }}</h3>
-                    <div class="actions">
-                        <button class="add-topic">Add Topic</button>
-                        <button class="delete delete-section">Delete Section</button>
-                    </div>
-                    <div class="topics">
-                        {% for topic in section.topics %}
-                        <div class="topic" data-id="{{ topic.id }}">
-                            <h4 contenteditable="true">{{ topic.name }}</h4>
-                            <p contenteditable="true">{{ topic.details.text }}</p>
-                            {% if topic.details.code %}
-                            <pre contenteditable="true"><code>{{ topic.details.code }}</code></pre>
-                            {% endif %}
-                            <div class="actions">
-                                <button class="delete delete-topic">Delete Topic</button>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
+    <div class="container">
+        <button id="add-subject" class="add">Add Subject</button>
+        <div id="subjects-container">
+            {% for subject in subjects %}
+            <div class="subject" data-id="{{ subject.id }}">
+                <h2>{{ subject.name }}</h2>
+                <p>{{ subject.description }}</p>
+                <div class="actions">
+                    <button class="add-section">Add Section</button>
+                    <button class="delete delete-subject">Delete Subject</button>
                 </div>
-                {% endfor %}
+                <div class="sections">
+                    {% for section in subject.sections %}
+                    <div class="section" data-id="{{ section.id }}">
+                        <h3>{{ section.name }}</h3>
+                        <div class="actions">
+                            <button class="add-topic">Add Topic</button>
+                            <button class="delete delete-section">Delete Section</button>
+                        </div>
+                        <div class="topics">
+                            {% for topic in section.topics %}
+                            <div class="topic" data-id="{{ topic.id }}">
+                                <h4>{{ topic.name }}</h4>
+                                <p>{{ topic.details.text }}</p>
+                                {% if topic.details.code %}
+                                <pre><code>{{ topic.details.code }}</code></pre>
+                                {% endif %}
+                                <div class="actions">
+                                    <button class="delete delete-topic">Delete Topic</button>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
-</div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
+    <script>
         /**
-         * Initialize event listeners for all buttons.
-         */
-        function initializeEventListeners() {
-            // Attach event listeners for delete buttons
-            document.querySelectorAll('.delete-subject').forEach(button => {
-                button.addEventListener('click', handleDeleteSubject);
-            });
+             * This event listeners for all delete buttons.
+             */
+        document.addEventListener('DOMContentLoaded', () => {
+            /**
+             * Initialize event listeners for all buttons.
+             */
+            function initializeEventListeners() {
+                // Attach event listeners for delete buttons
+                document.querySelectorAll('.delete-subject').forEach(button => {
+                    button.addEventListener('click', handleDeleteSubject);
+                });
 
-            document.querySelectorAll('.delete-section').forEach(button => {
-                button.addEventListener('click', handleDeleteSection);
-            });
+                document.querySelectorAll('.delete-section').forEach(button => {
+                    button.addEventListener('click', handleDeleteSection);
+                });
 
-            document.querySelectorAll('.delete-topic').forEach(button => {
-                button.addEventListener('click', handleDeleteTopic);
-            });
-        }
-
-        /**
-         * Handle deleting a subject.
-         */
-        function handleDeleteSubject(event) {
-            const subjectDiv = event.target.closest('.subject');
-            const subjectId = subjectDiv.getAttribute('data-id');
-
-            const hasSections = subjectDiv.querySelectorAll('.section').length > 0;
-            if (hasSections) {
-                alert("Cannot delete subject with sections.");
-                return;
+                document.querySelectorAll('.delete-topic').forEach(button => {
+                    button.addEventListener('click', handleDeleteTopic);
+                });
             }
 
-            fetch(`/api/subjects/${subjectId}`, {
-                method: 'DELETE'
-            }).then(() => {
-                subjectDiv.remove();
+            /**
+             * Handle deleting a subject.
+             */
+            function handleDeleteSubject(event) {
+                const subjectDiv = event.target.closest('.subject');
+                const subjectId = subjectDiv.getAttribute('data-id');
+
+                const hasSections = subjectDiv.querySelectorAll('.section').length > 0;
+                if (hasSections) {
+                    alert("Cannot delete subject with sections.");
+                    return;
+                }
+
+                fetch(`/api/subjects/${subjectId}`, {
+                    method: 'DELETE'
+                }).then(() => {
+                    subjectDiv.remove();
+                });
+            }
+
+            /**
+             * Handle deleting a section.
+             */
+            function handleDeleteSection(event) {
+                const sectionDiv = event.target.closest('.section');
+                const sectionId = sectionDiv.getAttribute('data-id');
+                const subjectId = sectionDiv.closest('.subject').getAttribute('data-id'); // Get the subject ID
+
+                const hasTopics = sectionDiv.querySelectorAll('.topic').length > 0;
+                if (hasTopics) {
+                    alert("Cannot delete section with topics.");
+                    return;
+                }
+
+                fetch(`/api/sections/${subjectId}/${sectionId}`, {
+                    method: 'DELETE'
+                }).then(response => response.json()).then(data => {
+                    if (data.message) {
+                        sectionDiv.remove(); // Remove the section from the DOM
+                    } else {
+                        alert(data.error || "Error deleting section");
+                    }
+                });
+            }
+            /**
+             * Handle deleting a topic.
+             */
+            function handleDeleteTopic(event) {
+                const topicDiv = event.target.closest('.topic');
+                const topicId = topicDiv.getAttribute('data-id');
+                const sectionId = topicDiv.closest('.section').getAttribute('data-id');
+                const subjectId = topicDiv.closest('.subject').getAttribute('data-id');
+
+                fetch(`/api/topics/${subjectId}/${sectionId}/${topicId}`, {
+                    method: 'DELETE'
+                }).then(response => response.json()).then(data => {
+                    if (data.message) {
+                        topicDiv.remove(); // Remove the topic from the DOM
+                    } else {
+                        alert(data.error || "Error deleting topic");
+                    }
+                });
+            }
+
+            // Initialize event listeners on page load
+            initializeEventListeners();
+        });
+
+        /**
+            * This event listeners for all add buttons.
+            */
+        document.addEventListener('DOMContentLoaded', () => {
+            const subjectsContainer = document.getElementById('subjects-container');
+            const addSubjectButton = document.getElementById('add-subject');
+
+
+            // Add Subject
+            addSubjectButton.addEventListener('click', () => {
+                // Create an empty subject block with editable fields
+                const newSubjectHtml = `
+    <div class="subject new" data-id="temp">
+        <h2 contenteditable="true" class="editable" data-placeholder="Enter Subject Name..."></h2>
+        <p contenteditable="true" class="editable" data-placeholder="Enter Subject Description..."></p>
+        <div class="actions">
+            <button class="save-subject add">Save Subject</button>
+            <button class="cancel-subject delete">Cancel</button>
+        </div>
+        <div class="sections"></div>
+    </div>
+    `;
+
+                // Insert the new Subject block at the top of the container
+                subjectsContainer.insertAdjacentHTML('afterbegin', newSubjectHtml);
+
+                // Attach event listeners for save and cancel actions
+                const newSubjectDiv = subjectsContainer.querySelector('.subject.new');
+
+                const saveButton = newSubjectDiv.querySelector('.save-subject');
+                const cancelButton = newSubjectDiv.querySelector('.cancel-subject');
+
+                // Add the feedback div above the actions
+                const feedbackDiv = document.createElement('div');
+                feedbackDiv.classList.add('feedback');
+                newSubjectDiv.querySelector('.actions').insertAdjacentElement('beforebegin', feedbackDiv);
+
+                // Save the new Subject
+                saveButton.addEventListener('click', () => {
+                    const name = newSubjectDiv.querySelector('h2').textContent.trim();
+                    const description = newSubjectDiv.querySelector('p').textContent.trim();
+
+                    if (!name || !description) {
+                        alert('Please fill out both the Subject Name and Description.');
+                        return;
+                    }
+
+                    // Check if a subject with the same name already exists
+                    fetch(`/api/subjects?name=${encodeURIComponent(name)}`, {
+                        method: 'GET',
+                        headers: { 'Content-Type': 'application/json' },
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.exists) {
+                                // If subject exists, show a message
+                                feedbackDiv.textContent = 'Subject with this name already exists.';
+                                feedbackDiv.style.color = 'red';
+                            } else {
+                                // If subject doesn't exist, proceed to save the subject
+                                fetch('/api/subjects', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ name, description })
+                                }).then(response => response.json()).then(data => {
+                                    if (data.id) {
+                                        // Update the subject div with the real ID
+                                        newSubjectDiv.setAttribute('data-id', data.id);
+                                        newSubjectDiv.classList.remove('new');
+                                        newSubjectDiv.querySelector('.actions').innerHTML = `
+                        <button class="add add-section">Add Section</button>
+                        <button class="delete delete-subject">Delete Subject</button>
+                        `;
+
+                                        // Show success message
+                                        feedbackDiv.textContent = 'Subject saved successfully!';
+                                        feedbackDiv.style.color = 'green';
+                                    } else {
+                                        feedbackDiv.textContent = data.error || 'Failed to save the Subject.';
+                                        feedbackDiv.style.color = 'red';
+                                    }
+                                }).catch(error => {
+                                    feedbackDiv.textContent = 'An error occurred while saving the subject.';
+                                    feedbackDiv.style.color = 'red';
+                                });
+                            }
+                        });
+                });
+
+                // Cancel the new Subject
+                cancelButton.addEventListener('click', () => {
+                    newSubjectDiv.remove();
+                });
             });
-        }
 
-        /**
-         * Handle deleting a section.
-         */
-         function handleDeleteSection(event) {
-    const sectionDiv = event.target.closest('.section');
-    const sectionId = sectionDiv.getAttribute('data-id');
-    const subjectId = sectionDiv.closest('.subject').getAttribute('data-id'); // Get the subject ID
 
-    const hasTopics = sectionDiv.querySelectorAll('.topic').length > 0;
-    if (hasTopics) {
-        alert("Cannot delete section with topics.");
-        return;
-    }
 
-    fetch(`/api/sections/${subjectId}/${sectionId}`, {
-        method: 'DELETE'
-    }).then(response => response.json()).then(data => {
-        if (data.message) {
-            sectionDiv.remove(); // Remove the section from the DOM
-        } else {
-            alert(data.error || "Error deleting section");
-        }
-    });
-}
-        /**
-         * Handle deleting a topic.
-         */
-         function handleDeleteTopic(event) {
-            const topicDiv = event.target.closest('.topic');
-            const topicId = topicDiv.getAttribute('data-id');
-            const sectionId = topicDiv.closest('.section').getAttribute('data-id');
-            const subjectId = topicDiv.closest('.subject').getAttribute('data-id');
 
-            fetch(`/api/topics/${subjectId}/${sectionId}/${topicId}`, {
-                method: 'DELETE'
-            }).then(response => response.json()).then(data => {
-                if (data.message) {
-                    topicDiv.remove(); // Remove the topic from the DOM
-                } else {
-                    alert(data.error || "Error deleting topic");
+
+            // Add Section Handler
+            subjectsContainer.addEventListener('click', (event) => {
+                if (event.target.classList.contains('add-section')) {
+                    const subjectDiv = event.target.closest('.subject');
+                    const sectionsContainer = subjectDiv.querySelector('.sections');
+
+                    // Check if a new section is already being added
+                    if (subjectDiv.querySelector('.section-form')) {
+                        alert('Please save or cancel the current new section before adding another.');
+                        return;
+                    }
+
+                    // Create an editable section form
+                    const sectionFormHtml = `
+                    <div class="section-form" style="border: 1px solid #ccc; padding: 1rem; background-color: #f9f9f9; border-radius: 5px; margin-bottom: 1rem;">
+                        <h3 contenteditable="true" class="editable" data-placeholder="Enter Section Name..." style="border: 1px solid #ccc; padding: 5px; border-radius: 3px; min-width: 200px;"></h3>
+                        <div class="actions">
+                            <button class="save-section add">Save Section</button>
+                            <button class="cancel-section delete">Cancel</button>
+                        </div>
+                    </div>
+                `;
+
+                    // Add the section form above the sections block
+                    sectionsContainer.insertAdjacentHTML('beforebegin', sectionFormHtml);
+
+                    // Attach event listeners for save and cancel buttons
+                    const sectionFormDiv = subjectDiv.querySelector('.section-form');
+
+                    const saveButton = sectionFormDiv.querySelector('.save-section');
+                    const cancelButton = sectionFormDiv.querySelector('.cancel-section');
+
+                    // Save the new Section
+                    saveButton.addEventListener('click', () => {
+                        const sectionName = sectionFormDiv.querySelector('h3').textContent.trim();
+                        const subjectId = subjectDiv.getAttribute('data-id');
+
+                        if (!sectionName) {
+                            alert('Please fill out the Section Name.');
+                            return;
+                        }
+
+                        // Make an API call to save the section
+                        fetch(`/api/sections/${subjectId}`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ name: sectionName })
+                        }).then(response => response.json()).then(data => {
+                            if (data.id) {
+                                // Add the new section to the sections container
+                                const newSectionHtml = `
+                                <div class="section" data-id="${data.id}">
+                                    <h3>${sectionName}</h3>
+                                    <div class="actions">
+                                        <button class="add add-topic">Add Topic</button>
+                                        <button class="delete delete-section">Delete Section</button>
+                                    </div>
+                                    <div class="topics"></div>
+                                </div>
+                            `;
+                                sectionsContainer.insertAdjacentHTML('afterbegin', newSectionHtml);
+
+                                // Remove the section form
+                                sectionFormDiv.remove();
+                            } else {
+                                alert(data.error || 'Failed to save the Section.');
+                            }
+                        });
+                    });
+
+                    // Cancel the new Section
+                    cancelButton.addEventListener('click', () => {
+                        sectionFormDiv.remove();
+                    });
                 }
             });
-        }
 
-        // Initialize event listeners on page load
-        initializeEventListeners();
-    });
-</script>
+            // Add Topic Handler
+            subjectsContainer.addEventListener('click', (event) => {
+                if (event.target.classList.contains('add-topic')) {
+                    const sectionDiv = event.target.closest('.section');
+                    const topicsContainer = sectionDiv.querySelector('.topics');
+
+                    // Check if a new topic is already being added
+                    if (sectionDiv.querySelector('.topic-form')) {
+                        alert('Please save or cancel the current new topic before adding another.');
+                        return;
+                    }
+
+                    // Create an editable topic form
+                    const topicFormHtml = `
+                    <div class="topic-form" style="border: 1px solid #ccc; padding: 1rem; background-color: #f9f9f9; border-radius: 5px; margin-bottom: 1rem;">
+                        <h4 contenteditable="true" class="editable" data-placeholder="Enter Topic Name..." style="border: 1px solid #ccc; padding: 5px; border-radius: 3px; min-width: 200px;"></h4>
+                        <textarea class="editable" placeholder="Enter Topic Details..." style="width: 100%; height: 60px; margin: 10px 0; border: 1px solid #ccc; border-radius: 3px; padding: 5px;"></textarea>
+                        <textarea class="editable" placeholder="Enter Code (Optional)..." style="width: 100%; height: 60px; margin: 10px 0; border: 1px solid #ccc; border-radius: 3px; padding: 5px;"></textarea>
+                        <div class="actions">
+                            <button class="save-topic add">Save Topic</button>
+                            <button class="cancel-topic delete">Cancel</button>
+                        </div>
+                    </div>
+                `;
+
+                    // Add the topic form above the topics block
+                    topicsContainer.insertAdjacentHTML('beforebegin', topicFormHtml);
+
+                    // Attach event listeners for save and cancel buttons
+                    const topicFormDiv = sectionDiv.querySelector('.topic-form');
+
+                    const saveButton = topicFormDiv.querySelector('.save-topic');
+                    const cancelButton = topicFormDiv.querySelector('.cancel-topic');
+
+                    // Save the new Topic
+                    saveButton.addEventListener('click', () => {
+                        const topicName = topicFormDiv.querySelector('h4').textContent.trim();
+                        const topicDetails = topicFormDiv.querySelectorAll('textarea')[0].value.trim();
+                        const topicCode = topicFormDiv.querySelectorAll('textarea')[1].value.trim();
+                        const sectionId = sectionDiv.getAttribute('data-id');
+                        const subjectId = sectionDiv.closest('.subject').getAttribute('data-id');
+
+                        if (!topicName || !topicDetails) {
+                            alert('Please fill out the Topic Name and Details.');
+                            return;
+                        }
+
+                        // Generate a new topic object (matching the JSON structure)
+                        const newTopic = {
+                            id: Date.now(),  // Use current time as unique ID
+                            section_id: sectionId,
+                            name: topicName,
+                            details: {
+                                id: Date.now(),  // Unique ID for details
+                                topic_id: Date.now(), // Unique ID for topic
+                                text: topicDetails,
+                                code: topicCode || null,
+                                table: null, // Default to null if not provided
+                                image: null  // Default to null if not provided
+                            }
+                        };
+
+                        // For demonstration, we will simulate a save and add the topic to the DOM
+                        // In a real scenario, you would send this to a server
+                        fetch(`/api/topics/${subjectId}/${sectionId}`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(newTopic)
+                        }).then(response => response.json()).then(data => {
+                            if (data.id) {
+                                // Add the new topic to the topics container
+                                const newTopicHtml = `
+                                <div class="topic" data-id="${newTopic.id}">
+                                    <h4>${newTopic.name}</h4>
+                                    <p>${newTopic.details.text}</p>
+                                    ${newTopic.details.code ? `<pre><code>${newTopic.details.code}</code></pre>` : ''}
+                                    <div class="actions">
+                                        <button class="delete delete-topic">Delete Topic</button>
+                                    </div>
+                                </div>
+                            `;
+                                topicsContainer.insertAdjacentHTML('afterbegin', newTopicHtml);
+
+                                // Remove the topic form
+                                topicFormDiv.remove();
+                            } else {
+                                alert(data.error || 'Failed to save the Topic.');
+                            }
+                        });
+                    });
+
+                    // Cancel the new Topic
+                    cancelButton.addEventListener('click', () => {
+                        topicFormDiv.remove();
+                    });
+                }
+            });
+
+            // Initialize event listeners for delete functionality
+            function initializeEventListeners() {
+                // Attach event listeners to delete buttons (already implemented in your code)
+            }
+        });
+    </script>
 
 </body>
+
 </html>
