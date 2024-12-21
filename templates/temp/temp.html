@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subjects Overview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        .container {
+            padding: 2rem;
+        }
+        .subject, .section, .topic {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            position: relative;
+        }
+        .actions {
+            margin-top: 0.5rem;
+        }
+        button {
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        button.delete {
+            background-color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Subjects Overview</h1>
+</header>
+
+<div class="container">
+    <div id="subjects-container">
+        {% for subject in subjects %}
+        <div class="subject" data-id="{{ subject.id }}">
+            <h2 contenteditable="true">{{ subject.name }}</h2>
+            <p contenteditable="true">{{ subject.description }}</p>
+            <div class="actions">
+                <button class="add-section">Add Section</button>
+                <button class="delete delete-subject">Delete Subject</button>
+            </div>
+            <div class="sections">
+                {% for section in subject.sections %}
+                <div class="section" data-id="{{ section.id }}">
+                    <h3 contenteditable="true">{{ section.name }}</h3>
+                    <div class="actions">
+                        <button class="add-topic">Add Topic</button>
+                        <button class="delete delete-section">Delete Section</button>
+                    </div>
+                    <div class="topics">
+                        {% for topic in section.topics %}
+                        <div class="topic" data-id="{{ topic.id }}">
+                            <h4 contenteditable="true">{{ topic.name }}</h4>
+                            <p contenteditable="true">{{ topic.details.text }}</p>
+                            {% if topic.details.code %}
+                            <pre contenteditable="true"><code>{{ topic.details.code }}</code></pre>
+                            {% endif %}
+                            <div class="actions">
+                                <button class="delete delete-topic">Delete Topic</button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        /**
+         * Initialize event listeners for all buttons.
+         */
+        function initializeEventListeners() {
+            // Attach event listeners for delete buttons
+            document.querySelectorAll('.delete-subject').forEach(button => {
+                button.addEventListener('click', handleDeleteSubject);
+            });
+
+            document.querySelectorAll('.delete-section').forEach(button => {
+                button.addEventListener('click', handleDeleteSection);
+            });
+
+            document.querySelectorAll('.delete-topic').forEach(button => {
+                button.addEventListener('click', handleDeleteTopic);
+            });
+        }
+
+        /**
+         * Handle deleting a subject.
+         */
+        function handleDeleteSubject(event) {
+            const subjectDiv = event.target.closest('.subject');
+            const subjectId = subjectDiv.getAttribute('data-id');
+
+            const hasSections = subjectDiv.querySelectorAll('.section').length > 0;
+            if (hasSections) {
+                alert("Cannot delete subject with sections.");
+                return;
+            }
+
+            fetch(`/api/subjects/${subjectId}`, {
+                method: 'DELETE'
+            }).then(() => {
+                subjectDiv.remove();
+            });
+        }
+
+        /**
+         * Handle deleting a section.
+         */
+         function handleDeleteSection(event) {
+    const sectionDiv = event.target.closest('.section');
+    const sectionId = sectionDiv.getAttribute('data-id');
+    const subjectId = sectionDiv.closest('.subject').getAttribute('data-id'); // Get the subject ID
+
+    const hasTopics = sectionDiv.querySelectorAll('.topic').length > 0;
+    if (hasTopics) {
+        alert("Cannot delete section with topics.");
+        return;
+    }
+
+    fetch(`/api/sections/${subjectId}/${sectionId}`, {
+        method: 'DELETE'
+    }).then(response => response.json()).then(data => {
+        if (data.message) {
+            sectionDiv.remove(); // Remove the section from the DOM
+        } else {
+            alert(data.error || "Error deleting section");
+        }
+    });
+}
+        /**
+         * Handle deleting a topic.
+         */
+         function handleDeleteTopic(event) {
+            const topicDiv = event.target.closest('.topic');
+            const topicId = topicDiv.getAttribute('data-id');
+            const sectionId = topicDiv.closest('.section').getAttribute('data-id');
+            const subjectId = topicDiv.closest('.subject').getAttribute('data-id');
+
+            fetch(`/api/topics/${subjectId}/${sectionId}/${topicId}`, {
+                method: 'DELETE'
+            }).then(response => response.json()).then(data => {
+                if (data.message) {
+                    topicDiv.remove(); // Remove the topic from the DOM
+                } else {
+                    alert(data.error || "Error deleting topic");
+                }
+            });
+        }
+
+        // Initialize event listeners on page load
+        initializeEventListeners();
+    });
+</script>
+
+</body>
+</html>

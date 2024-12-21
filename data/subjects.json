@@ -1,202 +1,77 @@
 {
-  "subjects": [
-    {
-      "id": 1,
-      "name": "Python",
-      "description": "Python is a high-level programming language known for its ease of use and readability. It supports multiple programming paradigms, including procedural, object-oriented, and functional programming.",
-      "sections": [
+    "subjects": [
         {
-          "id": 1,
-          "subject_id": 1,
-          "name": "Basics",
-          "topics": [
-            {
-              "id": 1,
-              "section_id": 1,
-              "name": "Basic Syntax",
-              "details": {
-                "id": 1,
-                "topic_id": 1,
-                "text": "Python is an easy-to-learn language with a clean syntax.",
-                "code": "print('Hello, World!')",
-                "table": null,
-                "image": null
-              }
-            },
-            {
-              "id": 2,
-              "section_id": 1,
-              "name": "Variables",
-              "details": {
-                "id": 2,
-                "topic_id": 2,
-                "text": "Variables store data values in Python.",
-                "code": "x = 5\ny = 'Hello'",
-                "table": null,
-                "image": null
-              }
-            }
-          ]
-        },
-        {
-          "id": 2,
-          "subject_id": 1,
-          "name": "Control Flow",
-          "topics": [
-            {
-              "id": 3,
-              "section_id": 2,
-              "name": "Loops",
-              "details": {
-                "id": 3,
-                "topic_id": 3,
-                "text": "Python supports for and while loops for iteration.",
-                "code": "for i in range(5):\n    print(i)",
-                "table": null,
-                "image": null
-              }
-            },
-            {
-              "id": 4,
-              "section_id": 2,
-              "name": "Conditionals",
-              "details": {
-                "id": 4,
-                "topic_id": 4,
-                "text": "Use if, elif, and else statements for conditions.",
-                "code": "if x > 5:\n    print('x is greater than 5')",
-                "table": null,
-                "image": null
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "name": "Mathematics",
-      "description": "Mathematics is the study of numbers, quantities, shapes, and patterns. It includes topics like algebra, calculus, and geometry that are foundational in many scientific and engineering disciplines.",
-      "sections": [
-        {
-          "id": 3,
-          "subject_id": 2,
-          "name": "Algebra",
-          "topics": [
-            {
-              "id": 5,
-              "section_id": 3,
-              "name": "Linear Equations",
-              "details": {
-                "id": 5,
-                "topic_id": 5,
-                "text": "Linear equations are equations of the first order.",
-                "code": null,
-                "table": {
-                  "headers": ["Equation", "Solution"],
-                  "rows": [
-                    ["2x + 3 = 7", "x = 2"],
-                    ["x - 5 = 10", "x = 15"]
-                  ]
+            "id": 1,
+            "name": "Python",
+            "description": "Python is a high-level programming language known for its ease of use and readability. It supports multiple programming paradigms, including procedural, object-oriented, and functional programming.",
+            "sections": [
+                {
+                    "id": 1,
+                    "subject_id": 1,
+                    "name": "Basics",
+                    "topics": [
+                        {
+                            "id": 1,
+                            "section_id": 1,
+                            "name": "Basic Syntax",
+                            "details": {
+                                "id": 1,
+                                "topic_id": 1,
+                                "text": "Python is an easy-to-learn language with a clean syntax.",
+                                "code": "print('Hello, World!')",
+                                "table": null,
+                                "image": null
+                            }
+                        },
+                        {
+                            "id": 2,
+                            "section_id": 1,
+                            "name": "Variables",
+                            "details": {
+                                "id": 2,
+                                "topic_id": 2,
+                                "text": "Variables store data values in Python.",
+                                "code": "x = 5\ny = 'Hello'",
+                                "table": null,
+                                "image": null
+                            }
+                        }
+                    ]
                 },
-                "image": null
-              }
-            },
-            {
-              "id": 6,
-              "section_id": 3,
-              "name": "Quadratic Equations",
-              "details": {
-                "id": 6,
-                "topic_id": 6,
-                "text": "Quadratic equations have the form ax^2 + bx + c = 0.",
-                "code": null,
-                "table": null,
-                "image": null
-              }
-            }
-          ]
-        },
-        {
-          "id": 4,
-          "subject_id": 2,
-          "name": "Calculus",
-          "topics": [
-            {
-              "id": 7,
-              "section_id": 4,
-              "name": "Limits",
-              "details": {
-                "id": 7,
-                "topic_id": 7,
-                "text": "Limits describe the value a function approaches.",
-                "code": null,
-                "table": null,
-                "image": null
-              }
-            },
-            {
-              "id": 8,
-              "section_id": 4,
-              "name": "Differentiation",
-              "details": {
-                "id": 8,
-                "topic_id": 8,
-                "text": "Differentiation calculates the rate of change.",
-                "code": "f'(x) = d/dx(f(x))",
-                "table": null,
-                "image": null
-              }
-            }
-          ]
+                {
+                    "id": 2,
+                    "subject_id": 1,
+                    "name": "Control Flow",
+                    "topics": [
+                        {
+                            "id": 3,
+                            "section_id": 2,
+                            "name": "Loops",
+                            "details": {
+                                "id": 3,
+                                "topic_id": 3,
+                                "text": "Python supports for and while loops for iteration.",
+                                "code": "for i in range(5):\n    print(i)",
+                                "table": null,
+                                "image": null
+                            }
+                        },
+                        {
+                            "id": 4,
+                            "section_id": 2,
+                            "name": "Conditionals",
+                            "details": {
+                                "id": 4,
+                                "topic_id": 4,
+                                "text": "Use if, elif, and else statements for conditions.",
+                                "code": "if x > 5:\n    print('x is greater than 5')",
+                                "table": null,
+                                "image": null
+                            }
+                        }
+                    ]
+                }
+            ]
         }
-      ]
-    },
-    {
-      "id": 3,
-      "name": "Physics",
-      "description": "Physics is the branch of science concerned with the nature and properties of matter and energy. It involves studying the physical laws of the universe, including mechanics, thermodynamics, and electromagnetism.",
-      "sections": [
-        {
-          "id": 5,
-          "subject_id": 3,
-          "name": "Mechanics",
-          "topics": [
-            {
-              "id": 9,
-              "section_id": 5,
-              "name": "Kinematics",
-              "details": {
-                "id": 9,
-                "topic_id": 9,
-                "text": "Kinematics is the study of motion.",
-                "code": null,
-                "table": {
-                  "headers": ["Term", "Definition"],
-                  "rows": [
-                    ["Velocity", "Rate of change of displacement"],
-                    ["Acceleration", "Rate of change of velocity"]
-                  ]
-                },
-                "image": null
-              }
-            },
-            {
-              "id": 10,
-              "section_id": 5,
-              "name": "Forces",
-              "details": {
-                "id": 10,
-                "topic_id": 10,
-                "text": "Force equals mass times acceleration.",
-                "code": "F = m * a",
-                "table": null,
-                "image": null
-              }
-            }
-          ]
-        }
-      ]
-    }
-  ]
+    ]
 }

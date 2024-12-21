@@ -1,9 +1,10 @@
 from flask import Flask, render_template, redirect, url_for, request, session, jsonify
 import json
-from models import get_subjects
+from models import get_subjects, delete_section, save_data, delete_subject_from_data, delete_topic
 from utils import check_login
 import logging
 logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Needed for session management
@@ -89,7 +90,47 @@ def manage_subjects():
 def api_get_subjects():
     """API to fetch all subjects."""
     return jsonify(get_subjects())
+#####-----------------------------------------------------------------------------------------------------------
+@app.route('/temp') 
+def temp():
+    """
+    Home route that displays the subject cards on the index page.
+    If the user is logged in, show the admin options. Otherwise, show the login popup.
+    """
+    subjects = get_subjects()
+    logging.debug("Subjects data is passed to temp page.")  # Log
+    return render_template('/temp/temp.html', subjects=subjects)
 
+@app.route('/api/subjects/<int:id>', methods=['DELETE'])
+def delete_subject(id):
+    result = delete_subject_from_data(id)
+    if result["status"] == "success":
+        return jsonify(result), 200
+    else:
+        return jsonify(result), 400
+
+######******************************************************************
+@app.route('/api/sections/<subject_id>/<section_id>', methods=['DELETE'])
+def delete_section_route(subject_id, section_id):
+    result = delete_section(subject_id, section_id)
+    if result["status"] == "success":
+        return jsonify(result), 200
+    else:
+        return jsonify(result), 400
+######******************************************************************
+@app.route('/api/topics/<int:subject_id>/<int:section_id>/<int:topic_id>', methods=['DELETE'])
+def delete_topic_route(subject_id, section_id, topic_id):
+    result = delete_topic(subject_id, section_id, topic_id)
+    if result["status"] == "success":
+        return jsonify(result), 200
+    else:
+        return jsonify(result), 400
+
+
+
+
+
+########---------------------------------------------------------------------------------------------------------
 ### Run Application ###
 if __name__ == '__main__':
     app.run(debug=True)
