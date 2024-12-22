@@ -441,3 +441,58 @@ body {
 .highlight-pulse {
     animation: highlightPulse 1s ease-out;
 }
+
+.error-message {
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    color: var(--danger-color);
+}
+
+/* Add these styles for the confirmation modal */
+.modal-dialog-centered {
+    display: flex;
+    align-items: center;
+    min-height: calc(100% - 1rem);
+}
+
+.modal-content {
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+    border-bottom: 1px solid #dee2e6;
+    background-color: #f8f9fa;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+.modal-footer {
+    border-top: 1px solid #dee2e6;
+    background-color: #f8f9fa;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    border-color: var(--danger-color);
+}
+
+.btn-danger:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* Add these styles for the warning modal */
+.modal-header.bg-warning {
+    color: #856404;
+}
+
+.text-warning {
+    color: #ffc107 !important;
+}
+
+.modal-header .fas {
+    font-size: 1.25rem;
+}

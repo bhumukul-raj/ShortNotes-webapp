@@ -2,23 +2,23 @@
     "subjects": [
         {
             "id": 1,
-            "name": "Python",
-            "description": "Python is a high-level programming language known for its ease of use and readability. It supports multiple programming paradigms, including procedural, object-oriented, and functional programming.",
+            "name": "Python updated",
+            "description": "Python is a high-level programming language known for its ease of use and readability. It supports multiple programming paradigms, including procedural, object-oriented, and functional programming. updated",
             "sections": [
                 {
                     "id": 1,
                     "subject_id": 1,
-                    "name": "Basics",
+                    "name": "Basics updated",
                     "topics": [
                         {
                             "id": 1,
                             "section_id": 1,
-                            "name": "Basic Syntax",
+                            "name": "Basic Syntax updated",
                             "details": {
                                 "id": 1,
                                 "topic_id": 1,
-                                "text": "Python is an easy-to-learn language with a clean syntax.",
-                                "code": "print('Hello, World!')",
+                                "text": "Python is an easy-to-learn language with a clean syntax. updated",
+                                "code": "print('Hello, World!') updated",
                                 "table": null,
                                 "image": null
                             }
@@ -32,6 +32,19 @@
                                 "topic_id": 2,
                                 "text": "Variables store data values in Python.",
                                 "code": "x = 5\ny = 'Hello'",
+                                "table": null,
+                                "image": null
+                            }
+                        },
+                        {
+                            "id": 5,
+                            "section_id": 1,
+                            "name": "for loop",
+                            "details": {
+                                "id": 5,
+                                "topic_id": 5,
+                                "text": "for iterate list",
+                                "code": "for loop",
                                 "table": null,
                                 "image": null
                             }
@@ -72,30 +85,6 @@
                     ]
                 }
             ]
-        },
-        {
-            "id": 2,
-            "name": "java",
-            "description": "programming Language.",
-            "sections": []
-        },
-        {
-            "id": 3,
-            "name": "Java1",
-            "description": "localhowt",
-            "sections": []
-        },
-        {
-            "id": 4,
-            "name": "java2",
-            "description": "sdjfkldjf",
-            "sections": []
-        },
-        {
-            "id": 5,
-            "name": "123123123",
-            "description": "sdfsdfsdf",
-            "sections": []
         }
     ]
 }

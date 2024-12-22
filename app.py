@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request, session, jsonify
 import json
-from models import get_subjects
+from models import get_subjects, add_subject, add_section_to_subject, add_topic_to_section, delete_topic_from_section, delete_section_from_subject, delete_subject_from_data, subject_has_sections, section_has_topics, update_topic_details, update_section_details, update_subject_details
 from utils import check_login
 import logging
 logging.basicConfig(level=logging.DEBUG)
@@ -99,48 +99,210 @@ def api_get_subjects():
 
 @app.route('/api/subjects/<int:subject_id>', methods=['PUT'])
 def update_subject(subject_id):
+    """API endpoint to update a subject."""
     if 'logged_in' not in session or not session['logged_in']:
         return jsonify({'error': 'Unauthorized'}), 401
 
     try:
         data = request.get_json()
-        # Implement your update logic here
-        # This is a placeholder - you'll need to implement the actual update
-        # in your data storage system
-        return jsonify({'success': True})
+        name = data.get('name', '').strip()
+        description = data.get('description', '').strip()
+        
+        if not name:
+            return jsonify({'error': 'Subject name is required'}), 400
+            
+        success, message = update_subject_details(subject_id, name, description)
+        
+        if success:
+            return jsonify({'message': message}), 200
+        return jsonify({'error': message}), 400
+        
     except Exception as e:
-        logging.error(f"Error updating subject: {str(e)}")
-        return jsonify({'error': 'Failed to update subject'}), 500
+        logging.error(f"Error in update_subject: {str(e)}")
+        return jsonify({'error': 'Internal server error'}), 500
 
 @app.route('/api/sections/<int:section_id>', methods=['PUT'])
 def update_section(section_id):
+    """API endpoint to update a section."""
     if 'logged_in' not in session or not session['logged_in']:
         return jsonify({'error': 'Unauthorized'}), 401
 
     try:
         data = request.get_json()
-        # Implement your section update logic here
-        # This is a placeholder - you'll need to implement the actual update
-        # in your data storage system
-        return jsonify({'success': True})
+        name = data.get('name', '').strip()
+        
+        if not name:
+            return jsonify({'error': 'Section name is required'}), 400
+            
+        success, message = update_section_details(section_id, name)
+        
+        if success:
+            return jsonify({'message': message}), 200
+        return jsonify({'error': message}), 400
+        
     except Exception as e:
-        logging.error(f"Error updating section: {str(e)}")
-        return jsonify({'error': 'Failed to update section'}), 500
+        logging.error(f"Error in update_section: {str(e)}")
+        return jsonify({'error': 'Internal server error'}), 500
 
 @app.route('/api/topics/<int:topic_id>', methods=['PUT'])
 def update_topic(topic_id):
+    """API endpoint to update a topic."""
     if 'logged_in' not in session or not session['logged_in']:
         return jsonify({'error': 'Unauthorized'}), 401
 
     try:
         data = request.get_json()
-        # Implement your topic update logic here
-        # This is a placeholder - you'll need to implement the actual update
-        # in your data storage system
-        return jsonify({'success': True})
+        name = data.get('name', '').strip()
+        text = data.get('text', '').strip()
+        code = data.get('code', '').strip()
+        
+        if not name:
+            return jsonify({'error': 'Topic name is required'}), 400
+            
+        success, message = update_topic_details(topic_id, name, text, code)
+        
+        if success:
+            return jsonify({'message': message}), 200
+        return jsonify({'error': message}), 400
+        
     except Exception as e:
-        logging.error(f"Error updating topic: {str(e)}")
-        return jsonify({'error': 'Failed to update topic'}), 500
+        logging.error(f"Error in update_topic: {str(e)}")
+        return jsonify({'error': 'Internal server error'}), 500
+
+@app.route('/api/subjects', methods=['POST'])
+def add_new_subject():
+    """API endpoint to add a new subject."""
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'error': 'Unauthorized'}), 401
+
+    try:
+        data = request.get_json()
+        name = data.get('name', '').strip()
+        description = data.get('description', '').strip()
+        
+        if not name:
+            return jsonify({'error': 'Subject name is required'}), 400
+            
+        success, message = add_subject(name, description)
+        
+        if success:
+            return jsonify({'message': message}), 201
+        return jsonify({'error': message}), 400
+        
+    except Exception as e:
+        logging.error(f"Error in add_new_subject: {str(e)}")
+        return jsonify({'error': 'Internal server error'}), 500
+
+@app.route('/api/subjects/<int:subject_id>/sections', methods=['POST'])
+def add_section(subject_id):
+    """API endpoint to add a new section to a subject."""
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'error': 'Unauthorized'}), 401
+
+    try:
+        data = request.get_json()
+        name = data.get('name', '').strip()
+        
+        if not name:
+            return jsonify({'error': 'Section name is required'}), 400
+            
+        success, message = add_section_to_subject(subject_id, name)
+        
+        if success:
+            return jsonify({'message': message}), 201
+        return jsonify({'error': message}), 400
+        
+    except Exception as e:
+        logging.error(f"Error in add_section: {str(e)}")
+        return jsonify({'error': 'Internal server error'}), 500
+
+@app.route('/api/sections/<int:section_id>/topics', methods=['POST'])
+def add_topic(section_id):
+    """API endpoint to add a new topic to a section."""
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'error': 'Unauthorized'}), 401
+
+    try:
+        data = request.get_json()
+        name = data.get('name', '').strip()
+        text = data.get('text', '').strip()
+        code = data.get('code', '').strip()
+        
+        if not name:
+            return jsonify({'error': 'Topic name is required'}), 400
+            
+        success, message = add_topic_to_section(section_id, name, text, code)
+        
+        if success:
+            return jsonify({'message': message}), 201
+        return jsonify({'error': message}), 400
+        
+    except Exception as e:
+        logging.error(f"Error in add_topic: {str(e)}")
+        return jsonify({'error': 'Internal server error'}), 500
+
+@app.route('/api/topics/<int:topic_id>', methods=['DELETE'])
+def delete_topic(topic_id):
+    """API endpoint to delete a topic."""
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'error': 'Unauthorized'}), 401
+
+    try:
+        success, message = delete_topic_from_section(topic_id)
+        if success:
+            return jsonify({'message': message}), 200
+        return jsonify({'error': message}), 400
+    except Exception as e:
+        logging.error(f"Error in delete_topic: {str(e)}")
+        return jsonify({'error': 'Internal server error'}), 500
+
+@app.route('/api/sections/<int:section_id>/check', methods=['GET'])
+def check_section(section_id):
+    """Check if a section has any topics."""
+    try:
+        has_topics = section_has_topics(section_id)
+        return jsonify({'hasTopics': has_topics}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+@app.route('/api/sections/<int:section_id>', methods=['DELETE'])
+def delete_section(section_id):
+    """API endpoint to delete a section."""
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'error': 'Unauthorized'}), 401
+
+    try:
+        success, message = delete_section_from_subject(section_id)
+        if success:
+            return jsonify({'message': message}), 200
+        return jsonify({'error': message}), 400
+    except Exception as e:
+        logging.error(f"Error in delete_section: {str(e)}")
+        return jsonify({'error': 'Internal server error'}), 500
+
+@app.route('/api/subjects/<int:subject_id>/check', methods=['GET'])
+def check_subject(subject_id):
+    """Check if a subject has any sections."""
+    try:
+        has_sections = subject_has_sections(subject_id)
+        return jsonify({'hasSections': has_sections}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+@app.route('/api/subjects/<int:subject_id>', methods=['DELETE'])
+def delete_subject(subject_id):
+    """API endpoint to delete a subject."""
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'error': 'Unauthorized'}), 401
+
+    try:
+        success, message = delete_subject_from_data(subject_id)
+        if success:
+            return jsonify({'message': message}), 200
+        return jsonify({'error': message}), 400
+    except Exception as e:
+        logging.error(f"Error in delete_subject: {str(e)}")
+        return jsonify({'error': 'Internal server error'}), 500
 
 ### Run Application ###
 if __name__ == '__main__':
