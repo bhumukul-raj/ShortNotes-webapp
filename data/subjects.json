@@ -2,7 +2,7 @@
     "subjects": [
         {
             "id": 1,
-            "name": "Python updatedqq",
+            "name": "Python",
             "description": "Python is a high-level programming language known for its ease of use and readability. It supports multiple programming paradigms, including procedural, object-oriented, and functional programming. updated",
             "created_at": "2024-03-14T10:30:00Z",
             "updated_at": "2024-03-14T15:45:00Z",
@@ -161,7 +161,14 @@
             "description": "java handle",
             "created_at": "2024-03-14T11:00:00Z",
             "updated_at": "2024-03-14T11:00:00Z",
-            "sections": []
+            "sections": [
+                {
+                    "id": 4,
+                    "subject_id": 2,
+                    "name": "fdfd",
+                    "topics": []
+                }
+            ]
         }
     ]
 }

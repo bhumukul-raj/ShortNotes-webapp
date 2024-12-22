@@ -11,7 +11,27 @@
     {% block head %}{% endblock %}
 </head>
 <body>
-    {% include '/admin/sidebar.html' %}
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <i class="fas fa-cogs"></i>
+            <span>Admin Panel</span>
+        </div>
+        
+        <nav class="nav flex-column">
+            <a class="nav-link" href="{{ url_for('dashboard') }}">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+            <a class="nav-link" href="{{ url_for('manage_subjects') }}">
+                <i class="fas fa-book"></i>
+                <span>Subjects</span>
+            </a>
+            <a class="nav-link" href="{{ url_for('logout') }}">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </nav>
+    </div>
 
     <div class="main-content">
         {% block content %}{% endblock %}

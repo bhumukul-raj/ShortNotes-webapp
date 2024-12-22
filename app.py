@@ -1,13 +1,31 @@
 from flask import Flask, render_template, redirect, url_for, request, session, jsonify
+from utils.logger_config import setup_logger
 import json
 from models import get_subjects, add_subject, add_section_to_subject, add_topic_to_section, delete_topic_from_section, delete_section_from_subject, delete_subject_from_data, subject_has_sections, section_has_topics, update_topic_details, update_section_details, update_subject_details
 from utils import check_login
-import logging
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
+
+# Set up logger for the application
+logger = setup_logger('app')
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Needed for session management
+app.secret_key = 'your_secret_key'
+
+@app.before_request
+def before_request():
+    """Log all requests"""
+    logger.info(f"Request: {request.method} {request.url} from {request.remote_addr}")
+
+@app.after_request
+def after_request(response):
+    """Log all responses"""
+    logger.info(f"Response: {response.status_code}")
+    return response
+
+@app.errorhandler(Exception)
+def handle_error(error):
+    """Log all errors"""
+    logger.error(f"Error: {str(error)}", exc_info=True)
+    return "An error occurred", 500
 
 ### Public Routes ###
 @app.route('/')  # Checked working
@@ -16,8 +34,9 @@ def index():
     Home route that displays the subject cards on the index page.
     If the user is logged in, show the admin options. Otherwise, show the login popup.
     """
+    logger.debug("Accessing index page")
     subjects = get_subjects()
-    logging.debug("Subjects data is passed to index page.")  # Log
+    logger.info("Index page loaded successfully")
     return render_template('/public/index.html', subjects=subjects)
 
 @app.route('/subject/<subject_name>')
@@ -38,14 +57,14 @@ def login():
     Handle login request for the admin. Verifies admin credentials.
     """
     if request.method == 'POST':
-        logging.debug("Login endpoint hit.")  # Log
+        logger.debug("Login endpoint hit.")  # Log
         username = request.form.get('username')
         password = request.form.get('password')
         if check_login(username, password):  # Verifies login credentials
-            logging.info("Login successful.")  # Log
+            logger.info("Login successful.")  # Log
             session['logged_in'] = True
             return redirect(url_for('dashboard'))
-        logging.warning("Login failed.")  # Log
+        logger.warning("Login failed.")  # Log
         return redirect(url_for('index'))  # If login fails
     return render_template('/auth/login.html')  # GET request
 
@@ -55,7 +74,7 @@ def logout():
     Log out the admin and redirect to the homepage.
     """
     session.pop('logged_in', None)
-    logging.info("Logout successful.")  # Log
+    logger.info("Logout successful.")  # Log
     return redirect(url_for('index'))
 
 ### Admin Routes ###
@@ -72,7 +91,7 @@ def dashboard():
     Admin dashboard for managing subjects and topics.
     """
     if 'logged_in' in session and session['logged_in']:
-        logging.debug("Admin dashboard accessed.")  # Log
+        logger.debug("Admin dashboard accessed.")  # Log
         return render_template('/admin/dashboard.html')
     return redirect(url_for('index'))
 
@@ -91,10 +110,10 @@ def api_get_subjects():
     """API to fetch all subjects."""
     try:
         subjects = get_subjects()
-        logging.debug(f"API returning subjects: {subjects}")
+        logger.debug(f"API returning subjects: {subjects}")
         return jsonify({'subjects': subjects})
     except Exception as e:
-        logging.error(f"Error in api_get_subjects: {str(e)}")
+        logger.error(f"Error in api_get_subjects: {str(e)}")
         return jsonify({'error': 'Internal server error'}), 500
 
 @app.route('/api/subjects/<int:subject_id>', methods=['PUT'])
@@ -118,7 +137,7 @@ def update_subject(subject_id):
         return jsonify({'error': message}), 400
         
     except Exception as e:
-        logging.error(f"Error in update_subject: {str(e)}")
+        logger.error(f"Error in update_subject: {str(e)}")
         return jsonify({'error': 'Internal server error'}), 500
 
 @app.route('/api/sections/<int:section_id>', methods=['PUT'])
@@ -141,7 +160,7 @@ def update_section(section_id):
         return jsonify({'error': message}), 400
         
     except Exception as e:
-        logging.error(f"Error in update_section: {str(e)}")
+        logger.error(f"Error in update_section: {str(e)}")
         return jsonify({'error': 'Internal server error'}), 500
 
 @app.route('/api/topics/<int:topic_id>', methods=['PUT'])
@@ -166,7 +185,7 @@ def update_topic(topic_id):
         return jsonify({'error': message}), 400
         
     except Exception as e:
-        logging.error(f"Error in update_topic: {str(e)}")
+        logger.error(f"Error in update_topic: {str(e)}")
         return jsonify({'error': 'Internal server error'}), 500
 
 @app.route('/api/subjects', methods=['POST'])
@@ -190,7 +209,7 @@ def add_new_subject():
         return jsonify({'error': message}), 400
         
     except Exception as e:
-        logging.error(f"Error in add_new_subject: {str(e)}")
+        logger.error(f"Error in add_new_subject: {str(e)}")
         return jsonify({'error': 'Internal server error'}), 500
 
 @app.route('/api/subjects/<int:subject_id>/sections', methods=['POST'])
@@ -213,7 +232,7 @@ def add_section(subject_id):
         return jsonify({'error': message}), 400
         
     except Exception as e:
-        logging.error(f"Error in add_section: {str(e)}")
+        logger.error(f"Error in add_section: {str(e)}")
         return jsonify({'error': 'Internal server error'}), 500
 
 @app.route('/api/sections/<int:section_id>/topics', methods=['POST'])
@@ -238,7 +257,7 @@ def add_topic(section_id):
         return jsonify({'error': message}), 400
         
     except Exception as e:
-        logging.error(f"Error in add_topic: {str(e)}")
+        logger.error(f"Error in add_topic: {str(e)}")
         return jsonify({'error': 'Internal server error'}), 500
 
 @app.route('/api/topics/<int:topic_id>', methods=['DELETE'])
@@ -253,7 +272,7 @@ def delete_topic(topic_id):
             return jsonify({'message': message}), 200
         return jsonify({'error': message}), 400
     except Exception as e:
-        logging.error(f"Error in delete_topic: {str(e)}")
+        logger.error(f"Error in delete_topic: {str(e)}")
         return jsonify({'error': 'Internal server error'}), 500
 
 @app.route('/api/sections/<int:section_id>/check', methods=['GET'])
@@ -277,7 +296,7 @@ def delete_section(section_id):
             return jsonify({'message': message}), 200
         return jsonify({'error': message}), 400
     except Exception as e:
-        logging.error(f"Error in delete_section: {str(e)}")
+        logger.error(f"Error in delete_section: {str(e)}")
         return jsonify({'error': 'Internal server error'}), 500
 
 @app.route('/api/subjects/<int:subject_id>/check', methods=['GET'])
@@ -301,7 +320,7 @@ def delete_subject(subject_id):
             return jsonify({'message': message}), 200
         return jsonify({'error': message}), 400
     except Exception as e:
-        logging.error(f"Error in delete_subject: {str(e)}")
+        logger.error(f"Error in delete_subject: {str(e)}")
         return jsonify({'error': 'Internal server error'}), 500
 
 ### Run Application ###

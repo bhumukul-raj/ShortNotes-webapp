@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     viewer.initialize();  // Initialize SubjectViewer
 
     setupLogoutButton();  // Set up the logout button functionality
+    setActiveNavLink();
 });
 
 // Global handlers for topic actions
@@ -1163,3 +1164,21 @@ window.updateSubject = async (subjectId) => {
         errorDiv.textContent = error.message;
     }
 };
+
+function setActiveNavLink() {
+    // Get current path
+    const currentPath = window.location.pathname;
+    
+    // Find all nav links
+    const navLinks = document.querySelectorAll('.sidebar .nav-link');
+    
+    // Remove active class from all links
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        
+        // Add active class if href matches current path
+        if (link.getAttribute('href') === currentPath) {
+            link.classList.add('active');
+        }
+    });
+}

@@ -1,49 +1,46 @@
+from utils.logger_config import setup_logger
 import json
-import logging
 
-# Set up logging configuration with DEBUG level
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+# Set up logger for models
+logger = setup_logger('models')
 
 def load_json(file_name):
     """Helper function to load data from a JSON file."""
     try:
-        logging.debug(f"Attempting to load JSON file: {file_name}")
+        logger.debug(f"Attempting to load JSON file: {file_name}")
         with open(file_name, 'r') as f:
             data = json.load(f)
-            logging.info(f"Successfully loaded JSON file: {file_name}")
+            logger.info(f"Successfully loaded JSON file: {file_name}")
             return data
     except FileNotFoundError:
-        logging.error(f"File not found: {file_name}")
-        print(f"Error: {file_name} not found.")
-        return []  # Return an empty list in case of error
+        logger.error(f"File not found: {file_name}")
+        return []
     except json.JSONDecodeError:
-        logging.error(f"JSON decoding error in file: {file_name}")
-        print(f"Error: Could not decode JSON from {file_name}.")
-        return []  # Return an empty list if JSON is invalid
+        logger.error(f"JSON decoding error in file: {file_name}")
+        return []
     except Exception as e:
-        logging.exception("Unexpected error occurred while loading JSON.")
-        return []  # Return empty list for any unexpected errors
-
-
-def get_subjects():
-    """Get all subjects from subjects.json."""
-    logging.debug("Getting all subjects from JSON data.")
-    data = load_json('data/subjects.json')
-    subjects = data.get('subjects', [])
-    logging.debug(f"Found {len(subjects)} subjects.")
-    return subjects  # Make sure to return the list under 'subjects'
+        logger.exception("Unexpected error occurred while loading JSON")
+        return []
 
 def save_json(file_name, data):
     """Helper function to save data to a JSON file."""
     try:
-        logging.debug(f"Attempting to save JSON file: {file_name}")
+        logger.debug(f"Attempting to save JSON file: {file_name}")
         with open(file_name, 'w') as f:
             json.dump(data, f, indent=4)
-            logging.info(f"Successfully saved JSON file: {file_name}")
+            logger.info(f"Successfully saved JSON file: {file_name}")
             return True
     except Exception as e:
-        logging.error(f"Error saving JSON file: {str(e)}")
+        logger.error(f"Error saving JSON file: {str(e)}")
         return False
+
+def get_subjects():
+    """Get all subjects from subjects.json."""
+    logger.debug("Getting all subjects from JSON data")
+    data = load_json('data/subjects.json')
+    subjects = data.get('subjects', [])
+    logger.debug(f"Found {len(subjects)} subjects")
+    return subjects
 
 def add_subject(name, description):
     """
@@ -80,7 +77,7 @@ def add_subject(name, description):
         return False, "Error saving subject"
         
     except Exception as e:
-        logging.error(f"Error adding subject: {str(e)}")
+        logger.error(f"Error adding subject: {str(e)}")
         return False, "Internal server error"
 
 def add_section_to_subject(subject_id, name):
@@ -124,7 +121,7 @@ def add_section_to_subject(subject_id, name):
         return False, "Error saving section"
         
     except Exception as e:
-        logging.error(f"Error adding section: {str(e)}")
+        logger.error(f"Error adding section: {str(e)}")
         return False, "Internal server error"
 
 def add_topic_to_section(section_id, name, text, code):
@@ -186,7 +183,7 @@ def add_topic_to_section(section_id, name, text, code):
         return False, "Error saving topic"
         
     except Exception as e:
-        logging.error(f"Error adding topic: {str(e)}")
+        logger.error(f"Error adding topic: {str(e)}")
         return False, "Internal server error"
 
 def section_has_topics(section_id):
@@ -230,7 +227,7 @@ def delete_topic_from_section(topic_id):
         return False, "Error saving changes"
         
     except Exception as e:
-        logging.error(f"Error deleting topic: {str(e)}")
+        logger.error(f"Error deleting topic: {str(e)}")
         return False, "Internal server error"
 
 def delete_section_from_subject(section_id):
@@ -257,7 +254,7 @@ def delete_section_from_subject(section_id):
         return False, "Error saving changes"
         
     except Exception as e:
-        logging.error(f"Error deleting section: {str(e)}")
+        logger.error(f"Error deleting section: {str(e)}")
         return False, "Internal server error"
 
 def delete_subject_from_data(subject_id):
@@ -274,7 +271,7 @@ def delete_subject_from_data(subject_id):
         return False, "Error saving changes"
         
     except Exception as e:
-        logging.error(f"Error deleting subject: {str(e)}")
+        logger.error(f"Error deleting subject: {str(e)}")
         return False, "Internal server error"
 
 def update_topic_details(topic_id, name, text, code):
@@ -311,7 +308,7 @@ def update_topic_details(topic_id, name, text, code):
         return False, "Error saving changes"
         
     except Exception as e:
-        logging.error(f"Error updating topic: {str(e)}")
+        logger.error(f"Error updating topic: {str(e)}")
         return False, "Internal server error"
 
 def update_section_details(section_id, name):
@@ -343,7 +340,7 @@ def update_section_details(section_id, name):
         return False, "Error saving changes"
         
     except Exception as e:
-        logging.error(f"Error updating section: {str(e)}")
+        logger.error(f"Error updating section: {str(e)}")
         return False, "Internal server error"
 
 def update_subject_details(subject_id, name, description):
@@ -373,6 +370,6 @@ def update_subject_details(subject_id, name, description):
         return False, "Error saving changes"
         
     except Exception as e:
-        logging.error(f"Error updating subject: {str(e)}")
+        logger.error(f"Error updating subject: {str(e)}")
         return False, "Internal server error"
 

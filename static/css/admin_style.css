@@ -6,6 +6,8 @@
     --success-color: #22c55e;
     --warning-color: #f59e0b;
     --danger-color: #ef4444;
+    --sidebar-width: 250px;
+    --sidebar-collapsed-width: 70px;
 }
 
 body {
@@ -19,10 +21,11 @@ body {
     color: white;
     position: fixed;
     padding-top: 1.5rem;
-    width: 250px;
+    width: var(--sidebar-width);
     box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     overflow-y: auto;
+    transition: width 0.3s ease, transform 0.3s ease;
 }
 
 .sidebar .nav-link {
@@ -47,7 +50,7 @@ body {
 }
 
 .main-content {
-    margin-left: 250px;
+    margin-left: var(--sidebar-width);
     padding: 2rem;
     transition: margin-left 0.3s ease;
 }
@@ -625,4 +628,531 @@ body {
 /* Hover effect for topic dates */
 .topic-row:hover .topic-dates small {
     color: #495057;
+}
+
+/* Responsive container */
+.container-fluid {
+    padding: 0;
+}
+
+/* Sidebar responsive styles */
+.sidebar {
+    width: var(--sidebar-width);
+    transition: width 0.3s ease, transform 0.3s ease;
+}
+
+/* Main content responsive styles */
+.main-content {
+    margin-left: var(--sidebar-width);
+    transition: margin-left 0.3s ease;
+    padding: 1rem;
+}
+
+/* Card and table responsive styles */
+.card {
+    overflow-x: auto;
+}
+
+.table-responsive {
+    margin: 0;
+    padding: 0;
+}
+
+/* Subject card responsive styles */
+.subject-card {
+    min-width: 300px;
+}
+
+/* Timestamps responsive styles */
+.subject-timestamps, .section-dates, .topic-dates {
+    white-space: normal;
+}
+
+/* Button groups responsive styles */
+.subject-actions, .section-actions, .topic-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Search box responsive styles */
+.search-box {
+    width: 100%;
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+    .section-dates {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+}
+
+@media (max-width: 992px) {
+    .main-content {
+        margin-left: var(--sidebar-collapsed-width);
+    }
+
+    .sidebar {
+        width: var(--sidebar-collapsed-width);
+    }
+
+    .sidebar:hover {
+        width: var(--sidebar-width);
+    }
+
+    .sidebar .nav-link span {
+        display: none;
+    }
+
+    .sidebar:hover .nav-link span {
+        display: inline;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+        position: fixed;
+        z-index: 1050;
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+        width: var(--sidebar-width);
+    }
+
+    .sidebar.show .nav-link span {
+        display: inline;
+    }
+
+    .card-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .subject-actions, .section-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .section-dates {
+        text-align: right;
+        margin-bottom: 0.5rem;
+    }
+
+    .topic-row td {
+        min-width: 150px;
+    }
+}
+
+@media (max-width: 576px) {
+    .d-flex.gap-3.mb-4 {
+        flex-direction: column;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+
+    .subject-card .card-header h3 {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .subject-timestamps {
+        text-align: left;
+    }
+
+    .section-container .d-flex {
+        flex-direction: column;
+    }
+
+    .section-dates {
+        order: 2;
+        text-align: left;
+        margin-top: 0.5rem;
+    }
+
+    .topic-row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .topic-row td {
+        width: 100% !important;
+        border: none;
+    }
+
+    .topic-dates {
+        margin-top: 0.5rem;
+    }
+
+    .table thead {
+        display: none;
+    }
+
+    .table, .table tbody, .table tr, .table td {
+        display: block;
+        width: 100%;
+    }
+
+    .table td {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .table td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Toggle button for mobile sidebar */
+.sidebar-toggle {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1060;
+    padding: 0.5rem;
+    background: var(--primary-color);
+    border: none;
+    border-radius: 0.25rem;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .sidebar-toggle {
+        display: block;
+    }
+}
+
+/* Overlay for mobile sidebar */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+}
+
+@media (max-width: 768px) {
+    .sidebar.show + .sidebar-overlay {
+        display: block;
+    }
+}
+
+/* Improve touch targets on mobile */
+@media (max-width: 768px) {
+    .btn-action {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    .nav-link {
+        padding: 1rem;
+    }
+}
+
+/* Improve form controls on mobile */
+@media (max-width: 576px) {
+    .form-control, .btn {
+        min-height: 44px;
+    }
+
+    textarea.form-control {
+        min-height: 88px;
+    }
+}
+
+/* Base styles */
+:root {
+    --sidebar-width: 250px;
+    --sidebar-collapsed-width: 70px;
+}
+
+/* Desktop (default) styles */
+.sidebar {
+    width: var(--sidebar-width);
+    height: 100vh;
+    position: fixed;
+    transition: width 0.3s ease;
+}
+
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: 2rem;
+    transition: margin-left 0.3s ease;
+}
+
+/* Tablet styles (768px - 1199px) */
+@media (max-width: 1199px) {
+    /* Collapsed sidebar for tablets */
+    .sidebar {
+        width: var(--sidebar-collapsed-width);
+    }
+
+    .sidebar:hover {
+        width: var(--sidebar-width);
+    }
+
+    .main-content {
+        margin-left: var(--sidebar-collapsed-width);
+        padding: 1.5rem;
+    }
+
+    /* Adjust section layout */
+    .section-dates {
+        font-size: 0.8rem;
+    }
+
+    .section-container .d-flex {
+        gap: 0.5rem;
+    }
+
+    /* Make timestamps more compact */
+    .subject-timestamps small,
+    .section-dates small,
+    .topic-dates small {
+        display: inline-block;
+        margin-right: 1rem;
+    }
+}
+
+/* Mobile styles (< 768px) */
+@media (max-width: 767px) {
+    /* Hidden sidebar with toggle for mobile */
+    .sidebar {
+        transform: translateX(-100%);
+        z-index: 1050;
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+        width: var(--sidebar-width);
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 1rem;
+    }
+
+    /* Show sidebar toggle button */
+    .sidebar-toggle {
+        display: block;
+    }
+
+    /* Stack elements vertically */
+    .card-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .subject-actions, 
+    .section-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    /* Adjust table layout for mobile */
+    .table-responsive {
+        margin: 0 -1rem;
+    }
+
+    .topic-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        padding: 1rem;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .topic-row td {
+        padding: 0.5rem 0;
+        border: none;
+    }
+
+    /* Stack action buttons */
+    .topic-actions {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    /* Adjust button sizes for touch */
+    .btn-action {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    /* Make forms more touch-friendly */
+    .form-control {
+        min-height: 44px;
+    }
+
+    /* Adjust search and add button layout */
+    .d-flex.gap-3.mb-4 {
+        flex-direction: column;
+    }
+
+    .search-box {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+}
+
+/* Shared responsive components */
+.sidebar-toggle {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1060;
+    padding: 0.75rem;
+    background: var(--primary-color);
+    border: none;
+    border-radius: 0.5rem;
+    color: white;
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+}
+
+/* Show overlay when sidebar is active on mobile */
+@media (max-width: 767px) {
+    .sidebar.show + .sidebar-overlay {
+        display: block;
+    }
+}
+
+/* Ensure content is always readable */
+.card, .table {
+    min-width: 300px;
+}
+
+/* Keep timestamps readable */
+.subject-timestamps,
+.section-dates,
+.topic-dates {
+    white-space: normal;
+}
+
+/* Add these styles for sidebar responsiveness */
+
+/* Sidebar brand/title styles */
+.sidebar-brand {
+    padding: 1rem 1.5rem;
+    color: white;
+    font-size: 1.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.sidebar-brand i {
+    margin-right: 0.75rem;
+    font-size: 1.5rem;
+}
+
+/* Sidebar nav link styles */
+.sidebar .nav-link {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.sidebar .nav-link span {
+    transition: opacity 0.3s ease;
+}
+
+/* Tablet styles (768px - 1199px) */
+@media (max-width: 1199px) {
+    .sidebar:not(:hover) {
+        width: var(--sidebar-collapsed-width);
+    }
+
+    /* Hide text when sidebar is collapsed */
+    .sidebar:not(:hover) .nav-link span,
+    .sidebar:not(:hover) .sidebar-brand span {
+        display: none;
+    }
+
+    /* Center icons when collapsed */
+    .sidebar:not(:hover) .nav-link {
+        text-align: center;
+        padding: 0.875rem;
+    }
+
+    .sidebar:not(:hover) .nav-link i {
+        margin-right: 0;
+        font-size: 1.25rem;
+    }
+
+    /* Adjust brand/title when collapsed */
+    .sidebar:not(:hover) .sidebar-brand {
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .sidebar:not(:hover) .sidebar-brand i {
+        margin-right: 0;
+    }
+}
+
+/* Mobile styles (< 768px) */
+@media (max-width: 767px) {
+    .sidebar.show {
+        width: var(--sidebar-width);
+    }
+
+    /* Show text when sidebar is expanded on mobile */
+    .sidebar.show .nav-link span,
+    .sidebar.show .sidebar-brand span {
+        display: inline;
+    }
+
+    .sidebar.show .nav-link i {
+        margin-right: 0.75rem;
+    }
+
+    .sidebar.show .sidebar-brand i {
+        margin-right: 0.75rem;
+    }
+}
+
+/* Add these styles for active nav links */
+.sidebar .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.sidebar .nav-link.active i {
+    color: var(--primary-color);
+}
+
+/* Hover effect for nav links */
+.sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: white;
 }
