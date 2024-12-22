@@ -496,3 +496,133 @@ body {
 .modal-header .fas {
     font-size: 1.25rem;
 }
+
+/* Add these styles for timestamps */
+.text-muted small {
+    font-size: 0.75rem;
+}
+
+.text-muted i {
+    font-size: 0.875rem;
+    margin-right: 0.25rem;
+}
+
+.timestamp {
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* Make timestamps more visible on hover */
+.subject-card:hover .timestamp,
+.section-container:hover .timestamp,
+.topic-row:hover .timestamp {
+    color: #495057;
+}
+
+/* Add these styles for the date display */
+.subject-actions {
+    display: flex;
+    align-items: center;
+}
+
+.text-muted small {
+    display: block;
+    text-align: right;
+    line-height: 1.2;
+}
+
+.card-header .d-flex {
+    gap: 1rem;
+}
+
+/* Update the timestamp styles */
+.subject-timestamps {
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.subject-timestamps small {
+    display: inline-block;
+    margin-left: 1.5rem;
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+.subject-timestamps i {
+    font-size: 0.875rem;
+    margin-right: 0.25rem;
+}
+
+/* Hover effect for timestamps */
+.subject-card:hover .subject-timestamps small {
+    color: #495057;
+}
+
+/* Section dates styling */
+.section-dates {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.section-dates small {
+    white-space: nowrap;
+    font-size: 0.75rem;
+}
+
+.section-dates i {
+    font-size: 0.875rem;
+    margin-right: 0.25rem;
+}
+
+/* Ensure proper alignment of section header elements */
+.section-container .d-flex {
+    gap: 1rem;
+}
+
+.section-actions {
+    white-space: nowrap;
+}
+
+/* Hover effect for section dates */
+.section-container:hover .section-dates small {
+    color: #495057;
+}
+
+/* Topic dates styling */
+.topic-dates {
+    font-size: 0.75rem;
+    white-space: nowrap;
+}
+
+.topic-dates small {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: #6c757d;
+}
+
+.topic-dates i {
+    font-size: 0.875rem;
+    margin-right: 0.25rem;
+}
+
+/* Topic actions styling */
+.topic-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Ensure proper vertical alignment in action column */
+.topic-row td:last-child {
+    vertical-align: top;
+    min-width: 200px;
+}
+
+/* Hover effect for topic dates */
+.topic-row:hover .topic-dates small {
+    color: #495057;
+}

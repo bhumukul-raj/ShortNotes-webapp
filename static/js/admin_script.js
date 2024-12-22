@@ -633,34 +633,97 @@ window.cancelSectionEdit = (sectionId) => {
 };
 
 window.addNewSubject = () => {
-    // Check if there's already a new subject being added
-    const tempSubject = document.querySelector('.subject-card[data-subject-id^="temp_"]');
-    if (tempSubject) {
-        tempSubject.scrollIntoView({ behavior: 'smooth' });
-        tempSubject.classList.add('highlight-pulse');
-        setTimeout(() => {
-            tempSubject.classList.remove('highlight-pulse');
-        }, 1000);
+    const modalHtml = `
+        <div class="modal fade" id="addSubjectModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="fas fa-plus-circle me-2"></i>
+                            Add New Subject
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addSubjectForm">
+                            <div class="mb-3">
+                                <label class="form-label">Subject Name</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="newSubjectName"
+                                       placeholder="Enter subject name"
+                                       required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Description</label>
+                                <textarea class="form-control" 
+                                          id="newSubjectDescription" 
+                                          rows="3"
+                                          placeholder="Enter subject description"></textarea>
+                            </div>
+                            <div class="error-message text-danger"></div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" onclick="submitNewSubject()">
+                            <i class="fas fa-plus me-2"></i>Add Subject
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Remove existing modal if any
+    const existingModal = document.getElementById('addSubjectModal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    // Add modal to document and show it
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+    const modal = new bootstrap.Modal(document.getElementById('addSubjectModal'));
+    modal.show();
+};
+
+window.submitNewSubject = async () => {
+    const nameInput = document.getElementById('newSubjectName');
+    const descriptionInput = document.getElementById('newSubjectDescription');
+    const errorDiv = document.querySelector('#addSubjectModal .error-message');
+
+    const name = nameInput.value.trim();
+    const description = descriptionInput.value.trim();
+
+    if (!name) {
+        errorDiv.textContent = 'Subject name is required';
         return;
     }
 
-    // Create a new subject template
-    const newSubject = {
-        id: 'temp_' + Date.now(),
-        name: '',  // Empty by default
-        description: '', // Empty by default
-        sections: []
-    };
+    try {
+        const response = await fetch('/api/subjects', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+                name,
+                description 
+            })
+        });
 
-    // Add the new subject to the DOM
-    const subjectsContainer = document.getElementById('subjectsContainer');
-    const subjectHtml = templates.subjectCard(newSubject);
-    subjectsContainer.insertAdjacentHTML('afterbegin', subjectHtml);
+        if (!response.ok) {
+            const data = await response.json();
+            throw new Error(data.error || 'Failed to create subject');
+        }
 
-    // Automatically trigger edit mode
-    setTimeout(() => {
-        editSubject(newSubject.id);
-    }, 100);
+        // Close modal and refresh page
+        bootstrap.Modal.getInstance(document.getElementById('addSubjectModal')).hide();
+        location.reload();
+    } catch (error) {
+        console.error('Failed to create subject:', error);
+        errorDiv.textContent = error.message;
+    }
 };
 
 // Add the section handler

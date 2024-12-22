@@ -50,8 +50,19 @@ export const templates = {
             </div>
             <div class="card-body">
                 <p class="text-muted subject-description">
-                    <span class="view-mode">${subject.description || 'No description'}</span>
+                    <span class="view-mode">
+                        ${subject.description || 'No description'}
+                    </span>
                 </p>
+                <!-- Timestamps -->
+                <div class="subject-timestamps text-end mb-4">
+                    <small class="text-muted d-block">
+                        <i class="fas fa-clock"></i> Created: ${new Date(subject.created_at).toLocaleString()}
+                    </small>
+                    <small class="text-muted d-block">
+                        <i class="fas fa-edit"></i> Updated: ${new Date(subject.updated_at).toLocaleString()}
+                    </small>
+                </div>
                 ${!subject.id.toString().includes('temp_') ? `
                     <div class="sections-container">
                         ${subject.sections && subject.sections.length > 0 ? 
@@ -66,7 +77,7 @@ export const templates = {
     sectionContent: (section) => `
         <div class="section-container mb-4" data-section-id="${section.id}">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <!-- Section title with view/edit modes -->
+                <!-- Section title -->
                 <div class="d-flex align-items-center">
                     <h4 class="section-title mb-0">
                         <div class="view-mode">
@@ -79,26 +90,38 @@ export const templates = {
                     </h4>
                 </div>
                 
-                <!-- Section action buttons -->
-                <div class="section-actions">
-                    <div class="view-mode">
-                        <button class="btn btn-action btn-light me-2" onclick="addTopicToSection(${section.id})" title="Add Topic">
-                            <i class="fas fa-plus text-success"></i>
-                        </button>
-                        <button class="btn btn-action btn-light me-2" onclick="editSection(${section.id})" title="Edit Section">
-                            <i class="fas fa-edit text-primary"></i>
-                        </button>
-                        <button class="btn btn-action btn-light" onclick="deleteSection(${section.id})" title="Delete Section">
-                            <i class="fas fa-trash text-danger"></i>
-                        </button>
+                <!-- Section dates and actions -->
+                <div class="d-flex align-items-center">
+                    <!-- Section dates -->
+                    <div class="section-dates me-3">
+                        <small class="text-muted me-3">
+                            <i class="fas fa-clock"></i> Created: ${new Date(section.created_at).toLocaleString()}
+                        </small>
+                        <small class="text-muted">
+                            <i class="fas fa-edit"></i> Updated: ${new Date(section.updated_at).toLocaleString()}
+                        </small>
                     </div>
-                    <div class="edit-mode" style="display: none;">
-                        <button class="btn btn-success btn-sm me-2" onclick="applySectionEdit(${section.id})">
-                            <i class="fas fa-check"></i> Apply
-                        </button>
-                        <button class="btn btn-secondary btn-sm" onclick="cancelSectionEdit(${section.id})">
-                            <i class="fas fa-times"></i> Cancel
-                        </button>
+                    <!-- Section actions -->
+                    <div class="section-actions">
+                        <div class="view-mode">
+                            <button class="btn btn-action btn-light me-2" onclick="addTopicToSection(${section.id})" title="Add Topic">
+                                <i class="fas fa-plus text-success"></i>
+                            </button>
+                            <button class="btn btn-action btn-light me-2" onclick="editSection(${section.id})" title="Edit Section">
+                                <i class="fas fa-edit text-primary"></i>
+                            </button>
+                            <button class="btn btn-action btn-light" onclick="deleteSection(${section.id})" title="Delete Section">
+                                <i class="fas fa-trash text-danger"></i>
+                            </button>
+                        </div>
+                        <div class="edit-mode" style="display: none;">
+                            <button class="btn btn-success btn-sm me-2" onclick="applySectionEdit(${section.id})">
+                                <i class="fas fa-check"></i> Apply
+                            </button>
+                            <button class="btn btn-secondary btn-sm" onclick="cancelSectionEdit(${section.id})">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -144,12 +167,24 @@ export const templates = {
             </td>
             <td>
                 <div class="view-mode">
-                    <button class="btn btn-action btn-light me-2" onclick="editTopic(${topic.id})" title="Edit">
-                        <i class="fas fa-edit text-primary"></i>
-                    </button>
-                    <button class="btn btn-action btn-light" onclick="deleteTopic(${topic.id})" title="Delete">
-                        <i class="fas fa-trash text-danger"></i>
-                    </button>
+                    <!-- Action Buttons -->
+                    <div class="topic-actions mb-2">
+                        <button class="btn btn-action btn-light me-2" onclick="editTopic(${topic.id})" title="Edit">
+                            <i class="fas fa-edit text-primary"></i>
+                        </button>
+                        <button class="btn btn-action btn-light" onclick="deleteTopic(${topic.id})" title="Delete">
+                            <i class="fas fa-trash text-danger"></i>
+                        </button>
+                    </div>
+                    <!-- Timestamps -->
+                    <div class="topic-dates">
+                        <small class="text-muted d-block">
+                            <i class="fas fa-clock"></i> Created: ${new Date(topic.created_at).toLocaleString()}
+                        </small>
+                        <small class="text-muted d-block">
+                            <i class="fas fa-edit"></i> Updated: ${new Date(topic.details.updated_at).toLocaleString()}
+                        </small>
+                    </div>
                 </div>
                 <div class="edit-mode" style="display: none;">
                     <button class="btn btn-success btn-sm me-2" onclick="applyTopicEdit(${topic.id})">

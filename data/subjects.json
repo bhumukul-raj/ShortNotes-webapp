@@ -2,51 +2,67 @@
     "subjects": [
         {
             "id": 1,
-            "name": "Python updated",
+            "name": "Python updatedqq",
             "description": "Python is a high-level programming language known for its ease of use and readability. It supports multiple programming paradigms, including procedural, object-oriented, and functional programming. updated",
+            "created_at": "2024-03-14T10:30:00Z",
+            "updated_at": "2024-03-14T15:45:00Z",
             "sections": [
                 {
                     "id": 1,
                     "subject_id": 1,
-                    "name": "Basics updated",
+                    "name": "Basics updatedqq",
+                    "created_at": "2024-03-14T10:35:00Z",
+                    "updated_at": "2024-03-14T16:00:00Z",
                     "topics": [
                         {
                             "id": 1,
                             "section_id": 1,
                             "name": "Basic Syntax updated",
+                            "created_at": "2024-03-14T10:40:00Z",
+                            "updated_at": "2024-03-14T16:15:00Z",
                             "details": {
                                 "id": 1,
                                 "topic_id": 1,
                                 "text": "Python is an easy-to-learn language with a clean syntax. updated",
                                 "code": "print('Hello, World!') updated",
                                 "table": null,
-                                "image": null
+                                "image": null,
+                                "created_at": "2024-03-14T10:40:00Z",
+                                "updated_at": "2024-03-14T16:15:00Z"
                             }
                         },
                         {
                             "id": 2,
                             "section_id": 1,
                             "name": "Variables",
+                            "created_at": "2024-03-14T10:45:00Z",
+                            "updated_at": "2024-03-14T10:45:00Z",
                             "details": {
                                 "id": 2,
                                 "topic_id": 2,
                                 "text": "Variables store data values in Python.",
                                 "code": "x = 5\ny = 'Hello'",
                                 "table": null,
-                                "image": null
+                                "image": null,
+                                "created_at": "2024-03-14T10:45:00Z",
+                                "updated_at": "2024-03-14T10:45:00Z"
                             }
                         },
                         {
                             "id": 5,
                             "section_id": 1,
                             "name": "for loop",
+                            "created_at": "2024-03-14T10:50:00Z",
+                            "updated_at": "2024-03-14T10:50:00Z",
                             "details": {
                                 "id": 5,
                                 "topic_id": 5,
                                 "text": "for iterate list",
                                 "code": "for loop",
                                 "table": null,
-                                "image": null
+                                "image": null,
+                                "created_at": "2024-03-14T10:50:00Z",
+                                "updated_at": "2024-03-14T10:50:00Z"
                             }
                         }
                     ]
@@ -55,36 +71,97 @@
                     "id": 2,
                     "subject_id": 1,
                     "name": "Control Flow",
+                    "created_at": "2024-03-14T10:55:00Z",
+                    "updated_at": "2024-03-14T10:55:00Z",
                     "topics": [
                         {
                             "id": 3,
                             "section_id": 2,
                             "name": "Loops",
+                            "created_at": "2024-03-14T11:00:00Z",
+                            "updated_at": "2024-03-14T11:00:00Z",
                             "details": {
                                 "id": 3,
                                 "topic_id": 3,
                                 "text": "Python supports for and while loops for iteration.",
                                 "code": "for i in range(5):\n    print(i)",
                                 "table": null,
-                                "image": null
+                                "image": null,
+                                "created_at": "2024-03-14T11:00:00Z",
+                                "updated_at": "2024-03-14T11:00:00Z"
                             }
                         },
                         {
                             "id": 4,
                             "section_id": 2,
                             "name": "Conditionals",
+                            "created_at": "2024-03-14T11:05:00Z",
+                            "updated_at": "2024-03-14T11:05:00Z",
                             "details": {
                                 "id": 4,
                                 "topic_id": 4,
                                 "text": "Use if, elif, and else statements for conditions.",
                                 "code": "if x > 5:\n    print('x is greater than 5')",
                                 "table": null,
-                                "image": null
+                                "image": null,
+                                "created_at": "2024-03-14T11:05:00Z",
+                                "updated_at": "2024-03-14T11:05:00Z"
+                            }
+                        },
+                        {
+                            "id": 6,
+                            "section_id": 2,
+                            "name": "sdfsdf",
+                            "created_at": "2024-03-14T11:10:00Z",
+                            "updated_at": "2024-03-14T11:10:00Z",
+                            "details": {
+                                "id": 6,
+                                "topic_id": 6,
+                                "text": "sdfsdf",
+                                "code": "sdfsdf",
+                                "table": null,
+                                "image": null,
+                                "created_at": "2024-03-14T11:10:00Z",
+                                "updated_at": "2024-03-14T11:10:00Z"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "subject_id": 1,
+                    "name": "fdsfdsfsdf",
+                    "created_at": "2024-03-14T11:15:00Z",
+                    "updated_at": "2024-03-14T11:15:00Z",
+                    "topics": [
+                        {
+                            "id": 7,
+                            "section_id": 3,
+                            "name": "dfdsf",
+                            "created_at": "2024-03-14T11:20:00Z",
+                            "updated_at": "2024-03-14T11:20:00Z",
+                            "details": {
+                                "id": 7,
+                                "topic_id": 7,
+                                "text": "dsfdsf",
+                                "code": "sdfdsf",
+                                "table": null,
+                                "image": null,
+                                "created_at": "2024-03-14T11:20:00Z",
+                                "updated_at": "2024-03-14T11:20:00Z"
                             }
                         }
                     ]
                 }
             ]
+        },
+        {
+            "id": 2,
+            "name": "java",
+            "description": "java handle",
+            "created_at": "2024-03-14T11:00:00Z",
+            "updated_at": "2024-03-14T11:00:00Z",
+            "sections": []
         }
     ]
 }
