@@ -16,12 +16,20 @@
                 </div>
             </div>
 
-<div class="search-box mb-4">
-    <i class="fas fa-search"></i>
-    <input type="text" class="form-control" placeholder="Search subjects, sections, or topics...">
-</div>
+            <div class="d-flex gap-3 mb-4">
+                <div class="search-box flex-grow-1">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="form-control" placeholder="Search subjects, sections, or topics...">
+                </div>
+                <button class="btn btn-primary" onclick="addNewSubject()">
+                    <i class="fas fa-plus me-2"></i>Add Subject
+                </button>
+            </div>
 
-<div id="subjectsContainer">
-    <!-- Subjects will be loaded here -->
-</div>
+            <div id="subjectsContainer">
+                <!-- Subjects will be loaded here -->
+            </div>
+        </div>
+    </div>
+</main>
 {% endblock %}

@@ -260,3 +260,184 @@ body {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* Topic editing styles */
+.topic-row .edit-mode textarea {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.topic-row .edit-mode input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.topic-content pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Additional helpful styles for topic editing */
+.topic-row .edit-mode {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+}
+
+.topic-row .edit-mode textarea {
+    font-size: 0.875rem;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.topic-row .edit-mode input {
+    font-size: 0.875rem;
+}
+
+/* Smooth transition for edit mode */
+.topic-row .view-mode,
+.topic-row .edit-mode {
+    transition: all 0.3s ease;
+}
+
+/* Style for code textarea */
+.topic-row .edit-mode textarea[placeholder="Code (optional)"] {
+    font-family: monospace;
+    background-color: #f1f1f1;
+}
+
+/* Subject editing styles */
+.subject-card .edit-mode {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+}
+
+.subject-card .edit-mode input,
+.subject-card .edit-mode textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 0.875rem;
+}
+
+.subject-card .edit-mode textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Section editing styles */
+.section-container .edit-mode {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+}
+
+.section-container .edit-mode input {
+    width: auto;
+    min-width: 200px;
+    margin-bottom: 10px;
+    font-size: 0.875rem;
+}
+
+/* Common styles for all edit modes */
+.view-mode,
+.edit-mode {
+    transition: all 0.3s ease;
+}
+
+/* Style for edit buttons */
+.btn-action {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-action:hover {
+    transform: translateY(-2px);
+}
+
+/* Smooth transitions for all editable elements */
+.subject-card,
+.section-container,
+.topic-row {
+    transition: all 0.3s ease;
+}
+
+/* Animation for edit mode */
+.edit-mode {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Topic row specific styles */
+.topic-row td {
+    vertical-align: middle;
+    padding: 1rem;
+}
+
+.topic-row .edit-mode textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 0.875rem;
+}
+
+.topic-row .edit-mode textarea:last-child {
+    font-family: monospace;
+    background-color: #f8f9fa;
+}
+
+.topic-row .edit-mode input {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 0.875rem;
+}
+
+.topic-content {
+    max-width: 100%;
+}
+
+.topic-content pre {
+    margin: 0;
+    font-size: 0.875rem;
+    background-color: #f8f9fa;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+/* Add subject button styles */
+.btn-primary {
+    height: 44px; /* Match the height of the search box */
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.search-box {
+    flex: 1;
+    min-width: 0; /* Prevents flex item from overflowing */
+}
+
+/* Ensure the gap between search and button is consistent */
+.gap-3 {
+    gap: 1rem !important;
+}
+
+/* Highlight effect for duplicate subject prevention */
+@keyframes highlightPulse {
+    0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(79, 70, 229, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+}
+
+.highlight-pulse {
+    animation: highlightPulse 1s ease-out;
+}

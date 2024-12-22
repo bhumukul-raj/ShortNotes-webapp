@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request, session, jsonify
 import json
-from models import get_subjects, delete_section, save_data, save_new_subject, delete_subject_from_data, delete_topic
+from models import get_subjects
 from utils import check_login
 import logging
 logging.basicConfig(level=logging.DEBUG)
@@ -89,66 +89,59 @@ def manage_subjects():
 @app.route('/api/subjects', methods=['GET'])
 def api_get_subjects():
     """API to fetch all subjects."""
-    return jsonify(get_subjects())
-#####-----------------------------------------------------------------------------------------------------------
-@app.route('/temp') 
-def temp():
-    """
-    Home route that displays the subject cards on the index page.
-    If the user is logged in, show the admin options. Otherwise, show the login popup.
-    """
-    subjects = get_subjects()
-    logging.debug("Subjects data is passed to temp page.")  # Log
-    return render_template('/temp/temp.html', subjects=subjects)
+    try:
+        subjects = get_subjects()
+        logging.debug(f"API returning subjects: {subjects}")
+        return jsonify({'subjects': subjects})
+    except Exception as e:
+        logging.error(f"Error in api_get_subjects: {str(e)}")
+        return jsonify({'error': 'Internal server error'}), 500
 
-@app.route('/api/subjects/<int:id>', methods=['DELETE'])
-def delete_subject(id):
-    result = delete_subject_from_data(id)
-    if result["status"] == "success":
-        return jsonify(result), 200
-    else:
-        return jsonify(result), 400
+@app.route('/api/subjects/<int:subject_id>', methods=['PUT'])
+def update_subject(subject_id):
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'error': 'Unauthorized'}), 401
 
-######******************************************************************
-@app.route('/api/sections/<subject_id>/<section_id>', methods=['DELETE'])
-def delete_section_route(subject_id, section_id):
-    result = delete_section(subject_id, section_id)
-    if result["status"] == "success":
-        return jsonify(result), 200
-    else:
-        return jsonify(result), 400
-######******************************************************************
-@app.route('/api/topics/<int:subject_id>/<int:section_id>/<int:topic_id>', methods=['DELETE'])
-def delete_topic_route(subject_id, section_id, topic_id):
-    result = delete_topic(subject_id, section_id, topic_id)
-    if result["status"] == "success":
-        return jsonify(result), 200
-    else:
-        return jsonify(result), 400
-######*********************************************
-@app.route('/api/subjects', methods=['POST'])
-def add_subject():
-    """
-    API to add a new subject.
-    """
-    data = request.get_json()
-    name = data.get('name')
-    description = data.get('description')
+    try:
+        data = request.get_json()
+        # Implement your update logic here
+        # This is a placeholder - you'll need to implement the actual update
+        # in your data storage system
+        return jsonify({'success': True})
+    except Exception as e:
+        logging.error(f"Error updating subject: {str(e)}")
+        return jsonify({'error': 'Failed to update subject'}), 500
 
-    if not name or not description:
-        return jsonify({"status": "error", "message": "Name and description are required"}), 400
+@app.route('/api/sections/<int:section_id>', methods=['PUT'])
+def update_section(section_id):
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'error': 'Unauthorized'}), 401
 
-    new_subject = save_new_subject(name, description)
+    try:
+        data = request.get_json()
+        # Implement your section update logic here
+        # This is a placeholder - you'll need to implement the actual update
+        # in your data storage system
+        return jsonify({'success': True})
+    except Exception as e:
+        logging.error(f"Error updating section: {str(e)}")
+        return jsonify({'error': 'Failed to update section'}), 500
 
-    if new_subject:
-        return jsonify(new_subject), 201
-    else:
-        return jsonify({"status": "error", "message": "Failed to add the subject"}), 500
+@app.route('/api/topics/<int:topic_id>', methods=['PUT'])
+def update_topic(topic_id):
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'error': 'Unauthorized'}), 401
 
+    try:
+        data = request.get_json()
+        # Implement your topic update logic here
+        # This is a placeholder - you'll need to implement the actual update
+        # in your data storage system
+        return jsonify({'success': True})
+    except Exception as e:
+        logging.error(f"Error updating topic: {str(e)}")
+        return jsonify({'error': 'Failed to update topic'}), 500
 
-
-
-########---------------------------------------------------------------------------------------------------------
 ### Run Application ###
 if __name__ == '__main__':
     app.run(debug=True)
