@@ -3,12 +3,53 @@ from utils.logger_config import setup_logger
 import json
 from models import get_subjects, add_subject, add_section_to_subject, add_topic_to_section, delete_topic_from_section, delete_section_from_subject, delete_subject_from_data, subject_has_sections, section_has_topics, update_topic_details, update_section_details, update_subject_details
 from utils import check_login
+from datetime import timedelta
+from marshmallow import Schema, fields, validate
+import os
+if os.name == 'nt':
+    import msvcrt
+else:
+    import fcntl
 
 # Set up logger for the application
 logger = setup_logger('app')
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)
+app.config['SESSION_COOKIE_SECURE'] = True
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+
+# Add this near the top of your file with other constants
+JSON_FILE = "path/to/your/json/file.json"  # Replace with your actual JSON file path
+
+# Replace any fcntl.flock() usage with this class
+class FileLock:
+    def __init__(self, file):
+        self.file = file
+        
+    def acquire(self):
+        if os.name == 'nt':
+            try:
+                msvcrt.locking(self.file.fileno(), msvcrt.LK_NBLCK, 1)
+            except OSError:
+                return False
+            return True
+        else:
+            try:
+                fcntl.flock(self.file.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except (IOError, BlockingIOError):
+                return False
+            return True
+            
+    def release(self):
+        if os.name == 'nt':
+            try:
+                msvcrt.locking(self.file.fileno(), msvcrt.LK_UNLCK, 1)
+            except OSError:
+                pass
+        else:
+            fcntl.flock(self.file.fileno(), fcntl.LOCK_UN)
 
 @app.before_request
 def before_request():
@@ -26,6 +67,20 @@ def handle_error(error):
     """Log all errors"""
     logger.error(f"Error: {str(error)}", exc_info=True)
     return "An error occurred", 500
+
+@app.errorhandler(404)
+def not_found_error(error):
+    return jsonify({'error': 'Resource not found'}), 404
+
+@app.errorhandler(500) 
+def internal_error(error):
+    logger.error(f"Internal error: {error}", exc_info=True)
+    return jsonify({'error': 'Internal server error'}), 500
+
+def validate_json_request():
+    if not request.is_json:
+        return jsonify({'error': 'Content-Type must be application/json'}), 415
+    return None
 
 ### Public Routes ###
 @app.route('/')  # Checked working
@@ -57,12 +112,13 @@ def login():
     Handle login request for the admin. Verifies admin credentials.
     """
     if request.method == 'POST':
+        session.permanent = True
+        session['logged_in'] = True
         logger.debug("Login endpoint hit.")  # Log
         username = request.form.get('username')
         password = request.form.get('password')
         if check_login(username, password):  # Verifies login credentials
             logger.info("Login successful.")  # Log
-            session['logged_in'] = True
             return redirect(url_for('dashboard'))
         logger.warning("Login failed.")  # Log
         return redirect(url_for('index'))  # If login fails
@@ -116,6 +172,10 @@ def api_get_subjects():
         logger.error(f"Error in api_get_subjects: {str(e)}")
         return jsonify({'error': 'Internal server error'}), 500
 
+class SubjectSchema(Schema):
+    name = fields.Str(required=True, validate=validate.Length(min=1))
+    description = fields.Str(required=True)
+
 @app.route('/api/subjects/<int:subject_id>', methods=['PUT'])
 def update_subject(subject_id):
     """API endpoint to update a subject."""
@@ -124,6 +184,11 @@ def update_subject(subject_id):
 
     try:
         data = request.get_json()
+        schema = SubjectSchema()
+        errors = schema.validate(data)
+        if errors:
+            return jsonify({'error': errors}), 400
+
         name = data.get('name', '').strip()
         description = data.get('description', '').strip()
         
@@ -322,6 +387,24 @@ def delete_subject(subject_id):
     except Exception as e:
         logger.error(f"Error in delete_subject: {str(e)}")
         return jsonify({'error': 'Internal server error'}), 500
+
+def save_json(data):
+    temp_file = f"{JSON_FILE}.tmp"
+    try:
+        with open(temp_file, 'w') as f:
+            lock = FileLock(f)
+            if lock.acquire():
+                try:
+                    json.dump(data, f, indent=4)
+                    f.flush()
+                    os.fsync(f.fileno())
+                finally:
+                    lock.release()
+        os.rename(temp_file, JSON_FILE)
+    except Exception as e:
+        if os.path.exists(temp_file):
+            os.remove(temp_file)
+        raise e
 
 ### Run Application ###
 if __name__ == '__main__':

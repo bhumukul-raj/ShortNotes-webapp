@@ -1,11 +1,10 @@
+import os
+from werkzeug.security import check_password_hash
+from dotenv import load_dotenv
+
+load_dotenv()
+
 def check_login(username, password):
-    """
-    Check if the provided username and password are valid.
-    Currently using a simple hardcoded check - you might want to replace this
-    with a more secure authentication system.
-    """
-    # Simple hardcoded credentials for demo purposes
-    ADMIN_USERNAME = "admin"
-    ADMIN_PASSWORD = "admin123"
-    
-    return username == ADMIN_USERNAME and password == ADMIN_PASSWORD 
+    ADMIN_USERNAME = os.getenv('ADMIN_USERNAME')
+    ADMIN_PASSWORD_HASH = os.getenv('ADMIN_PASSWORD_HASH')
+    return username == ADMIN_USERNAME and check_password_hash(ADMIN_PASSWORD_HASH, password) 

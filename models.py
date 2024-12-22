@@ -1,5 +1,7 @@
 from utils.logger_config import setup_logger
 import json
+from functools import lru_cache
+import time
 
 # Set up logger for models
 logger = setup_logger('models')
@@ -34,20 +36,28 @@ def save_json(file_name, data):
         logger.error(f"Error saving JSON file: {str(e)}")
         return False
 
+@lru_cache(maxsize=32)
 def get_subjects():
-    """Get all subjects from subjects.json."""
-    logger.debug("Getting all subjects from JSON data")
-    data = load_json('data/subjects.json')
-    subjects = data.get('subjects', [])
-    logger.debug(f"Found {len(subjects)} subjects")
-    return subjects
+    """Get all subjects with caching."""
+    return load_json('data/subjects.json').get('subjects', [])
+
+def invalidate_cache():
+    """Clear the cache when data changes."""
+    get_subjects.cache_clear()
 
 def add_subject(name, description):
-    """
-    Add a new subject if it doesn't already exist.
-    Returns (success, message) tuple.
-    """
+    """Add a new subject if it doesn't already exist."""
     try:
+        # Validate inputs
+        if not isinstance(name, str) or not isinstance(description, str):
+            return False, "Invalid input types"
+        
+        if not name.strip() or len(name) > 100:  # Add reasonable limits
+            return False, "Invalid name length"
+            
+        if len(description) > 1000:  # Add reasonable limits
+            return False, "Description too long"
+            
         # Load current data
         data = load_json('data/subjects.json')
         subjects = data.get('subjects', [])
@@ -77,7 +87,7 @@ def add_subject(name, description):
         return False, "Error saving subject"
         
     except Exception as e:
-        logger.error(f"Error adding subject: {str(e)}")
+        logger.error(f"Error adding subject: {str(e)}", exc_info=True)  # Add stack trace
         return False, "Internal server error"
 
 def add_section_to_subject(subject_id, name):
