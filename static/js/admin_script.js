@@ -370,10 +370,9 @@ window.deleteSubject = async (subjectId) => {
                     throw new Error(deleteData.error || 'Failed to delete subject');
                 }
 
-                location.reload();
+                await refreshSubjectsList();
             } catch (error) {
-                console.error('Failed to delete subject:', error);
-                showWarningModal(error.message);
+                console.error('Error deleting subject:', error);
             }
         });
     } catch (error) {
@@ -485,7 +484,7 @@ window.applySubjectEdit = async (subjectId) => {
             }
 
             // Refresh the subjects list
-            location.reload();
+            await refreshSubjectsList();
             return;
         }
 
@@ -707,10 +706,7 @@ window.submitNewSubject = async () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ 
-                name,
-                description 
-            })
+            body: JSON.stringify({ name, description })
         });
 
         if (!response.ok) {
@@ -718,9 +714,18 @@ window.submitNewSubject = async () => {
             throw new Error(data.error || 'Failed to create subject');
         }
 
-        // Close modal and refresh page
-        bootstrap.Modal.getInstance(document.getElementById('addSubjectModal')).hide();
-        location.reload();
+        // Close modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById('addSubjectModal'));
+        modal.hide();
+
+        // Refresh the subjects list
+        await refreshSubjectsList();
+
+        // Clear the form
+        nameInput.value = '';
+        descriptionInput.value = '';
+        errorDiv.textContent = '';
+
     } catch (error) {
         console.error('Failed to create subject:', error);
         errorDiv.textContent = error.message;
@@ -1181,4 +1186,23 @@ function setActiveNavLink() {
             link.classList.add('active');
         }
     });
+}
+
+// Add this function to refresh the subjects list
+async function refreshSubjectsList() {
+    try {
+        const response = await fetch('/api/subjects');
+        const data = await response.json();
+        
+        const subjectsContainer = document.getElementById('subjectsContainer');
+        const { templates } = await import('./subjectsTemplates.js');
+        
+        // Clear existing content and add new subjects
+        subjectsContainer.innerHTML = '';
+        data.subjects.forEach(subject => {
+            subjectsContainer.insertAdjacentHTML('beforeend', templates.subjectCard(subject));
+        });
+    } catch (error) {
+        console.error('Failed to refresh subjects:', error);
+    }
 }

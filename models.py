@@ -65,29 +65,35 @@ def add_subject(name, description):
         # Check for duplicate name (case-insensitive)
         if any(s['name'].lower() == name.lower() for s in subjects):
             return False, "A subject with this name already exists"
-        
-        # Get next ID
-        next_id = max([s['id'] for s in subjects], default=0) + 1
+            
+        # Generate new ID
+        new_id = max([s['id'] for s in subjects], default=0) + 1
         
         # Create new subject
+        from datetime import datetime
+        timestamp = datetime.utcnow().isoformat() + "+0000"
+        
         new_subject = {
-            "id": next_id,
-            "name": name,
-            "description": description,
-            "sections": []
+            'id': new_id,
+            'name': name,
+            'description': description,
+            'sections': [],
+            'created_at': timestamp,
+            'updated_at': timestamp
         }
         
         # Add to subjects list
         subjects.append(new_subject)
         data['subjects'] = subjects
         
-        # Save updated data
+        # Save to file
         if save_json('data/subjects.json', data):
+            invalidate_cache()
             return True, "Subject added successfully"
         return False, "Error saving subject"
         
     except Exception as e:
-        logger.error(f"Error adding subject: {str(e)}", exc_info=True)  # Add stack trace
+        logger.error(f"Error adding subject: {str(e)}")
         return False, "Internal server error"
 
 def add_section_to_subject(subject_id, name):
@@ -127,6 +133,7 @@ def add_section_to_subject(subject_id, name):
         
         # Save updated data
         if save_json('data/subjects.json', data):
+            invalidate_cache()
             return True, "Section added successfully"
         return False, "Error saving section"
         
@@ -189,6 +196,7 @@ def add_topic_to_section(section_id, name, text, code):
         
         # Save updated data
         if save_json('data/subjects.json', data):
+            invalidate_cache()
             return True, "Topic added successfully"
         return False, "Error saving topic"
         
@@ -233,6 +241,7 @@ def delete_topic_from_section(topic_id):
             return False, "Topic not found"
             
         if save_json('data/subjects.json', data):
+            invalidate_cache()
             return True, "Topic deleted successfully"
         return False, "Error saving changes"
         
@@ -260,6 +269,7 @@ def delete_section_from_subject(section_id):
             return False, "Section not found"
             
         if save_json('data/subjects.json', data):
+            invalidate_cache()
             return True, "Section deleted successfully"
         return False, "Error saving changes"
         
@@ -277,6 +287,7 @@ def delete_subject_from_data(subject_id):
         data['subjects'] = [s for s in data.get('subjects', []) if s['id'] != subject_id]
         
         if save_json('data/subjects.json', data):
+            invalidate_cache()
             return True, "Subject deleted successfully"
         return False, "Error saving changes"
         
@@ -314,6 +325,7 @@ def update_topic_details(topic_id, name, text, code):
             return False, "Topic not found"
             
         if save_json('data/subjects.json', data):
+            invalidate_cache()
             return True, "Topic updated successfully"
         return False, "Error saving changes"
         
@@ -346,6 +358,7 @@ def update_section_details(section_id, name):
             return False, "Section not found"
             
         if save_json('data/subjects.json', data):
+            invalidate_cache()
             return True, "Section updated successfully"
         return False, "Error saving changes"
         
@@ -376,6 +389,7 @@ def update_subject_details(subject_id, name, description):
             return False, "Subject not found"
             
         if save_json('data/subjects.json', data):
+            invalidate_cache()
             return True, "Subject updated successfully"
         return False, "Error saving changes"
         
