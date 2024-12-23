@@ -1,0 +1,6 @@
+{"timestamp": "2024-12-23T18:35:05.972955", "level": "ERROR", "message": "Error updating section: module 'datetime' has no attribute 'utcnow'", "module": "models", "function": "update_section_details", "line": 384}
+{"timestamp": "2024-12-23T18:35:11.276951", "level": "ERROR", "message": "Error updating section: module 'datetime' has no attribute 'utcnow'", "module": "models", "function": "update_section_details", "line": 384}
+{"timestamp": "2024-12-23T18:35:22.128019", "level": "ERROR", "message": "Error updating section: module 'datetime' has no attribute 'utcnow'", "module": "models", "function": "update_section_details", "line": 384}
+{"timestamp": "2024-12-23T18:36:06.374758", "level": "ERROR", "message": "Error updating topic: module 'datetime' has no attribute 'utcnow'", "module": "models", "function": "update_topic_details", "line": 350}
+{"timestamp": "2024-12-23T18:36:37.054663", "level": "ERROR", "message": "Error updating section: module 'datetime' has no attribute 'utcnow'", "module": "models", "function": "update_section_details", "line": 384}
+{"timestamp": "2024-12-23T18:36:46.305788", "level": "ERROR", "message": "Error updating topic: module 'datetime' has no attribute 'utcnow'", "module": "models", "function": "update_topic_details", "line": 350}

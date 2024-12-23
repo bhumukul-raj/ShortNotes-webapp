@@ -131,32 +131,38 @@
         },
         {
             "id": 2,
-            "name": "test new subject u",
-            "description": "test new subject",
+            "name": "math1",
+            "description": "ganit",
             "sections": [
                 {
                     "id": 3,
                     "subject_id": 2,
-                    "name": "ss",
+                    "name": "tringle1",
                     "topics": [
                         {
                             "id": 7,
                             "section_id": 3,
-                            "name": "s",
+                            "name": "cos",
+                            "created_at": "2024-12-23T18:40:52.499471Z",
+                            "updated_at": "2024-12-23T18:41:13.812026Z",
                             "details": {
                                 "id": 7,
                                 "topic_id": 7,
-                                "text": "s",
-                                "code": "s",
+                                "text": "thita",
+                                "code": "sin1",
                                 "table": null,
-                                "image": null
+                                "image": null,
+                                "created_at": "2024-12-23T18:40:52.499471Z",
+                                "updated_at": "2024-12-23T18:41:13.812026Z"
                             }
                         }
-                    ]
+                    ],
+                    "created_at": "2024-12-23T18:40:32.909984Z",
+                    "updated_at": "2024-12-23T18:41:08.507885Z"
                 }
             ],
-            "created_at": "2024-12-23T18:01:35.695770+0000",
-            "updated_at": "2024-12-23T18:01:35.695770+0000"
+            "created_at": "2024-12-23T18:40:02.608807Z",
+            "updated_at": "2024-12-23T18:41:02.124955Z"
         }
     ]
 }

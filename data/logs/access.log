@@ -1196,3 +1196,438 @@
 {"timestamp": "2024-12-23T18:21:18.573682", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
 {"timestamp": "2024-12-23T18:21:18.594733", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
 {"timestamp": "2024-12-23T18:21:18.595327", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:25:03.801476", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:25:03.802011", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:25:03.810428", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:25:03.832779", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:25:03.853809", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:25:03.856136", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:25:03.954601", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:25:03.969878", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:25:03.978737", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:25:04.016060", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:25:04.016676", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:25:08.035637", "level": "INFO", "message": "Request: DELETE http://127.0.0.1:5000/api/topics/7 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:25:08.036316", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:25:08.037210", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 33}
+{"timestamp": "2024-12-23T18:25:08.037647", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:25:08.051862", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:25:08.069491", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:25:08.070729", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:25:08.116073", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:25:08.116610", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:25:08.125144", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:25:08.129723", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:25:08.129988", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:25:08.132222", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:25:08.145751", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:25:08.146470", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:25:10.262552", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/sections/3/check from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:25:10.262857", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:25:10.262999", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:25:11.178404", "level": "INFO", "message": "Request: DELETE http://127.0.0.1:5000/api/sections/3 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:25:11.178985", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:25:11.179421", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:25:11.180253", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 33}
+{"timestamp": "2024-12-23T18:25:11.180700", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:25:11.194987", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:25:11.210711", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:25:11.211233", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:25:11.259716", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:25:11.260691", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:25:11.269989", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:25:11.273480", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:25:11.274293", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:25:11.275565", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:25:11.284607", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:25:11.284993", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:25:12.778550", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects/2/check from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:25:12.778919", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:25:12.779139", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:25:13.735494", "level": "INFO", "message": "Request: DELETE http://127.0.0.1:5000/api/subjects/2 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:25:13.735812", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:25:13.736105", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:25:13.737230", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 33}
+{"timestamp": "2024-12-23T18:25:13.738412", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:25:13.745698", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:25:13.757220", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:25:13.758745", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:29:47.361872", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:29:47.362450", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:29:47.369772", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:29:47.407549", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:29:47.409559", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:29:47.410421", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:29:47.513854", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:29:47.530328", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:29:47.538500", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:29:47.545208", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:29:47.545680", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:30:37.444379", "level": "INFO", "message": "Request: POST http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:30:37.444772", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:30:37.445366", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 33}
+{"timestamp": "2024-12-23T18:30:37.445591", "level": "INFO", "message": "Response: 201", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:30:37.452426", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:30:37.466275", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:30:37.467263", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:31:29.809726", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:31:29.810216", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:31:29.818341", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:31:29.848214", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:31:29.851636", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:31:29.852603", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:31:29.952709", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:31:29.975181", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:31:29.979157", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:31:29.995750", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:31:29.996173", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:32:09.833685", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:32:09.834176", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:32:09.865157", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:32:09.865736", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:32:09.867442", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:32:09.868039", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:32:09.869432", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:32:09.870099", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:32:09.878945", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:32:09.879329", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:32:26.162189", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects/2/check from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:32:26.162496", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:32:26.162630", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:32:27.258141", "level": "INFO", "message": "Request: DELETE http://127.0.0.1:5000/api/subjects/2 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:32:27.258642", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:32:27.259007", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:32:27.260008", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 33}
+{"timestamp": "2024-12-23T18:32:27.260624", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:32:27.269468", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:32:27.270728", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:32:27.271845", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:32:42.276980", "level": "INFO", "message": "Request: POST http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:32:42.277363", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:32:42.277968", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 33}
+{"timestamp": "2024-12-23T18:32:42.278197", "level": "INFO", "message": "Response: 201", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:32:42.282334", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:32:42.294217", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:32:42.294583", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:33:04.996663", "level": "INFO", "message": "Request: PUT http://127.0.0.1:5000/api/subjects/2 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:33:04.997296", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:33:04.997954", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 33}
+{"timestamp": "2024-12-23T18:33:04.998243", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:33:05.008231", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:33:05.023493", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 15}
+{"timestamp": "2024-12-23T18:33:05.026560", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:33:05.080946", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:33:05.084493", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:33:05.088617", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:33:05.091675", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:33:05.095264", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:33:05.096581", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:33:05.109614", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:33:05.110255", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:34:14.870425", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:34:14.871031", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:34:14.878264", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:34:14.906676", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:34:14.907586", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:34:14.908662", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:34:15.004608", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:34:15.021585", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:34:15.031749", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:34:15.038293", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:34:15.038701", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:34:35.949168", "level": "INFO", "message": "Request: PUT http://127.0.0.1:5000/api/subjects/2 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:34:35.949763", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:34:35.950363", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 34}
+{"timestamp": "2024-12-23T18:34:35.950804", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:34:35.961175", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:34:35.972101", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:34:35.972768", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:34:36.010890", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:34:36.011388", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:34:36.017958", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:34:36.020463", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:34:36.021127", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:34:36.022454", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:34:36.031697", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:34:36.032165", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:34:50.112520", "level": "INFO", "message": "Request: POST http://127.0.0.1:5000/api/subjects/2/sections from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:34:50.112914", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:34:50.113514", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 34}
+{"timestamp": "2024-12-23T18:34:50.113740", "level": "INFO", "message": "Response: 201", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:34:50.124652", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:34:50.140918", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:34:50.142032", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:34:50.175147", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:34:50.175936", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:34:50.182213", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:34:50.182358", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:34:50.182766", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:34:50.183159", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:34:50.196017", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:34:50.196519", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:05.972486", "level": "INFO", "message": "Request: PUT http://127.0.0.1:5000/api/sections/3 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:05.972858", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:35:05.973019", "level": "ERROR", "message": "Error updating section: module 'datetime' has no attribute 'utcnow'", "module": "models", "function": "update_section_details", "line": 384}
+{"timestamp": "2024-12-23T18:35:05.973144", "level": "INFO", "message": "Response: 400", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:11.276483", "level": "INFO", "message": "Request: PUT http://127.0.0.1:5000/api/sections/3 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:11.276855", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:35:11.276991", "level": "ERROR", "message": "Error updating section: module 'datetime' has no attribute 'utcnow'", "module": "models", "function": "update_section_details", "line": 384}
+{"timestamp": "2024-12-23T18:35:11.277111", "level": "INFO", "message": "Response: 400", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:13.573622", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:13.574126", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:13.609228", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:13.610773", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:13.611115", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:13.611961", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:13.612446", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:13.613453", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:13.624741", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:13.625138", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:14.261683", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:14.262215", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:14.288542", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:14.289653", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:14.290694", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:14.291437", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:14.292095", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:14.292646", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:14.302608", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:14.302934", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:22.127561", "level": "INFO", "message": "Request: PUT http://127.0.0.1:5000/api/sections/3 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:22.127924", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:35:22.128060", "level": "ERROR", "message": "Error updating section: module 'datetime' has no attribute 'utcnow'", "module": "models", "function": "update_section_details", "line": 384}
+{"timestamp": "2024-12-23T18:35:22.128172", "level": "INFO", "message": "Response: 400", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:37.352057", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:37.352545", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:37.383984", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:37.385202", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:37.385619", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:37.386540", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:37.387179", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:37.388292", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:37.400540", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:37.400862", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:56.024188", "level": "INFO", "message": "Request: POST http://127.0.0.1:5000/api/sections/3/topics from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:56.024621", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:35:56.025246", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 34}
+{"timestamp": "2024-12-23T18:35:56.025470", "level": "INFO", "message": "Response: 201", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:56.035119", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:56.049260", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:35:56.049752", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:56.090937", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:56.091559", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:56.092813", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:56.094854", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:56.095121", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:56.097001", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:35:56.105201", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:35:56.105611", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:36:06.374286", "level": "INFO", "message": "Request: PUT http://127.0.0.1:5000/api/topics/7 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:36:06.374658", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:36:06.375435", "level": "ERROR", "message": "Error updating topic: module 'datetime' has no attribute 'utcnow'", "module": "models", "function": "update_topic_details", "line": 350}
+{"timestamp": "2024-12-23T18:36:06.375555", "level": "INFO", "message": "Response: 400", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:36:13.860828", "level": "INFO", "message": "Request: PUT http://127.0.0.1:5000/api/subjects/2 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:36:13.861306", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:36:13.861960", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 34}
+{"timestamp": "2024-12-23T18:36:13.862351", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:36:13.873175", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:36:13.886776", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:36:13.888969", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:36:13.943704", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:36:13.945417", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:36:13.945870", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:36:13.948760", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:36:13.949273", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:36:13.950748", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:36:13.967886", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:36:13.968475", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:36:21.556110", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:36:21.556461", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:36:21.582452", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:36:21.582906", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:36:21.590072", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:36:21.591346", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:36:21.591659", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:36:21.592311", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:36:21.603688", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:36:21.604276", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:36:29.007126", "level": "INFO", "message": "Request: PUT http://127.0.0.1:5000/api/subjects/2 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:36:29.007586", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:36:29.008217", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 34}
+{"timestamp": "2024-12-23T18:36:29.008485", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:36:29.018776", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:36:29.037784", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:36:29.038731", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:36:29.084369", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:36:29.084826", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:36:29.094844", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:36:29.095469", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:36:29.097320", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:36:29.098697", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:36:29.115951", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:36:29.116359", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:36:37.054202", "level": "INFO", "message": "Request: PUT http://127.0.0.1:5000/api/sections/3 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:36:37.054568", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:36:37.054688", "level": "ERROR", "message": "Error updating section: module 'datetime' has no attribute 'utcnow'", "module": "models", "function": "update_section_details", "line": 384}
+{"timestamp": "2024-12-23T18:36:37.054881", "level": "INFO", "message": "Response: 400", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:36:46.305215", "level": "INFO", "message": "Request: PUT http://127.0.0.1:5000/api/topics/7 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:36:46.305684", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:36:46.305814", "level": "ERROR", "message": "Error updating topic: module 'datetime' has no attribute 'utcnow'", "module": "models", "function": "update_topic_details", "line": 350}
+{"timestamp": "2024-12-23T18:36:46.305946", "level": "INFO", "message": "Response: 400", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:38:50.794483", "level": "INFO", "message": "Request: PUT http://127.0.0.1:5000/api/topics/7 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:38:50.795740", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:38:50.796446", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 34}
+{"timestamp": "2024-12-23T18:38:50.796739", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:38:50.809532", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:38:50.826079", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:38:50.842789", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:38:50.888218", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:38:50.893908", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:38:50.895625", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:38:51.001055", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:38:51.019770", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:38:51.033176", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:38:51.038726", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:38:51.039108", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:38:59.187398", "level": "INFO", "message": "Request: PUT http://127.0.0.1:5000/api/sections/3 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:38:59.187817", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:38:59.188840", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 34}
+{"timestamp": "2024-12-23T18:38:59.189253", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:38:59.199739", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:38:59.212741", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:38:59.215264", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:38:59.275606", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:38:59.276861", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:38:59.276980", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:38:59.278645", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:38:59.279064", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:38:59.283606", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:38:59.300377", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:38:59.300850", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:39:38.312096", "level": "INFO", "message": "Request: DELETE http://127.0.0.1:5000/api/topics/7 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:39:38.312421", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:39:38.313082", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 34}
+{"timestamp": "2024-12-23T18:39:38.313381", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:39:38.323179", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:39:38.346115", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:39:38.347401", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:39:38.395779", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:39:38.396415", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:39:38.397657", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:39:38.398576", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:39:38.399011", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:39:38.403600", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:39:38.415829", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:39:38.416325", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:39:41.169076", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/sections/3/check from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:39:41.169442", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:39:41.169579", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:39:41.981676", "level": "INFO", "message": "Request: DELETE http://127.0.0.1:5000/api/sections/3 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:39:41.981982", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:39:41.982241", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:39:41.982801", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 34}
+{"timestamp": "2024-12-23T18:39:41.983062", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:39:41.994987", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:39:42.008458", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:39:42.012168", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:39:42.072853", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:39:42.073991", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:39:42.078744", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:39:42.080668", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:39:42.080936", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:39:42.086317", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:39:42.095998", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:39:42.096990", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:39:43.975005", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects/2/check from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:39:43.975412", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:39:43.975544", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:39:44.858877", "level": "INFO", "message": "Request: DELETE http://127.0.0.1:5000/api/subjects/2 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:39:44.859173", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:39:44.859428", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:39:44.860028", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 34}
+{"timestamp": "2024-12-23T18:39:44.860392", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:39:44.869653", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:39:44.871193", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:39:44.871611", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:40:02.608418", "level": "INFO", "message": "Request: POST http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:40:02.608769", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:40:02.609378", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 34}
+{"timestamp": "2024-12-23T18:40:02.609613", "level": "INFO", "message": "Response: 201", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:40:02.616009", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:40:02.623177", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:40:02.623633", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:40:32.909468", "level": "INFO", "message": "Request: POST http://127.0.0.1:5000/api/subjects/2/sections from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:40:32.909936", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:40:32.910910", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 34}
+{"timestamp": "2024-12-23T18:40:32.911392", "level": "INFO", "message": "Response: 201", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:40:32.921921", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:40:32.938623", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:40:32.939132", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:40:32.980619", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:40:32.981057", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:40:32.987982", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:40:32.988822", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:40:32.989321", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:40:32.990147", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:40:33.002500", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:40:33.003037", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:40:52.498809", "level": "INFO", "message": "Request: POST http://127.0.0.1:5000/api/sections/3/topics from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:40:52.499406", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:40:52.500560", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 34}
+{"timestamp": "2024-12-23T18:40:52.500950", "level": "INFO", "message": "Response: 201", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:40:52.511596", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:40:52.527622", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:40:52.528263", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:40:52.572579", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:40:52.574140", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:40:52.576875", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:40:52.578645", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:40:52.578943", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:40:52.580756", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:40:52.593131", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:40:52.593838", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:41:02.124343", "level": "INFO", "message": "Request: PUT http://127.0.0.1:5000/api/subjects/2 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:41:02.124919", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:41:02.125538", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 34}
+{"timestamp": "2024-12-23T18:41:02.125803", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:41:02.136254", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:41:02.146605", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:41:02.147148", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:41:02.192227", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:41:02.192801", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:41:02.202118", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:41:02.207135", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:41:02.207307", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:41:02.208535", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:41:02.218618", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:41:02.219257", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:41:08.507495", "level": "INFO", "message": "Request: PUT http://127.0.0.1:5000/api/sections/3 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:41:08.507854", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:41:08.508461", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 34}
+{"timestamp": "2024-12-23T18:41:08.508744", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:41:08.519233", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:41:08.540193", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:41:08.541906", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:41:08.595951", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:41:08.597113", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:41:08.603251", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:41:08.606595", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:41:08.607080", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:41:08.607826", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:41:08.618261", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:41:08.618872", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:41:13.811614", "level": "INFO", "message": "Request: PUT http://127.0.0.1:5000/api/topics/7 from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:41:13.811994", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:41:13.812611", "level": "INFO", "message": "Successfully saved JSON file: data/subjects.json", "module": "models", "function": "save_json", "line": 34}
+{"timestamp": "2024-12-23T18:41:13.812857", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:41:13.823152", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/admin/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:41:13.839657", "level": "INFO", "message": "Successfully loaded JSON file: data/subjects.json", "module": "models", "function": "load_json", "line": 16}
+{"timestamp": "2024-12-23T18:41:13.840900", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:41:13.886980", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/css/admin_style.css from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:41:13.887899", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:41:13.898259", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/admin_script.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:41:13.901589", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/static/js/subjectsTemplates.js from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:41:13.902891", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:41:13.904633", "level": "INFO", "message": "Response: 304", "module": "app", "function": "after_request", "line": 62}
+{"timestamp": "2024-12-23T18:41:13.921916", "level": "INFO", "message": "Request: GET http://127.0.0.1:5000/api/subjects from 127.0.0.1", "module": "app", "function": "before_request", "line": 57}
+{"timestamp": "2024-12-23T18:41:13.922264", "level": "INFO", "message": "Response: 200", "module": "app", "function": "after_request", "line": 62}

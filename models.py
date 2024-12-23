@@ -1,3 +1,4 @@
+import datetime
 from utils.logger_config import setup_logger
 import json
 from functools import lru_cache
@@ -69,9 +70,9 @@ def add_subject(name, description):
         # Generate new ID
         new_id = max([s['id'] for s in subjects], default=0) + 1
         
-        # Create new subject
+        # Create new subject with timestamps
         from datetime import datetime
-        timestamp = datetime.utcnow().isoformat() + "+0000"
+        timestamp = datetime.utcnow().isoformat() + "Z"
         
         new_subject = {
             'id': new_id,
@@ -119,11 +120,16 @@ def add_section_to_subject(subject_id, name):
         next_id = max([s['id'] for s in all_sections], default=0) + 1
         
         # Create new section
+        from datetime import datetime
+        timestamp = datetime.utcnow().isoformat() + "Z"
+        
         new_section = {
-            "id": next_id,
-            "subject_id": subject_id,
-            "name": name,
-            "topics": []
+            'id': next_id,
+            'subject_id': subject_id,
+            'name': name,
+            'topics': [],
+            'created_at': timestamp,
+            'updated_at': timestamp
         }
         
         # Add to subject's sections
@@ -141,7 +147,7 @@ def add_section_to_subject(subject_id, name):
         logger.error(f"Error adding section: {str(e)}")
         return False, "Internal server error"
 
-def add_topic_to_section(section_id, name, text, code):
+def add_topic_to_section(section_id, name, text, code, table=None, image=None):
     """
     Add a new topic to a section.
     Returns (success, message) tuple.
@@ -175,17 +181,24 @@ def add_topic_to_section(section_id, name, text, code):
         next_topic_id = max([t['id'] for t in all_topics], default=0) + 1
         
         # Create new topic
+        from datetime import datetime
+        timestamp = datetime.utcnow().isoformat() + "Z"
+        
         new_topic = {
-            "id": next_topic_id,
-            "section_id": section_id,
-            "name": name,
-            "details": {
-                "id": next_topic_id,
-                "topic_id": next_topic_id,
-                "text": text if text else None,
-                "code": code if code else None,
-                "table": None,
-                "image": None
+            'id': next_topic_id,
+            'section_id': section_id,
+            'name': name,
+            'created_at': timestamp,
+            'updated_at': timestamp,
+            'details': {
+                'id': next_topic_id,
+                'topic_id': next_topic_id,
+                'text': text,
+                'code': code,
+                'table': table,
+                'image': image,
+                'created_at': timestamp,
+                'updated_at': timestamp
             }
         }
         
@@ -295,25 +308,27 @@ def delete_subject_from_data(subject_id):
         logger.error(f"Error deleting subject: {str(e)}")
         return False, "Internal server error"
 
-def update_topic_details(topic_id, name, text, code):
+def update_topic_details(topic_id, name, text, code, table=None, image=None):
     """Update topic details."""
     try:
         data = load_json('data/subjects.json')
         found = False
+        
+        # Get current timestamp
+        timestamp = datetime.datetime.utcnow().isoformat() + "Z"
         
         # Find and update the topic
         for subject in data.get('subjects', []):
             for section in subject.get('sections', []):
                 for topic in section.get('topics', []):
                     if topic['id'] == topic_id:
-                        # Check for duplicate name in the same section
-                        if any(t['name'].lower() == name.lower() and t['id'] != topic_id 
-                              for t in section['topics']):
-                            return False, "A topic with this name already exists in this section"
-                        
                         topic['name'] = name
-                        topic['details']['text'] = text if text else None
-                        topic['details']['code'] = code if code else None
+                        topic['updated_at'] = timestamp
+                        topic['details']['text'] = text
+                        topic['details']['code'] = code
+                        topic['details']['table'] = table
+                        topic['details']['image'] = image
+                        topic['details']['updated_at'] = timestamp
                         found = True
                         break
                 if found:
@@ -339,6 +354,9 @@ def update_section_details(section_id, name):
         data = load_json('data/subjects.json')
         found = False
         
+        # Get current timestamp
+        timestamp = datetime.datetime.utcnow().isoformat() + "Z"
+        
         # Find and update the section
         for subject in data.get('subjects', []):
             # Check for duplicate name in the same subject
@@ -349,6 +367,7 @@ def update_section_details(section_id, name):
             for section in subject.get('sections', []):
                 if section['id'] == section_id:
                     section['name'] = name
+                    section['updated_at'] = timestamp
                     found = True
                     break
             if found:
@@ -378,13 +397,17 @@ def update_subject_details(subject_id, name, description):
         
         # Find and update the subject
         found = False
+        from datetime import datetime
+        timestamp = datetime.utcnow().isoformat() + "Z"
+        
         for subject in data.get('subjects', []):
             if subject['id'] == subject_id:
                 subject['name'] = name
                 subject['description'] = description
+                subject['updated_at'] = timestamp
                 found = True
                 break
-                
+        
         if not found:
             return False, "Subject not found"
             
