@@ -1,5 +1,6 @@
 // admin_script.js
 import { templates } from './subjectsTemplates.js';
+import { topicFormTemplate } from './formTemplate.js';
 
 // Main application logic
 class SubjectViewer {
@@ -812,397 +813,426 @@ window.submitNewSection = async (subjectId) => {
     }
 };
 
-window.addTopicToSection = async (sectionId) => {
-    // Create modal HTML
-    const modalHtml = `
-        <div class="modal fade" id="addTopicModal" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Add New Topic</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="addTopicForm">
-                            <div class="mb-3">
-                                <label class="form-label">Topic Name</label>
-                                <input type="text" class="form-control" id="topicName" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Content Text</label>
-                                <textarea class="form-control" id="topicText" rows="3"></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Code Example</label>
-                                <textarea class="form-control font-monospace" id="topicCode" rows="3"></textarea>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary" onclick="submitNewTopic(${sectionId})">Add Topic</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
+window.addTopicAndContent = (sectionId) => {
+    // Remove existing modal if any
+    const existingModal = document.getElementById('addTopicModal');
+    if (existingModal) {
+        existingModal.remove();
+    }
 
-    // Add modal to document
-    document.body.insertAdjacentHTML('beforeend', modalHtml);
-
-    // Initialize and show modal
+    // Add the modal to the document
+    document.body.insertAdjacentHTML('beforeend', topicFormTemplate.modal());
+    
+    // Initialize the modal
     const modal = new bootstrap.Modal(document.getElementById('addTopicModal'));
     modal.show();
 
-    // Clean up modal after it's hidden
-    document.getElementById('addTopicModal').addEventListener('hidden.bs.modal', function () {
-        this.remove();
+    // Initialize form handlers
+    let codeMirrorInstance = null;
+
+    // Handle content type selection
+    document.querySelector('#addContentModal .content-type-select').addEventListener('change', function(e) {
+        const inputContainer = document.querySelector('#addContentModal .dynamic-input');
+        inputContainer.innerHTML = '';
+
+        switch (e.target.value) {
+            case 'text':
+                inputContainer.innerHTML = `<textarea class="form-control" placeholder="Enter text"></textarea>`;
+                break;
+            case 'code':
+                // Create container for Ace Editor
+                inputContainer.innerHTML = `
+                    <div id="aceEditorContainer" style="height: 300px; width: 100%; border-radius: 4px; border: 1px solid #ced4da;"></div>
+                `;
+                // Initialize Ace Editor
+                aceEditor = ace.edit("aceEditorContainer");
+                aceEditor.setTheme("ace/theme/monokai");
+                aceEditor.session.setMode("ace/mode/javascript");
+                aceEditor.setFontSize(14);
+                aceEditor.setShowPrintMargin(false);
+                aceEditor.session.setTabSize(4);
+                break;
+            case 'image':
+                inputContainer.innerHTML = `
+                    <div class="image-input-container">
+                        <input type="file" class="form-control mb-2" id="imageFileInput" accept="image/*">
+                        <input type="text" class="form-control mb-2" id="imageUrlInput" placeholder="Enter image URL">
+                        <div class="image-preview-container" style="display: none;">
+                            <img id="imagePreview" src="" alt="Preview" style="max-width: 100%; max-height: 300px;">
+                            <div class="cropper-controls mt-2">
+                                <button type="button" class="btn btn-sm btn-primary" id="cropBtn">Crop</button>
+                                <button type="button" class="btn btn-sm btn-secondary" id="resetBtn">Reset</button>
+                                <button type="button" class="btn btn-sm btn-success" id="saveBtn" style="display: none;">Save Crop</button>
+                                <button type="button" class="btn btn-sm btn-danger" id="cancelBtn" style="display: none;">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                setupImageHandlers();
+                break;
+            case 'table':
+                inputContainer.innerHTML = `
+                    <div class="table-responsive">
+                        <table class="table" id="dynamicTable">
+                            <thead>
+                                <tr>
+                                    <th><input type="text" class="form-control" placeholder="Column 1"></th>
+                                    <th><input type="text" class="form-control" placeholder="Column 2"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="form-control" placeholder="Column 1"></td>
+                                    <td><input type="text" class="form-control" placeholder="Column 2"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="table-controls mt-2">
+                            <button type="button" class="btn btn-sm btn-primary me-2" id="addTableRow">
+                                <i class="fas fa-plus"></i> Add Row
+                            </button>
+                            <button type="button" class="btn btn-sm btn-primary" id="addTableCol">
+                                <i class="fas fa-plus"></i> Add Column
+                            </button>
+                        </div>
+                    </div>
+                `;
+                setupTableHandlers();
+                break;
+        }
+    });
+
+    // Handle showing content modal
+    document.getElementById('showContentModal').addEventListener('click', () => {
+        const contentModal = new bootstrap.Modal(document.getElementById('addContentModal'));
+        contentModal.show();
+    });
+
+    // Handle form submission
+    document.getElementById('topicForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const formData = collectFormData(sectionId);
+        try {
+            const response = await fetch(`/api/sections/${sectionId}/topics`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to create topic');
+            }
+
+            modal.hide();
+            await refreshSubjectsList();
+        } catch (error) {
+            console.error('Error creating topic:', error);
+        }
     });
 };
 
-window.submitNewTopic = async (sectionId) => {
-    const topicName = document.getElementById('topicName').value.trim();
-    const topicText = document.getElementById('topicText').value.trim();
-    const topicCode = document.getElementById('topicCode').value.trim();
-
-    if (!topicName) {
-        alert('Topic name is required');
-        return;
+// Add this helper function
+function resetContentModal() {
+    const select = document.querySelector('#addContentModal .content-type-select');
+    const dynamicInput = document.querySelector('#addContentModal .dynamic-input');
+    select.value = '';
+    dynamicInput.innerHTML = '';
+    if (aceEditor) {
+        aceEditor.destroy();
+        aceEditor = null;
     }
+}
 
-    try {
-        const response = await fetch(`/api/sections/${sectionId}/topics`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: topicName,
-                text: topicText,
-                code: topicCode
-            })
-        });
-
-        if (!response.ok) {
-            const data = await response.json();
-            throw new Error(data.error || 'Failed to add topic');
-        }
-
-        // Close modal and refresh page
-        bootstrap.Modal.getInstance(document.getElementById('addTopicModal')).hide();
-        location.reload();
-    } catch (error) {
-        console.error('Failed to add topic:', error);
-        alert(error.message);
-    }
-};
-
-// Add these edit handlers
-window.editTopic = async (topicId) => {
-    const topicRow = document.querySelector(`.topic-row[data-topic-id="${topicId}"]`);
-    if (!topicRow) return;
-
-    const modalHtml = `
-        <div class="modal fade" id="editTopicModal" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Edit Topic</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="editTopicForm">
-                            <div class="mb-3">
-                                <label class="form-label">Topic Name</label>
-                                <input type="text" 
-                                       class="form-control" 
-                                       id="editTopicName" 
-                                       value="${topicRow.querySelector('.topic-name').textContent.trim()}"
-                                       required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Content Text</label>
-                                <textarea class="form-control" 
-                                          id="editTopicText" 
-                                          rows="3">${topicRow.querySelector('.topic-content p')?.textContent || ''}</textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Code Example</label>
-                                <textarea class="form-control font-monospace" 
-                                          id="editTopicCode" 
-                                          rows="3">${topicRow.querySelector('.topic-content code')?.textContent || ''}</textarea>
-                            </div>
-                            <div class="error-message text-danger"></div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary" onclick="updateTopic(${topicId})">Save Changes</button>
-                    </div>
-                </div>
-            </div>
+// Add these helper functions for creating content blocks
+function createTextBlock() {
+    const text = document.querySelector('#addContentModal textarea').value;
+    return `
+        <button class="remove-block"><i class="fa fa-times"></i></button>
+        <div class="mb-3">
+            <label class="form-label">Text Content</label>
+            <textarea class="form-control" readonly>${text}</textarea>
         </div>
     `;
+}
 
-    // Remove existing modal if any
-    const existingModal = document.getElementById('editTopicModal');
-    if (existingModal) {
-        existingModal.remove();
-    }
-
-    // Add modal to document
-    document.body.insertAdjacentHTML('beforeend', modalHtml);
-
-    // Show modal
-    const modal = new bootstrap.Modal(document.getElementById('editTopicModal'));
-    modal.show();
-};
-
-window.updateTopic = async (topicId) => {
-    const nameInput = document.getElementById('editTopicName');
-    const textInput = document.getElementById('editTopicText');
-    const codeInput = document.getElementById('editTopicCode');
-    const errorDiv = document.querySelector('#editTopicModal .error-message');
-
-    const name = nameInput.value.trim();
-    const text = textInput.value.trim();
-    const code = codeInput.value.trim();
-
-    if (!name) {
-        errorDiv.textContent = 'Topic name is required';
-        return;
-    }
-
-    try {
-        const response = await fetch(`/api/topics/${topicId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name,
-                text,
-                code
-            })
-        });
-
-        if (!response.ok) {
-            const data = await response.json();
-            throw new Error(data.error || 'Failed to update topic');
-        }
-
-        // Close modal and refresh page
-        bootstrap.Modal.getInstance(document.getElementById('editTopicModal')).hide();
-        location.reload();
-    } catch (error) {
-        console.error('Failed to update topic:', error);
-        errorDiv.textContent = error.message;
-    }
-};
-
-// Add section edit handlers
-window.editSection = (sectionId) => {
-    const sectionContainer = document.querySelector(`.section-container[data-section-id="${sectionId}"]`);
-    if (!sectionContainer) return;
-
-    const modalHtml = `
-        <div class="modal fade" id="editSectionModal" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Edit Section</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="editSectionForm">
-                            <div class="mb-3">
-                                <label class="form-label">Section Name</label>
-                                <input type="text" 
-                                       class="form-control" 
-                                       id="editSectionName" 
-                                       value="${sectionContainer.querySelector('.section-name').textContent.trim()}"
-                                       required>
-                            </div>
-                            <div class="error-message text-danger"></div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary" onclick="updateSection(${sectionId})">Save Changes</button>
-                    </div>
-                </div>
-            </div>
+function createCodeBlock() {
+    const code = aceEditor ? aceEditor.getValue() : '';
+    return `
+        <button class="remove-block"><i class="fa fa-times"></i></button>
+        <div class="mb-3">
+            <label class="form-label">Code</label>
+            <pre class="form-control" style="font-family: monospace; white-space: pre-wrap;">${code}</pre>
         </div>
     `;
+}
 
-    // Remove existing modal if any
-    const existingModal = document.getElementById('editSectionModal');
-    if (existingModal) {
-        existingModal.remove();
-    }
-
-    // Add modal to document and show it
-    document.body.insertAdjacentHTML('beforeend', modalHtml);
-    const modal = new bootstrap.Modal(document.getElementById('editSectionModal'));
-    modal.show();
-};
-
-window.updateSection = async (sectionId) => {
-    const nameInput = document.getElementById('editSectionName');
-    const errorDiv = document.querySelector('#editSectionModal .error-message');
-
-    const name = nameInput.value.trim();
-    if (!name) {
-        errorDiv.textContent = 'Section name is required';
-        return;
-    }
-
-    try {
-        const response = await fetch(`/api/sections/${sectionId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ name })
-        });
-
-        if (!response.ok) {
-            const data = await response.json();
-            throw new Error(data.error || 'Failed to update section');
-        }
-
-        bootstrap.Modal.getInstance(document.getElementById('editSectionModal')).hide();
-        location.reload();
-    } catch (error) {
-        console.error('Failed to update section:', error);
-        errorDiv.textContent = error.message;
-    }
-};
-
-// Add subject edit handlers
-window.editSubject = (subjectId) => {
-    const subjectCard = document.querySelector(`.subject-card[data-subject-id="${subjectId}"]`);
-    if (!subjectCard) return;
-
-    const modalHtml = `
-        <div class="modal fade" id="editSubjectModal" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Edit Subject</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="editSubjectForm">
-                            <div class="mb-3">
-                                <label class="form-label">Subject Name</label>
-                                <input type="text" 
-                                       class="form-control" 
-                                       id="editSubjectName" 
-                                       value="${subjectCard.querySelector('.subject-name').textContent.trim()}"
-                                       required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Description</label>
-                                <textarea class="form-control" 
-                                          id="editSubjectDescription" 
-                                          rows="3">${subjectCard.querySelector('.subject-description').textContent.trim()}</textarea>
-                            </div>
-                            <div class="error-message text-danger"></div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary" onclick="updateSubject(${subjectId})">Save Changes</button>
-                    </div>
-                </div>
-            </div>
+function createImageBlock() {
+    const preview = document.getElementById('imagePreview');
+    return `
+        <button class="remove-block"><i class="fa fa-times"></i></button>
+        <div class="mb-3">
+            <label class="form-label">Image</label>
+            <img src="${preview.src}" alt="Content image" class="img-fluid">
         </div>
     `;
+}
 
-    // Remove existing modal if any
-    const existingModal = document.getElementById('editSubjectModal');
-    if (existingModal) {
-        existingModal.remove();
+function createTableBlock() {
+    const table = document.getElementById('dynamicTable').cloneNode(true);
+    return `
+        <button class="remove-block"><i class="fa fa-times"></i></button>
+        <div class="mb-3">
+            <label class="form-label">Table</label>
+            ${table.outerHTML}
+        </div>
+    `;
+}
+
+// Add cleanup for Ace Editor when modal is closed
+document.getElementById('addContentModal').addEventListener('hidden.bs.modal', function () {
+    if (aceEditor) {
+        aceEditor.destroy();
+        aceEditor = null;
     }
+});
 
-    // Add modal to document and show it
-    document.body.insertAdjacentHTML('beforeend', modalHtml);
-    const modal = new bootstrap.Modal(document.getElementById('editSubjectModal'));
-    modal.show();
-};
+let cropper = null;
 
-window.updateSubject = async (subjectId) => {
-    const nameInput = document.getElementById('editSubjectName');
-    const descriptionInput = document.getElementById('editSubjectDescription');
-    const errorDiv = document.querySelector('#editSubjectModal .error-message');
+function validateURL(url) {
+    // Basic URL validation
+    const pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+        '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return pattern.test(url);
+}
 
-    const name = nameInput.value.trim();
-    const description = descriptionInput.value.trim();
+function setupImageHandlers() {
+    const fileInput = document.getElementById('imageFileInput');
+    const urlInput = document.getElementById('imageUrlInput');
+    const previewContainer = document.querySelector('.image-preview-container');
+    const preview = document.getElementById('imagePreview');
+    const cropBtn = document.getElementById('cropBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const saveBtn = document.getElementById('saveBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
 
-    if (!name) {
-        errorDiv.textContent = 'Subject name is required';
-        return;
-    }
+    let originalImageUrl = '';
+    let cropper = null;
 
-    try {
-        const response = await fetch(`/api/subjects/${subjectId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ 
-                name,
-                description 
-            })
+    function initializeCropper() {
+        if (cropper) {
+            cropper.destroy();
+        }
+        cropper = new Cropper(preview, {
+            aspectRatio: 16 / 9,
+            viewMode: 2,
+            autoCropArea: 1,
+            ready() {
+                cropBtn.style.display = 'none';
+                resetBtn.style.display = 'none';
+                saveBtn.style.display = 'inline-block';
+                cancelBtn.style.display = 'inline-block';
+            }
         });
-
-        if (!response.ok) {
-            const data = await response.json();
-            throw new Error(data.error || 'Failed to update subject');
-        }
-
-        bootstrap.Modal.getInstance(document.getElementById('editSubjectModal')).hide();
-        location.reload();
-    } catch (error) {
-        console.error('Failed to update subject:', error);
-        errorDiv.textContent = error.message;
     }
-};
 
-function setActiveNavLink() {
-    // Get current path
-    const currentPath = window.location.pathname;
-    
-    // Find all nav links
-    const navLinks = document.querySelectorAll('.sidebar .nav-link');
-    
-    // Remove active class from all links
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        
-        // Add active class if href matches current path
-        if (link.getAttribute('href') === currentPath) {
-            link.classList.add('active');
+    function destroyCropper() {
+        if (cropper) {
+            cropper.destroy();
+            cropper = null;
         }
+    }
+
+    // File input handler
+    fileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                originalImageUrl = e.target.result;
+                preview.src = e.target.result;
+                previewContainer.style.display = 'block';
+                urlInput.value = '';
+                destroyCropper();
+                cropBtn.style.display = 'inline-block';
+                resetBtn.style.display = 'inline-block';
+                saveBtn.style.display = 'none';
+                cancelBtn.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // URL input handler
+    urlInput.addEventListener('input', debounce(function(event) {
+        const url = event.target.value.trim();
+        if (url && validateURL(url)) {
+            originalImageUrl = url;
+            preview.src = url;
+            preview.onload = function() {
+                previewContainer.style.display = 'block';
+                fileInput.value = '';
+                destroyCropper();
+                cropBtn.style.display = 'inline-block';
+                resetBtn.style.display = 'inline-block';
+                saveBtn.style.display = 'none';
+                cancelBtn.style.display = 'none';
+            };
+            preview.onerror = function() {
+                previewContainer.style.display = 'none';
+                alert('Failed to load image from URL');
+            };
+        } else {
+            previewContainer.style.display = 'none';
+        }
+    }, 500));
+
+    // Crop button handler
+    cropBtn.addEventListener('click', function() {
+        initializeCropper();
+    });
+
+    // Reset button handler
+    resetBtn.addEventListener('click', function() {
+        destroyCropper();
+        preview.src = originalImageUrl;
+        cropBtn.style.display = 'inline-block';
+        resetBtn.style.display = 'inline-block';
+        saveBtn.style.display = 'none';
+        cancelBtn.style.display = 'none';
+    });
+
+    // Save crop button handler
+    saveBtn.addEventListener('click', function() {
+        if (cropper) {
+            const croppedCanvas = cropper.getCroppedCanvas();
+            preview.src = croppedCanvas.toDataURL();
+            destroyCropper();
+            cropBtn.style.display = 'inline-block';
+            resetBtn.style.display = 'inline-block';
+            saveBtn.style.display = 'none';
+            cancelBtn.style.display = 'none';
+        }
+    });
+
+    // Cancel crop button handler
+    cancelBtn.addEventListener('click', function() {
+        destroyCropper();
+        preview.src = originalImageUrl;
+        cropBtn.style.display = 'inline-block';
+        resetBtn.style.display = 'inline-block';
+        saveBtn.style.display = 'none';
+        cancelBtn.style.display = 'none';
+    });
+
+    // Cleanup on modal close
+    document.getElementById('addContentModal').addEventListener('hidden.bs.modal', function() {
+        destroyCropper();
+        previewContainer.style.display = 'none';
+        preview.src = '';
+        fileInput.value = '';
+        urlInput.value = '';
     });
 }
 
-// Add this function to refresh the subjects list
-async function refreshSubjectsList() {
-    try {
-        const response = await fetch('/api/subjects');
-        const data = await response.json();
-        
-        const subjectsContainer = document.getElementById('subjectsContainer');
-        const { templates } = await import('./subjectsTemplates.js');
-        
-        // Clear existing content and add new subjects
-        subjectsContainer.innerHTML = '';
-        data.subjects.forEach(subject => {
-            subjectsContainer.insertAdjacentHTML('beforeend', templates.subjectCard(subject));
+// Debounce helper function
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Table handling functions
+function setupTableHandlers() {
+    const table = document.getElementById('dynamicTable');
+    const headerInputs = table.querySelectorAll('thead input');
+    const addRowBtn = document.getElementById('addTableRow');
+    const addColBtn = document.getElementById('addTableCol');
+
+    // Sync header changes
+    headerInputs.forEach(input => {
+        input.addEventListener('input', function() {
+            const columnIndex = Array.from(headerInputs).indexOf(this);
+            const cells = table.querySelectorAll(`tbody tr td:nth-child(${columnIndex + 1})`);
+            cells.forEach(cell => {
+                const cellInput = cell.querySelector('input');
+                if (cellInput) {
+                    cellInput.placeholder = this.value;
+                }
+            });
         });
-    } catch (error) {
-        console.error('Failed to refresh subjects:', error);
+    });
+
+    // Add row button handler
+    if (addRowBtn) {
+        addRowBtn.addEventListener('click', () => {
+            const tbody = table.querySelector('tbody');
+            const columnCount = table.querySelectorAll('thead th').length;
+            const newRow = document.createElement('tr');
+            
+            for (let i = 0; i < columnCount; i++) {
+                const td = document.createElement('td');
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'form-control';
+                input.placeholder = headerInputs[i].value || `Column ${i + 1}`;
+                td.appendChild(input);
+                newRow.appendChild(td);
+            }
+            
+            tbody.appendChild(newRow);
+        });
+    }
+
+    // Add column button handler
+    if (addColBtn) {
+        addColBtn.addEventListener('click', () => {
+            const columnIndex = table.querySelectorAll('thead th').length + 1;
+            
+            // Add header
+            const headerRow = table.querySelector('thead tr');
+            const th = document.createElement('th');
+            const headerInput = document.createElement('input');
+            headerInput.type = 'text';
+            headerInput.className = 'form-control';
+            headerInput.placeholder = `Column ${columnIndex}`;
+            
+            // Add header input event listener
+            headerInput.addEventListener('input', function() {
+                const cells = table.querySelectorAll(`tbody tr td:nth-child(${columnIndex})`);
+                cells.forEach(cell => {
+                    const cellInput = cell.querySelector('input');
+                    if (cellInput) {
+                        cellInput.placeholder = this.value;
+                    }
+                });
+            });
+            
+            th.appendChild(headerInput);
+            headerRow.appendChild(th);
+            
+            // Add cells to each row
+            const rows = table.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                const td = document.createElement('td');
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'form-control';
+                input.placeholder = `Column ${columnIndex}`;
+                td.appendChild(input);
+                row.appendChild(td);
+            });
+        });
     }
 }

@@ -131,13 +131,13 @@
         },
         {
             "id": 2,
-            "name": "math1",
-            "description": "ganit",
+            "name": "math1aqss",
+            "description": "ganita",
             "sections": [
                 {
                     "id": 3,
                     "subject_id": 2,
-                    "name": "tringle1",
+                    "name": "tringle1aass",
                     "topics": [
                         {
                             "id": 7,
@@ -155,14 +155,82 @@
                                 "created_at": "2024-12-23T18:40:52.499471Z",
                                 "updated_at": "2024-12-23T18:41:13.812026Z"
                             }
+                        },
+                        {
+                            "id": 9,
+                            "section_id": 3,
+                            "name": "as",
+                            "created_at": "2024-12-23T18:58:32.354801Z",
+                            "updated_at": "2024-12-23T18:58:32.354801Z",
+                            "details": {
+                                "id": 9,
+                                "topic_id": 9,
+                                "text": "as",
+                                "code": "as",
+                                "table": null,
+                                "image": null,
+                                "created_at": "2024-12-23T18:58:32.354801Z",
+                                "updated_at": "2024-12-23T18:58:32.354801Z"
+                            }
                         }
                     ],
                     "created_at": "2024-12-23T18:40:32.909984Z",
-                    "updated_at": "2024-12-23T18:41:08.507885Z"
+                    "updated_at": "2024-12-23T18:58:20.954686Z"
+                },
+                {
+                    "id": 4,
+                    "subject_id": 2,
+                    "name": "aaq",
+                    "topics": [
+                        {
+                            "id": 8,
+                            "section_id": 4,
+                            "name": "aaa",
+                            "created_at": "2024-12-23T18:55:15.443653Z",
+                            "updated_at": "2024-12-23T18:58:41.383403Z",
+                            "details": {
+                                "id": 8,
+                                "topic_id": 8,
+                                "text": "aaaqq",
+                                "code": "aaqqs",
+                                "table": null,
+                                "image": null,
+                                "created_at": "2024-12-23T18:55:15.443653Z",
+                                "updated_at": "2024-12-23T18:58:41.383403Z"
+                            }
+                        }
+                    ],
+                    "created_at": "2024-12-23T18:54:40.990955Z",
+                    "updated_at": "2024-12-23T18:55:30.187864Z"
+                },
+                {
+                    "id": 6,
+                    "subject_id": 2,
+                    "name": "qq",
+                    "topics": [],
+                    "created_at": "2024-12-23T19:01:36.820399Z",
+                    "updated_at": "2024-12-23T19:01:36.820399Z"
                 }
             ],
             "created_at": "2024-12-23T18:40:02.608807Z",
-            "updated_at": "2024-12-23T18:41:02.124955Z"
+            "updated_at": "2024-12-23T18:57:55.025838Z"
+        },
+        {
+            "id": 3,
+            "name": "qq",
+            "description": "qq",
+            "sections": [
+                {
+                    "id": 5,
+                    "subject_id": 3,
+                    "name": "ss",
+                    "topics": [],
+                    "created_at": "2024-12-23T18:58:03.848352Z",
+                    "updated_at": "2024-12-23T18:58:03.848352Z"
+                }
+            ],
+            "created_at": "2024-12-23T18:56:03.564798Z",
+            "updated_at": "2024-12-23T18:56:03.564798Z"
         }
     ]
 }

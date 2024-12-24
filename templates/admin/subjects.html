@@ -38,4 +38,10 @@
 <!-- Make sure these scripts are loaded in the correct order -->
 <script type="module" src="{{ url_for('static', filename='js/subjectsTemplates.js') }}"></script>
 <script type="module" src="{{ url_for('static', filename='js/admin_script.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/ace.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+<script type="module" src="{{ url_for('static', filename='js/formTemplate.js') }}"></script>
 {% endblock %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin_forms.css') }}">

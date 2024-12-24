@@ -104,7 +104,7 @@ export const templates = {
                     <!-- Section actions -->
                     <div class="section-actions">
                         <div class="view-mode">
-                            <button class="btn btn-action btn-light me-2" onclick="addTopicToSection(${section.id})" title="Add Topic">
+                            <button class="btn btn-action btn-light me-2" onclick="addTopicAndContent(${section.id})" title="Add Topic">
                                 <i class="fas fa-plus text-success"></i>
                             </button>
                             <button class="btn btn-action btn-light me-2" onclick="editSection(${section.id})" title="Edit Section">
@@ -125,22 +125,16 @@ export const templates = {
                     </div>
                 </div>
             </div>
-
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th style="width: 30%">Topic</th>
-                            <th style="width: 50%">Content</th>
-                            <th style="width: 20%">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${section.topics && section.topics.length > 0 ? 
-                            section.topics.map(topic => templates.topicRow(topic)).join('') :
-                            '<tr><td colspan="3" class="text-center">No topics available</td></tr>'}
-                    </tbody>
-                </table>
+            <!-- Topics Container -->
+            <div class="topics-container">
+                ${section.topics && section.topics.length > 0 ? 
+                    `<table class="table">
+                        <tbody>
+                            ${section.topics.map(topic => templates.topicRow(topic)).join('')}
+                        </tbody>
+                    </table>` : 
+                    '<p class="text-muted">No topics available</p>'
+                }
             </div>
         </div>
     `,
@@ -225,5 +219,39 @@ export const templates = {
                 `).join('')}
             </tbody>
         </table>
+    `,
+
+    sectionCard: (section) => `
+        <div class="section-card mb-3" data-section-id="${section.id}">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <div class="view-mode">
+                        <h5 class="mb-0">
+                            <i class="fas fa-folder me-2"></i>
+                            <span class="section-name">${section.name}</span>
+                        </h5>
+                    </div>
+                    <div class="edit-mode" style="display: none;">
+                        <input type="text" class="form-control" value="${section.name}">
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-sm btn-primary" onclick="addTopicAndContent(${section.id})">
+                            <i class="fas fa-plus me-1"></i>Add Topic
+                        </button>
+                        <button class="btn btn-sm btn-outline-primary" onclick="editSection(${section.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteSection(${section.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="topics-container">
+                        ${section.topics ? section.topics.map(topic => templates.topicCard(topic)).join('') : ''}
+                    </div>
+                </div>
+            </div>
+        </div>
     `
 };
